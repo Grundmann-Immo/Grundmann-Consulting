@@ -734,7 +734,7 @@ und Entscheidungen zum optimalen Verkaufszeitpunkt fundiert vorbereitet.</p>
   <li>ein tragfähiges Netzwerk aus Investoren, Handwerkern und Maklern in Sachsen und Sachsen-Anhalt aufbauen wollen</li>
   <li>einen Co-Investor suchen oder ihr Investment strukturiert gemeinsam umsetzen möchten</li>
   <li>als Investor aus den alten Bundesländern regionales Markt- und Praxiswissen vor Ort suchen</li>
-  <li>eine neue Hausverwaltung suchen</li>
+  <li>eine neue Hausverwaltung für Ihre Immobilie suchen</li>
   <li>mit ihrer aktuellen Hausverwaltung nicht zufrieden sind und eine fundierte Entscheidungsgrundlage für Veränderungen benötigen</li>
 </ul>
 
@@ -766,7 +766,7 @@ und Entscheidungen zum optimalen Verkaufszeitpunkt fundiert vorbereitet.</p>
           <summary>Warum MFH-Investitionen oft Rendite verschenken <span class="chev">⌃</span></summary>
           <div class="acc-body">
             Viele Mehrfamilienhäuser werden auf Grundlage subjektiver Einschätzungen, der Angaben des Verkäufers oder einzelner technischer Aspekte erworben.
-            Wirtschaftliche Prüfungen sind häufig unvollständig oder zu oberflächlich. Im Bestand werden anschließend Maßnahmen umgesetzt, ohne deren tatsächliche Wirkung zu priorisieren.
+            Wirtschaftliche Prüfungen, sind häufig unvollständig oder zu oberflächlich. Im Bestand werden anschließend Maßnahmen umgesetzt, ohne deren tatsächliche Wirkung zu priorisieren.
           </div>
         </details>
       </div>
@@ -776,9 +776,7 @@ und Entscheidungen zum optimalen Verkaufszeitpunkt fundiert vorbereitet.</p>
         <div class="contact-title">Kontaktieren Sie mich</div>
         <p class="contact-sub">Eine kurze Beschreibung Ihrer Immobilie und Anliegens genügt.</p>
 
-        <!-- Netlify Forms -> E-Mail an grundmann.immoplus@gmail.com über Netlify Notifications -->
-        <div class="contact-grid">
-<!-- modify this form HTML and place wherever you want your form -->
+
 <form
   action="https://formspree.io/f/mvzqvggb"
   method="POST"
@@ -821,6 +819,39 @@ und Entscheidungen zum optimalen Verkaufszeitpunkt fundiert vorbereitet.</p>
       </div>
     </div>
   </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("kontakt-form");
+  const success = document.getElementById("form-success");
+
+  if (!form) return;
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();   // 🚫 verhindert Formspree-Danke-Seite
+
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { "Accept": "application/json" }
+      });
+
+      if (response.ok) {
+        form.reset();
+        success.style.display = "block";
+      } else {
+        alert("Beim Senden ist ein Fehler aufgetreten. Bitte erneut versuchen.");
+      }
+    } catch (error) {
+      alert("Verbindung fehlgeschlagen. Bitte später erneut versuchen.");
+    }
+  });
+});
+</script>
+
 
 </body>
 </html>
