@@ -778,35 +778,39 @@ und Entscheidungen zum optimalen Verkaufszeitpunkt fundiert vorbereitet.</p>
 
         <!-- Netlify Forms -> E-Mail an grundmann.immoplus@gmail.com über Netlify Notifications -->
         <div class="contact-grid">
-          <form name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="kontakt">
-            <p style="display:none">
-              <label>Don’t fill this out: <input name="bot-field"></label>
-            </p>
+<!-- modify this form HTML and place wherever you want your form -->
+<form
+  action="https://formspree.io/f/mvzqvggb"
+  method="POST"
+  id="kontakt-form"
+>
+  <div class="field">
+    <label for="name">Name</label>
+    <input id="name" name="Name" type="text" required>
+  </div>
 
-            <div class="row2">
-              <div class="field">
-                <label for="name">Name</label>
-                <input id="name" name="Name" type="text" required />
-              </div>
-              <div class="field">
-                <label for="email">Email</label>
-                <input id="email" name="Email" type="email" required />
-              </div>
-            </div>
+  <div class="field">
+    <label for="email">E-Mail-Adresse</label>
+    <input id="email" name="E-Mail" type="email" required>
+  </div>
 
-            <div class="field">
-              <label for="phone">Telefonnummer (optional)</label>
-              <input id="phone" name="Telefon" type="tel" />
-            </div>
+  <div class="field">
+    <label for="phone">Telefonnummer (optional)</label>
+    <input id="phone" name="Telefon" type="tel">
+  </div>
 
-            <div class="field">
-              <label for="msg">Nachricht</label>
-              <textarea id="msg" name="Nachricht" required></textarea>
-            </div>
+  <div class="field">
+    <label for="message">Nachricht</label>
+    <textarea id="message" name="Nachricht" required></textarea>
+  </div>
 
-            <button class="btn" type="submit">Senden</button>
-          </form>
+  <button class="btn" type="submit">Nachricht senden</button>
+
+  <!-- Erfolgsmeldung -->
+  <p id="form-success" style="display:none; margin-top:16px;">
+    Vielen Dank für Ihre Nachricht. Ich melde mich zeitnah bei Ihnen.
+  </p>
+</form>
         </div>
 
         <!-- Impressum ganz nach unten -->
