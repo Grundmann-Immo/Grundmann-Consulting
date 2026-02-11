@@ -1,0 +1,902 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grundmann Consulting</title>
+  <meta name="description" content="Objektoptimierung und strategische Immobilienberatung für Mehrfamilienhäuser in Leipzig & Sachsen." />
+
+  <!-- Inter für ALLES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f3efe7;
+      --text: #111;
+      --muted: rgba(0,0,0,.72);
+      --line: rgba(0,0,0,.18);
+      --btnSolid: #102821;
+
+      --accent: #a5671f;
+      --accentDark: #8d551a;
+
+      --max: 1160px;     /* alle Frames gleiche Breite */
+      --radius: 12px;
+
+      --base: 16px;      /* überall gleich, außer Überschriften */
+      --gap: 72px;       /* gleichmäßiger Abstand zwischen Frames */
+
+      /* Hero/Navigation Verlauf */
+      --heroGrad: linear-gradient(90deg, rgba(16,40,33,.92) 0%, rgba(16,40,33,.75) 58%, rgba(16,40,33,.15) 100%);
+
+      /* ===== Hero Bild-Integration (Baum-Grün) ===== */
+      --treeGreen: #4f6a3f;          /* anpassbar */
+      --heroFadeStop: 52%;          /* ab hier Bild 100% scharf */
+      --heroOverlayOpacity: .88;    /* Deckkraft links */
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: var(--base);
+      line-height: 1.65;
+    }
+
+    /* Einheitliche Schriftgröße: alles außer Überschriften */
+    p, li, label, input, textarea, button, a, summary, small { font-size: var(--base); }
+
+    h1,h2,h3{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    .container{
+      width: min(var(--max), 92vw);
+      margin: 0 auto;
+    }
+
+    /* ===== Menüleiste ===== */
+    .topnav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(90deg, rgba(16,40,33,.92) 0%, rgba(16,40,33,.75) 58%, rgba(16,40,33,.15) 100%);
+      color:#fff;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .topnav .container{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 12px 0;
+      gap: 18px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      text-decoration:none;
+      color:#fff;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .logo-box{
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.22);
+      display:grid;
+      place-items:center;
+      font-weight:700;
+    }
+    .logo-img{
+      height: 50px;          /* ideale Höhe für Navigation */
+      width: auto;
+      display: block;
+    }
+    .navlinks{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      flex: 1;
+      justify-content: flex-end;
+    }
+    .navlinks a{
+      color: #fff;
+      text-decoration:none;
+      font-weight:600;
+      padding: 8px 8px;
+      border-radius: 10px;
+    }
+    .navlinks a:hover{
+      background: rgba(255,255,255,.10);
+    }
+
+    /* ===== Abstände zwischen Frames ===== */
+    .frame-gap{ padding: var(--gap) 0; }
+
+    /* ===== HERO (integriertes Foto mit Grün-Overlay) ===== */
+/* ===== HERO: EIN Bild + Overlay links (ohne Blur) ===== */
+.hero-frame{
+  width: min(var(--max), 92vw);
+  margin: var(--gap) auto 0;
+  border-radius: var(--radius);
+  overflow:hidden;
+
+  display:grid;
+  grid-template-columns: 1.05fr 1.25fr;
+  min-height: 560px;
+
+  position: relative;
+
+  /* EIN Background fürs ganze Hero */
+  background-image: url("assets/Wohngebäude.png");
+  background-size: cover;
+  background-position: right 40%;
+}
+
+/* Overlay links, läuft weich nach rechts aus */
+.hero-frame::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+
+  /* nur links stark, nach rechts transparent */
+  background: linear-gradient(
+    90deg,
+    rgba(32,64,36,.92) 0%,
+    rgba(32,64,36,.86) 42%,
+    rgba(32,64,36,.45) 60%,
+    rgba(32,64,36,0.00) 72%
+  );
+}
+
+.hero-left{
+  position: relative;      /* damit Text über dem Overlay liegt */
+  z-index: 1;
+  padding: 54px 52px;
+  color: #fff;
+
+  /* WICHTIG: kein eigener Hintergrund mehr */
+  background: transparent;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap: 14px;
+}
+
+.hero-left h1{
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.hero-left p{
+  margin:0;
+  max-width: 56ch;
+  opacity:.95;
+}
+
+/* kein Gelb */
+.hero-left strong{
+  color: rgba(255,255,255,.92);
+  font-weight: 700;
+}
+
+/* Rechte Spalte bleibt nur Layout, KEIN Bild/Keil/Overlay */
+.hero-right{
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+
+/* Optional: dezentes Licht-Highlight bleibt ok */
+.hero-right .hero-highlight{
+  position:absolute;
+  inset:0;
+  background: radial-gradient(closest-side at 80% 20%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%);
+  pointer-events:none;
+}
+
+
+    /* Optionales Licht-Highlight */
+    .hero-right::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(closest-side at 80% 20%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%);
+      pointer-events:none;
+    }
+
+    /* ===== SERVICES ===== */
+    .section-title{
+      text-align:center;
+      font-weight: 700;
+      font-size: 36px;
+      margin: 0 0 26px;
+    }
+
+    .svc-grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 38px;
+      align-items:stretch;
+      margin-top: 16px;
+    }
+    .svc-grid-2{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 38px;
+      align-items:stretch;
+      margin-top: 44px;
+    }
+
+    /* Karten: gleiche Bildgrößen + gleiche Textstart-Höhe */
+    .svc{
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+    }
+    .svc .img{
+      width:100%;
+      height: 260px;                 /* alle 5 Fotos exakt gleich groß */
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:#ddd;
+    }
+    .svc .img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .svc h3{
+      font-size: 22px;
+      font-weight: 700;
+      margin: 14px 0 8px;
+
+      height: 56px;                 /* feste Höhe für ALLE Karten */
+      display: flex;
+      align-items: center;          /* vertikal zentriert */
+      justify-content: center;      /* horizontal zentriert */
+
+      line-height: 1.25;
+      padding: 0 8px;
+      text-align: center;
+    }
+    .svc p{
+      margin:0 auto;
+      max-width: 46ch;
+      color: var(--muted);
+      padding: 0 10px;
+    }
+
+    /* ===== PRICING (ohne schwarzen Hintergrund) ===== */
+    .pricing{
+      position:relative;
+      padding: 0;
+      background: transparent;
+    }
+    .pricing-panel{
+      width: min(var(--max), 92vw);
+      margin: 0 auto;
+      background: rgba(255,255,255,.22);
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: var(--radius);
+      padding: 40px 22px;
+    }
+    .pricing-panel h2{
+      text-align:center;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 22px;
+      letter-spacing: .2px;
+    }
+
+    .price-table{
+      width:min(980px, 100%);
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: 8px;
+      overflow:hidden;
+      background: rgba(255,255,255,.24);
+    }
+    .price-col{
+      padding: 16px 14px 14px;
+      border-right: 1px solid rgba(0,0,0,.10);
+      min-height: 560px;
+      display:flex;
+      flex-direction:column;
+    }
+    .price-col:last-child{ border-right:none; }
+
+    .kicker{
+      font-weight: 700;
+      font-size: 18px;
+      opacity:.95;
+      margin-bottom: 6px;
+      height: 44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: 0 6px;
+      text-transform: none;
+      color: #102821;
+    }
+    .price{
+      font-weight: 700;
+      font-size: 26px;
+      margin: 0;
+      min-height: 34px;
+      text-align: center;
+    }
+    .sub{
+      opacity:.85;
+      font-size: 12px;
+      margin-top: 2px;
+      min-height: 22px;
+      text-align: center;
+    }
+
+    .acc-checklist{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .acc-checklist li{
+      position: relative;
+      padding-left: 28px;
+      margin: 0 0 10px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .acc-checklist li::before{
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0.05em;
+      font-weight: 700;
+      color: rgba(0,0,0,.70);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background: var(--heroGrad);
+      color:#fff;
+      border:none;
+      padding: 10px 16px;
+      font-weight:700;
+      cursor:pointer;
+      text-decoration:none;
+      transition: transform .12s ease, filter .12s ease;
+      border-radius: 6px;
+    }
+    .btn:hover{
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .footerbar{
+      margin-top: 72px;
+      padding-top: 2px;
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      width: min(var(--max), 92vw);
+      margin-left: auto;
+      margin-right: auto;
+      border-top: 1px solid rgba(0,0,0,.25);
+    }
+
+    .footer-logo{
+      height: 50px;
+      width: auto;
+      display:block;
+      margin: 0;
+      opacity: .85;
+    }
+
+    .footerbar a{
+      color: #111;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.7em;
+      margin: 0;
+    }
+    .footerbar a:hover{
+      text-decoration: underline;
+    }
+
+    .col-cta{
+      height: 48px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin: 10px 0 10px;
+    }
+    .col-cta .btn{ width:100%; }
+
+    .col-desc{
+      color: rgba(0,0,0,.76);
+      margin: 6px 0 10px;
+      line-height: 1.6;
+    }
+
+    .checks{
+      list-style:none;
+      padding:0;
+      margin: 0;
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+      color: rgba(0,0,0,.78);
+    }
+    .checks li{
+      display:flex;
+      gap: 8px;
+      align-items:flex-start;
+    }
+    .dot{
+      width:14px;height:14px;
+      border-radius:50%;
+      background: rgba(0,0,0,.10);
+      position:relative;
+      margin-top: 3px;
+      flex: 0 0 14px;
+    }
+    .dot:after{
+      content:"";
+      position:absolute;
+      left:4px; top:3px;
+      width:6px; height:3px;
+      border-left:2px solid rgba(0,0,0,.60);
+      border-bottom:2px solid rgba(0,0,0,.60);
+      transform: rotate(-45deg);
+    }
+
+    /* ===== INFO + KONTAKT ===== */
+    .info-title{
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+    .accordion{
+      border-top: 1px solid var(--line);
+      margin-top: 12px;
+    }
+    details{
+      border-bottom: 1px solid var(--line);
+      padding: 16px 0;
+    }
+    summary{
+      font-weight: 700;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+
+    .chev{
+      display:inline-block;
+      opacity:.7;
+      transform: rotate(180deg);
+      transition: transform .18s ease;
+    }
+    details[open] .chev{ transform: rotate(0deg); }
+
+    .acc-body{
+      margin-top: 10px;
+      color: var(--muted);
+      max-width: 92ch;
+    }
+
+    .contact-wrap{
+      padding-top: 48px;
+    }
+    .contact-title{
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 14px;
+    }
+    .contact-sub{
+      margin: 0 0 22px;
+      color: var(--muted);
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      max-width: 760px;
+    }
+
+    .row2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    label{
+      display:block;
+      color: var(--muted);
+      margin: 0 0 6px;
+      font-weight: 600;
+    }
+    input, textarea{
+      width:100%;
+      border: none;
+      background: rgba(0,0,0,.08);
+      padding: 12px 12px;
+      font-family: inherit;
+      outline:none;
+      border-radius: 0;
+    }
+    textarea{ min-height: 160px; resize: vertical; }
+    .field{ margin-bottom: 14px; }
+
+    .smallnote{
+      margin-top: 10px;
+      color: rgba(0,0,0,.55);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-frame{ grid-template-columns: 1fr; }
+      .hero-left{ padding: 38px 22px; }
+      .hero-right{ height: 320px; }
+ .hero-frame{
+    background-position: center 30%;
+  }
+      .svc-grid-3{ grid-template-columns: 1fr; }
+      .svc-grid-2{ grid-template-columns: 1fr; }
+
+      .price-table{ grid-template-columns: 1fr; }
+      .price-col{
+        min-height: auto;
+        border-right:none;
+        border-bottom: 1px solid rgba(0,0,0,.10);
+      }
+      .price-col:last-child{ border-bottom:none; }
+
+      .row2{ grid-template-columns: 1fr; }
+      .navlinks{ gap: 8px; }
+    }
+
+    /* Mobile Menü: horizontal scroll (Android + iPhone sicher) */
+    @media (max-width: 700px){
+      .topnav .container{
+        gap: 10px;
+      }
+      .logo-img{
+        height: 36px;
+      }
+      .navlinks{
+        min-width: 0;
+        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+
+        overflow-x: scroll;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+
+        padding-bottom: 2px;
+        scrollbar-width: none;
+        touch-action: pan-x;
+      }
+      .navlinks::-webkit-scrollbar{
+        display: none;
+      }
+      .navlinks a{
+        flex: 0 0 auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MENU -->
+  <nav class="topnav">
+    <div class="container">
+      <a class="logo" href="#top" aria-label="Startseite">
+        <img src="assets/Logo_Grundmann-Consulting_white.png"
+             alt="Grundmann Consulting Logo"
+             class="logo-img">
+      </a>
+      <div class="navlinks">
+        <a href="#preise">Beratungsleistungen</a>
+        <a href="immobilienberatung-leipzig.html">Leipzig</a>
+        <a href="#erfahrung">FAQ</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO (integriert, ohne img) -->
+  <header class="hero-frame" id="top">
+    <div class="hero-left">
+      <h1>Objektoptimierung und strategische Immobilienberatung für Mehrfamilienhäuser &amp; Eigentumswohnungen</h1>
+      <p>
+        Sie stehen am Anfang einer Investition oder besitzen Bestandsimmobilien und möchten Potenziale heben:<br>
+        Unabhängige Beratung für Einsteiger, Eigentümer und Investoren rund um den Ankauf, die wirtschaftliche
+        Bestandsoptimierung und den Verkauf von Mehrfamilienhäusern und Eigentumswohnungen in Leipzig, Dresden, Halle sowie in den Regionen Sachsen und Sachsen-Anhalt.
+        <br><strong>Wirtschaftlich fundiert</strong>, strategisch priorisiert und ohne Makler- oder Provisionsinteresse.
+      </p>
+    </div>
+    <div class="hero-right" aria-label="Mehrfamilienhaus in Leipzig, Dresden und Halle – Straßenansicht einer Bestandsimmobilie"></div>
+  </header>
+
+  <!-- SERVICES -->
+  <section class="frame-gap" id="leistungen">
+    <div class="container">
+      <div class="section-title">Objektoptimierung &amp; Strategieberatung</div>
+
+      <div class="svc-grid-3">
+        <article class="svc">
+          <div class="img"><img src="assets/Stadtkarte.png" alt="Standort- und Marktanalyse für Mehrfamilienhäuser in Leipzig, Dresden und Halle"></div>
+          <h3>Standort- &amp; Marktanalyse</h3>
+          <p>Die Standort- und Marktanalyse schafft eine belastbare Entscheidungsgrundlage, indem Lage,
+Mikromarkt und wirtschaftliches Potenzial von Mehrfamilienhäusern und Eigentumswohnungen realistisch eingeordnet werden.</p>
+        </article>
+
+        <article class="svc">
+          <div class="img"><img src="assets/Immobilienanalyse.png" alt="Wirtschaftlichkeitsanalyse eines Mehrfamilienhauses"></div>
+          <h3>Objekt- &amp; Wirtschaftlichkeitsanalyse</h3>
+          <p>Die Analyse von Erträgen, Kosten und Objektstruktur macht wirtschaftliche Spielräume sichtbar
+und zeigt, wo bei Mehrfamilienhäusern und Eigentumswohnungen Optimierungs- oder Risikopotenziale bestehen.</p>
+        </article>
+
+        <article class="svc">
+          <div class="img"><img src="assets/Immobilienbewertung.png" alt="Ankaufsberatung für Mehrfamilienhäuser und Eigentumswohnungen"></div>
+          <h3>Unterstützung bei Objektakquise</h3>
+          <p>Die Begleitung bei der Objektakquise unterstützt Investoren bei der realistischen Bewertung von
+Ankaufspreisen, Potenzialen und Risiken – als Grundlage für fundierte Preisverhandlungen.</p>
+        </article>
+      </div>
+
+      <div class="svc-grid-2">
+        <article class="svc">
+          <div class="img"><img src="assets/StrategischePlanung.png" alt="Strategieberatung und Entwicklungsplanung für Mehrfamilienhäuser und Eigentumswohnungen"></div>
+          <h3>Strategieberatung &amp; Entwicklungsplanung</h3>
+          <p>Aus Zielen, Objektstruktur und Marktbedingungen wird ein klar priorisierter Entwicklungsplan
+abgeleitet, der wirtschaftlich sinnvoll umsetzbar ist und langfristige Wertpotenziale berücksichtigt.</p>
+        </article>
+
+        <article class="svc">
+          <div class="img"><img src="assets/Schlüsselübergabe.png" alt="Verkaufsoptimierung und Exit-Vorbereitung für Mehrfamilienhäuser und Eigentumswohnungen"></div>
+          <h3>Verkaufsoptimierung &amp; Exit-Vorbereitung</h3>
+          <p>Durch eine gezielte Vorbereitung des Verkaufs werden wirtschaftliche Potenziale sichtbar gemacht
+und Entscheidungen zum optimalen Verkaufszeitpunkt fundiert vorbereitet.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING (hell, ohne schwarzen Hintergrund) -->
+  <section class="frame-gap pricing" id="preise">
+    <div class="pricing-panel">
+      <h2>Beratungsleistungen</h2>
+
+      <div class="price-table">
+        <div class="price-col">
+          <div class="kicker">Kostenloser Objektcheck</div>
+          <div class="price">€0</div>
+          <div class="sub">pro Projekt</div>
+          <div class="col-cta"><a class="btn" href="#kontakt">Kontakt</a></div>
+          <div class="col-desc">Ziel des kostenlosen Objektchecks ist eine klare wirtschaftliche Ersteinschätzung der Immobilie.</div>
+          <ul class="checks">
+            <li><span class="dot"></span><span>Kurzbewertung der Immobilie</span></li>
+            <li><span class="dot"></span><span>Top 3 Optimierungshebel</span></li>
+            <li><span class="dot"></span><span>Klare Empfehlungen</span></li>
+          </ul>
+        </div>
+
+        <div class="price-col">
+          <div class="kicker">Ankaufsberatung</div>
+          <div class="price">ab €2.500</div>
+          <div class="sub">pro Projekt</div>
+          <div class="col-cta"><a class="btn" href="#kontakt">Kontakt</a></div>
+          <div class="col-desc">Erhebliche Einsparpotenziale durch realistische Preiseinschätzung und Identifikation versteckter Risiken.</div>
+          <ul class="checks">
+            <li><span class="dot"></span><span>Standort- und Mikrolagenbewertung</span></li>
+            <li><span class="dot"></span><span>Analyse der bestehenden Mieten und Potenziale</span></li>
+            <li><span class="dot"></span><span>Prüfung der vorhandenen Unterlagen</span></li>
+            <li><span class="dot"></span><span>Klare Entscheidungsempfehlung</span></li>
+            <li><span class="dot"></span><span>Optional: Kontakt zu Maklern / Dienstleistern</span></li>
+            <li><span class="dot"></span><span>Optional: Durchführung von Besichtigungen</span></li>
+          </ul>
+        </div>
+
+        <div class="price-col">
+          <div class="kicker">Objektoptimierung &amp; Strategie</div>
+          <div class="price">auf Anfrage</div>
+          <div class="sub">pro Projekt</div>
+          <div class="col-cta"><a class="btn" href="#kontakt">Kontakt</a></div>
+          <div class="col-desc">Maximierung der wirtschaftlichen Ergebnisse. Durch strukturierte Immobilienoptimierung werden Betriebskosten reduziert und Erträge langfristig gesteigert.</div>
+          <ul class="checks">
+            <li><span class="dot"></span><span>Analyse von Mietniveau und Erlösstruktur</span></li>
+            <li><span class="dot"></span><span>Prüfung laufender Kosten und Dienstleisterverträge</span></li>
+            <li><span class="dot"></span><span>Bewertung von Optimierungs- und Entwicklungspotenzialen</span></li>
+            <li><span class="dot"></span><span>Priorisierung wirtschaftlich sinnvoller Maßnahmen</span></li>
+            <li><span class="dot"></span><span>Optional: Prüfung der aktuellen Hausverwaltung</span></li>
+          </ul>
+        </div>
+
+        <div class="price-col">
+          <div class="kicker">Verkaufsberatung</div>
+          <div class="price">ab €2.500</div>
+          <div class="sub">pro Projekt</div>
+          <div class="col-cta"><a class="btn" href="#kontakt">Kontakt</a></div>
+          <div class="col-desc">Immobilien werden nicht zum Angebotspreis gekauft. Deshalb ist eine strategische Verkaufsvorbereitung zur Erzielung des optimalen Marktpreises enorm wichtig. Auf Wunsch auch mit Begleitung des Eigenverkaufs ohne Makler (objektabhängig).</div>
+          <ul class="checks">
+            <li><span class="dot"></span><span>Analyse der Verkaufsreife und Ausgangslage</span></li>
+            <li><span class="dot"></span><span>Bewertung sinnvoller Maßnahmen vor dem Verkauf</span></li>
+            <li><span class="dot"></span><span>Einschätzung des optimalen Verkaufszeitpunkts</span></li>
+            <li><span class="dot"></span><span>Vorbereitung relevanter Unterlagen</span></li>
+            <li><span class="dot"></span><span>Strategische Beratung zur Preisfindung</span></li>
+            <li><span class="dot"></span><span>Optional: Beratung bei Verkauf ohne Makler</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ERFAHRUNG / INFO -->
+  <section class="frame-gap" id="erfahrung">
+    <div class="container">
+      <div class="info-title">Heben Sie das Potenzial Ihrer Immobilie</div>
+
+      <div class="accordion">
+        <details open>
+          <summary>Für wen diese Beratung sinnvoll ist <span class="chev">⌃</span></summary>
+          <div class="acc-body">
+
+            <p><strong>Bei mir sind Einsteiger, Eigentümer und Investoren richtig, die:</strong></p>
+
+            <ul class="acc-checklist">
+              <li>nicht die Zeit, Kapazität oder den Fokus haben, sich selbst intensiv um die strategische Steuerung ihrer Immobilie zu kümmern</li>
+              <li>neu im Leipziger Markt sind und eine realistische wirtschaftliche Einordnung benötigen</li>
+              <li>ein tragfähiges Netzwerk aus Investoren, Handwerkern und Maklern in Sachsen und Sachsen-Anhalt aufbauen wollen</li>
+              <li>einen Co-Investor suchen oder ihr Investment strukturiert gemeinsam umsetzen möchten</li>
+              <li>als Investor aus den alten Bundesländern regionales Markt- und Praxiswissen vor Ort suchen</li>
+              <li>eine neue Hausverwaltung für Ihre Immobilie suchen</li>
+              <li>mit ihrer aktuellen Hausverwaltung nicht zufrieden sind und eine fundierte Entscheidungsgrundlage für Veränderungen benötigen</li>
+            </ul>
+
+            <p style="margin-top:12px;">
+              Ich unterstütze dort, wo lokale Marktkenntnis, wirtschaftliche Klarheit und eine unabhängige Perspektive entscheidend sind.
+            </p>
+
+          </div>
+        </details>
+
+        <details>
+          <summary>Wie ich Sie dabei unterstütze <span class="chev">⌃</span></summary>
+          <div class="acc-body">
+            Ich begleite Einsteiger, Eigentümer und Investoren bei entscheidenden Phasen im Lebenszyklus ihrer Immobilien – beratend, ohne Verkaufs- oder Provisionsinteresse.
+            Dazu zählen die Ankaufprüfung, die wirtschaftliche Optimierung im Bestand sowie die Vorbereitung von Verkaufsentscheidungen.
+            Auf Wunsch unterstütze ich zudem bei der Auswahl und Strukturierung der Zusammenarbeit mit einer passenden Hausverwaltung und relevanten Dienstleistern.
+          </div>
+        </details>
+
+        <details>
+          <summary>Meine Erfahrung und Expertise <span class="chev">⌃</span></summary>
+          <div class="acc-body">
+            Ich bin selbst Investor und Eigentümer von Immobilien in Leipzig und kenne die Herausforderungen im Bestand aus eigener praktischer Erfahrung.
+            Viele Themen, mit denen Eigentümer und Investoren an mich herantreten, habe ich selbst durchlaufen – von Ankaufentscheidungen über die Optimierung im Bestand bis hin zur Zusammenarbeit mit Verwaltungen und Dienstleistern.
+          </div>
+        </details>
+
+        <details>
+          <summary>Warum MFH-Investitionen oft Rendite verschenken <span class="chev">⌃</span></summary>
+          <div class="acc-body">
+            Viele Mehrfamilienhäuser werden auf Grundlage subjektiver Einschätzungen, der Angaben des Verkäufers oder einzelner technischer Aspekte erworben.
+            Wirtschaftliche Prüfungen, sind häufig unvollständig oder zu oberflächlich. Im Bestand werden anschließend Maßnahmen umgesetzt, ohne deren tatsächliche Wirkung zu priorisieren.
+          </div>
+        </details>
+      </div>
+
+      <!-- KONTAKT -->
+      <div class="contact-wrap" id="kontakt">
+        <div class="contact-title">Kontaktieren Sie mich</div>
+        <p class="contact-sub">Eine kurze Beschreibung Ihrer Immobilie und Anliegens genügt.</p>
+
+        <form
+          action="https://formspree.io/f/mvzqvggb"
+          method="POST"
+          id="kontakt-form"
+        >
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="Name" type="text" required>
+          </div>
+
+          <div class="field">
+            <label for="email">E-Mail-Adresse</label>
+            <input id="email" name="E-Mail" type="email" required>
+          </div>
+
+          <div class="field">
+            <label for="phone">Telefonnummer (optional)</label>
+            <input id="phone" name="Telefon" type="tel">
+          </div>
+
+          <div class="field">
+            <label for="message">Nachricht</label>
+            <textarea id="message" name="Nachricht" required></textarea>
+          </div>
+
+          <button class="btn" type="submit">Nachricht senden</button>
+
+          <!-- Erfolgsmeldung -->
+          <p id="form-success" style="display:none; margin-top:16px;">
+            Vielen Dank für Ihre Nachricht. Ich melde mich zeitnah bei Ihnen.
+          </p>
+        </form>
+      </div>
+
+      <!-- Impressum ganz nach unten -->
+      <div class="footerbar">
+        <img src="assets/Logo_Grundmann-Consulting.png" alt="Grundmann Consulting Logo" class="footer-logo">
+        <a href="impressum.html">Impressum</a>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("kontakt-form");
+      const success = document.getElementById("form-success");
+
+      if (!form) return;
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const data = new FormData(form);
+
+        try {
+          const response = await fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (response.ok) {
+            form.reset();
+            success.style.display = "block";
+          } else {
+            alert("Beim Senden ist ein Fehler aufgetreten. Bitte erneut versuchen.");
+          }
+        } catch (error) {
+          alert("Verbindung fehlgeschlagen. Bitte später erneut versuchen.");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
