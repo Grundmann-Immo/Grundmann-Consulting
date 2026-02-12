@@ -1,0 +1,534 @@
+<!-- cashflow-rechner/index.html -->
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cashflow-Rechner | Grundmann Consulting</title>
+  <meta name="description" content="Cashflow-Rechner für Eigentumswohnungen & Mehrfamilienhäuser – Kredit, Rate, Nebenkosten und monatlicher Cashflow." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f3efe7;
+      --text: #111;
+      --muted: rgba(0,0,0,.72);
+      --line: rgba(0,0,0,.18);
+      --max: 1160px;
+      --radius: 12px;
+      --base: 16px;
+      --heroGrad: linear-gradient(90deg, rgba(16,40,33,.92) 0%, rgba(16,40,33,.75) 58%, rgba(16,40,33,.15) 100%);
+      --panel: rgba(255,255,255,.22);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: var(--base);
+      line-height: 1.65;
+    }
+    p, li, label, input, button, a, small { font-size: var(--base); }
+    .container{ width: min(var(--max), 92vw); margin: 0 auto; }
+
+    .topnav{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--heroGrad);
+      color:#fff;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .topnav .container{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 12px 0;
+      gap: 18px;
+    }
+    .logo{ display:flex; align-items:center; text-decoration:none; color:#fff; font-weight:700; }
+    .logo-img{ height: 50px; width:auto; display:block; }
+
+    .navlinks{ display:flex; align-items:center; gap: 10px; flex: 1; justify-content: flex-end; }
+    .navlinks a{
+      color:#fff; text-decoration:none; font-weight:600;
+      padding: 8px 8px; border-radius: 10px;
+    }
+    .navlinks a:hover{ background: rgba(255,255,255,.10); }
+
+    .frame-gap{ padding: 54px 0; }
+
+    .pagehead{
+      width: min(var(--max), 92vw);
+      margin: 54px auto 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid rgba(0,0,0,.10);
+      padding: 26px 22px;
+    }
+    .pagehead h1{ margin: 0 0 6px; font-size: 28px; line-height: 1.15; }
+    .pagehead p{ margin: 0; color: var(--muted); max-width: 90ch; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 26px;
+      align-items:start;
+    }
+    .panel{
+      background: var(--panel);
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+    .panel h2{ font-size: 18px; margin: 0 0 14px; letter-spacing: .2px; }
+    .subhead{ margin: 18px 0 10px; font-weight: 700; font-size: 14px; opacity: .9; }
+
+    .rows{ display:flex; flex-direction:column; gap: 12px; }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 220px;
+      gap: 14px;
+      align-items:center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(0,0,0,.10);
+    }
+    .row:last-child{ border-bottom:none; padding-bottom:0; }
+
+    .label{ font-weight: 700; }
+    .hint{ color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+    input{
+      width:100%;
+      border: none;
+      background: rgba(0,0,0,.08);
+      padding: 10px 12px;
+      font-family: inherit;
+      outline:none;
+      border-radius: 8px;
+      text-align: right;
+    }
+
+    .suffix{ position: relative; }
+    .suffix span{
+      position:absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(0,0,0,.55);
+      font-weight: 600;
+      pointer-events:none;
+    }
+    .suffix input{ padding-right: 34px; }
+
+    .result{ display:flex; flex-direction:column; gap: 12px; }
+    .kpi{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      padding: 12px 12px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.28);
+      border: 1px solid rgba(0,0,0,.10);
+    }
+    .kpi .name{ font-weight: 700; }
+    .kpi .val{ font-weight: 700; }
+    .kpi.green{ background: rgba(34,139,34,.10); border-color: rgba(34,139,34,.22); }
+    .kpi.red{ background: rgba(200,0,0,.08); border-color: rgba(200,0,0,.18); }
+
+    .small{ color: var(--muted); font-size: 12px; margin: 6px 0 0; }
+    .btnrow{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      background: var(--heroGrad);
+      color:#fff; border:none;
+      padding: 10px 14px;
+      font-weight:700; cursor:pointer; text-decoration:none;
+      transition: transform .12s ease, filter .12s ease;
+      border-radius: 10px;
+    }
+    .btn:hover{ filter: brightness(1.05); transform: translateY(-1px); }
+    .btn.ghost{ background: rgba(0,0,0,.08); color:#111; border: 1px solid rgba(0,0,0,.14); }
+
+    .mini{
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(0,0,0,.10);
+    }
+
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+      .row{ grid-template-columns: 1fr; }
+      input{ text-align:left; }
+      .logo-img{ height: 40px; }
+      .navlinks{ justify-content:flex-start; overflow-x:auto; white-space:nowrap; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="topnav">
+    <div class="container">
+      <a class="logo" href="../index.html#top" aria-label="Startseite">
+        <img src="../assets/Logo_Grundmann-Consulting_white.png" alt="Grundmann Consulting Logo" class="logo-img">
+      </a>
+      <div class="navlinks">
+        <a href="../index.html#preise">Beratungsleistungen</a>
+        <a href="../immobilienberatung-leipzig/">Leipzig</a>
+        <a href="./">Cashflow-Rechner</a>
+        <a href="../index.html#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="pagehead">
+    <h1>Cashflow-Rechner</h1>
+    <p>Erstcheck für Kauf &amp; Bestand: Kreditsumme, Rate, nicht umlagefähige Kosten und Cashflow.</p>
+  </header>
+
+  <main class="frame-gap">
+    <div class="container">
+      <div class="grid">
+
+        <section class="panel" aria-label="Eingaben">
+          <h2>Kreditsumme</h2>
+
+          <div class="rows">
+
+            <div class="row">
+              <div><div class="label">Kaufpreis</div><div class="hint">Tipp: Shift + Pfeil = 10× Schritt</div></div>
+              <div class="suffix">
+                <input id="kaufpreis" type="number" min="0" step="1000" value="0" inputmode="numeric">
+                <span>€</span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div><div class="label">Eigenkapital</div><div class="hint">Anteil vom Kaufpreis</div></div>
+              <div class="suffix"><input id="ek_pct" type="number" min="0" max="100" step="1" value="0"><span>%</span></div>
+            </div>
+
+            <div class="subhead">Kaufnebenkosten (automatisch)</div>
+
+            <div class="row">
+              <div><div class="label">Notar &amp; Grundbuch</div><div class="hint">in % vom Kaufpreis</div></div>
+              <div class="suffix"><input id="nk_notar_pct" type="number" min="0" step="0.1" value="0"><span>%</span></div>
+            </div>
+
+            <div class="row">
+              <div><div class="label">Grunderwerbsteuer</div><div class="hint">in % vom Kaufpreis</div></div>
+              <div class="suffix"><input id="nk_grest_pct" type="number" min="0" step="0.1" value="0"><span>%</span></div>
+            </div>
+
+            <div class="row">
+              <div><div class="label">Makler</div><div class="hint">optional</div></div>
+              <div class="suffix"><input id="nk_makler_pct" type="number" min="0" step="0.1" value="0"><span>%</span></div>
+            </div>
+
+            <div class="row">
+              <div><div class="label">Sanierungskosten</div><div class="hint">Shift + Pfeil = 10× Schritt</div></div>
+              <div class="suffix">
+                <input id="sanierung" type="number" min="0" step="1000" value="0" inputmode="numeric">
+                <span>€</span>
+              </div>
+            </div>
+
+            <h2 style="margin-top:18px;">Berechnung der Rate</h2>
+
+            <div class="row">
+              <div><div class="label">Zins</div></div>
+              <div class="suffix"><input id="zins_pct" type="number" min="0" step="0.1" value="0"><span>%</span></div>
+            </div>
+
+            <div class="row">
+              <div><div class="label">Tilgung</div></div>
+              <div class="suffix"><input id="tilgung_pct" type="number" min="0" step="0.1" value="0"><span>%</span></div>
+            </div>
+
+            <h2 style="margin-top:18px;">Cashflow</h2>
+
+            <div class="subhead">Miete (soll)</div>
+
+            <div class="row">
+              <div><div class="label">Wohnfläche</div><div class="hint">m²</div></div>
+              <div class="suffix"><input id="wf" type="number" min="0" step="1" value="0"><span>m²</span></div>
+            </div>
+
+            <div class="row">
+              <div><div class="label">Miete €/m²</div><div class="hint">Kaltmiete (Soll)</div></div>
+              <div class="suffix"><input id="miete_qm" type="number" min="0" step="0.1" value="0"><span>€</span></div>
+            </div>
+
+            <div class="subhead">Nicht umlagefähige Nebenkosten (Schätzung)</div>
+
+            <div class="row">
+              <div><div class="label">Rücklage / Instandhaltung</div><div class="hint">€/m² pro Monat</div></div>
+              <div class="suffix"><input id="ih_qm" type="number" min="0" step="0.1" value="0"><span>€</span></div>
+            </div>
+
+            <div class="row">
+              <div><div class="label">Verwaltung</div><div class="hint">Shift + Pfeil = 10× Schritt</div></div>
+              <div class="suffix">
+                <input id="verw" type="number" min="0" step="10" value="0" inputmode="numeric">
+                <span>€</span>
+              </div>
+            </div>
+
+            <div class="btnrow">
+              <button class="btn" type="button" id="resetBtn">Zurücksetzen</button>
+              <button class="btn ghost" type="button" id="copyBtn">Ergebnisse kopieren</button>
+              <button class="btn ghost" type="button" id="leipzigDefaultsBtn">Leipzig-Defaults</button>
+            </div>
+
+            <p class="small">Rate: Faustformel (Zins+Tilgung). Optional kann ich dir „exakte Annuität“ ergänzen.</p>
+          </div>
+        </section>
+
+        <aside class="panel" aria-label="Ergebnisse">
+          <h2>Ergebnisse</h2>
+
+          <div class="result">
+            <div class="kpi"><div class="name">Kaufnebenkosten (Summe)</div><div class="val" id="out_nk_sum">0,00&nbsp;€</div></div>
+            <div class="kpi"><div class="name">Eigenkapital</div><div class="val" id="out_ek">0,00&nbsp;€</div></div>
+            <div class="kpi"><div class="name">Kredit</div><div class="val" id="out_kredit">0,00&nbsp;€</div></div>
+            <div class="kpi"><div class="name">Rate</div><div class="val" id="out_rate">0,00&nbsp;€ / Monat</div></div>
+
+            <div class="kpi"><div class="name">Miete (soll)</div><div class="val" id="out_miete">0,00&nbsp;€ / Monat</div></div>
+            <div class="kpi"><div class="name">Nicht umlagefähige NK</div><div class="val" id="out_nuk">0,00&nbsp;€ / Monat</div></div>
+
+            <!-- bessere Formulierung -->
+            <div class="kpi"><div class="name">Kaufpreis je m²</div><div class="val" id="out_price_qm">—</div></div>
+
+            <div class="kpi" id="kpi_cashflow">
+              <div class="name">Cashflow</div>
+              <div class="val" id="out_cashflow">0,00&nbsp;€ / Monat</div>
+            </div>
+
+            <div class="kpi"><div class="name">Cashflow-Rendite (p.a.)</div><div class="val" id="out_cf_yield">—</div></div>
+            <p class="small" id="out_note">Trage Werte ein, um eine Erstabschätzung zu erhalten.</p>
+
+            <div class="mini">
+              <div>Notar/GB: <span id="out_nk_notar">0,00&nbsp;€</span></div>
+              <div>GrESt: <span id="out_nk_grest">0,00&nbsp;€</span></div>
+              <div>Makler: <span id="out_nk_makler">0,00&nbsp;€</span></div>
+            </div>
+
+            <div class="btnrow">
+              <a class="btn" href="../index.html#kontakt">Objekt kurz prüfen lassen</a>
+              <a class="btn ghost" href="../index.html#preise">Beratungsleistungen</a>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const nf2 = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const nf2plain = new Intl.NumberFormat('de-DE', { maximumFractionDigits: 2 });
+    const eur = (n) => nf2.format(n) + " €";
+    const eurPerMonth = (n) => nf2.format(n) + " € / Monat";
+    const pct = (n) => nf2plain.format(n) + " %";
+    const el = (id) => document.getElementById(id);
+
+    const ids = [
+      "kaufpreis","ek_pct","nk_notar_pct","nk_grest_pct","nk_makler_pct","sanierung",
+      "zins_pct","tilgung_pct","wf","miete_qm","ih_qm","verw"
+    ];
+
+    const defaultsZero = Object.fromEntries(ids.map(id => [id, 0]));
+
+    // Realistische Leipzig-Defaults (anpassbar)
+    const defaultsLeipzig = {
+      kaufpreis: 210000,
+      ek_pct: 20,
+      nk_notar_pct: 2.0,
+      nk_grest_pct: 5.5,
+      nk_makler_pct: 0.0,
+      sanierung: 15000,
+      zins_pct: 3.3,
+      tilgung_pct: 2.0,
+      wf: 65,
+      miete_qm: 10.5,
+      ih_qm: 1.0,
+      verw: 30
+    };
+
+    function num(x){
+      const v = Number(x.value);
+      return isFinite(v) ? v : 0;
+    }
+
+    function setDynamicStep(input){
+      // dynamische Schrittweite: bei großen Zahlen gröber
+      const v = Math.max(0, num(input));
+      let step = 1000;
+      if (v >= 1000000) step = 50000;
+      else if (v >= 500000) step = 20000;
+      else if (v >= 200000) step = 10000;
+      else if (v >= 100000) step = 5000;
+      else step = 1000;
+
+      // Verwaltung soll feiner bleiben
+      if (input.id === "verw") {
+        step = v >= 200 ? 25 : 10;
+      }
+
+      input.step = String(step);
+    }
+
+    // Shift+Arrow = 10x step
+    function attachShiftArrowBoost(input){
+      input.addEventListener("keydown", (e) => {
+        if (!e.shiftKey) return;
+        if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+
+        e.preventDefault();
+        const step = Number(input.step || 1) || 1;
+        const delta = (e.key === "ArrowUp" ? step : -step) * 10;
+        const v = Math.max(0, num(input) + delta);
+        input.value = String(v);
+        setDynamicStep(input);
+        calc();
+      });
+    }
+
+    function calc(){
+      const kp = Math.max(0, num(el("kaufpreis")));
+      const ekp = Math.min(100, Math.max(0, num(el("ek_pct"))));
+      const ek = kp * (ekp/100);
+
+      const notar = kp * (Math.max(0, num(el("nk_notar_pct")))/100);
+      const grest = kp * (Math.max(0, num(el("nk_grest_pct")))/100);
+      const makler = kp * (Math.max(0, num(el("nk_makler_pct")))/100);
+      const nkSum = notar + grest + makler;
+
+      const sani = Math.max(0, num(el("sanierung")));
+      const kredit = Math.max(0, (kp - ek) + nkSum + sani);
+
+      const z = Math.max(0, num(el("zins_pct")))/100;
+      const t = Math.max(0, num(el("tilgung_pct")))/100;
+      const rate = kredit * (z + t) / 12;
+
+      const area = Math.max(0, num(el("wf")));
+      const rentqm = Math.max(0, num(el("miete_qm")));
+      const mieteMonat = area * rentqm;
+
+      const ih = area * Math.max(0, num(el("ih_qm")));
+      const verw = Math.max(0, num(el("verw")));
+      const nukSum = ih + verw;
+
+      const cashflow = mieteMonat - rate - nukSum;
+      const cfYield = ek > 0 ? (cashflow * 12 / ek) * 100 : null;
+
+      el("out_nk_sum").textContent = eur(nkSum);
+      el("out_nk_notar").textContent = eur(notar);
+      el("out_nk_grest").textContent = eur(grest);
+      el("out_nk_makler").textContent = eur(makler);
+
+      el("out_ek").textContent = eur(ek);
+      el("out_kredit").textContent = eur(kredit);
+      el("out_rate").textContent = eurPerMonth(rate);
+      el("out_miete").textContent = eurPerMonth(mieteMonat);
+      el("out_nuk").textContent = eurPerMonth(nukSum);
+      el("out_cashflow").textContent = eurPerMonth(cashflow);
+      el("out_cf_yield").textContent = (cfYield === null) ? "—" : pct(cfYield);
+
+      el("out_price_qm").textContent = (area > 0 && kp > 0)
+        ? (nf2.format(kp / area) + " € / m²")
+        : "—";
+
+      const kpi = el("kpi_cashflow");
+      kpi.classList.toggle("green", cashflow > 0);
+      kpi.classList.toggle("red", cashflow < 0);
+
+      const note =
+        (kp===0 && area===0 && rentqm===0 && z===0 && t===0)
+          ? "Trage Werte ein, um eine Erstabschätzung zu erhalten."
+          : (cashflow >= 0
+              ? "Positiver Cashflow: gut für Stabilität. Rücklagen/Leerstand realistisch prüfen."
+              : "Negativer Cashflow: Hebel prüfen (Preis, Miete, NK, Sanierung, Zins, EK, Bewirtschaftung).");
+
+      el("out_note").textContent = note;
+    }
+
+    function applyDefaults(obj){
+      Object.entries(obj).forEach(([k,v]) => {
+        if (el(k)) el(k).value = v;
+      });
+
+      // Steps neu setzen
+      ["kaufpreis","sanierung","verw"].forEach(id => setDynamicStep(el(id)));
+      calc();
+    }
+
+    function bind(){
+      ids.forEach(id => el(id).addEventListener("input", () => {
+        // Steps dynamisch während Input
+        if (id === "kaufpreis" || id === "sanierung" || id === "verw") {
+          setDynamicStep(el(id));
+        }
+        calc();
+      }));
+
+      // Shift-Arrow Boost + initial step
+      ["kaufpreis","sanierung","verw"].forEach(id => {
+        const input = el(id);
+        setDynamicStep(input);
+        attachShiftArrowBoost(input);
+      });
+
+      el("resetBtn").addEventListener("click", () => applyDefaults(defaultsZero));
+      el("leipzigDefaultsBtn").addEventListener("click", () => applyDefaults(defaultsLeipzig));
+
+      el("copyBtn").addEventListener("click", async () => {
+        const text =
+`Cashflow-Rechner (Grundmann Consulting)
+Kaufpreis: ${el("kaufpreis").value} €
+Wohnfläche: ${el("wf").value} m²
+Kaufpreis je m²: ${el("out_price_qm").textContent}
+
+Eigenkapital: ${el("out_ek").textContent} (${el("ek_pct").value} %)
+Kaufnebenkosten (Summe): ${el("out_nk_sum").textContent}
+Kredit: ${el("out_kredit").textContent}
+Rate: ${el("out_rate").textContent}
+
+Miete (soll): ${el("out_miete").textContent}
+Nicht umlagefähige NK: ${el("out_nuk").textContent}
+
+Cashflow: ${el("out_cashflow").textContent}
+CF-Rendite p.a.: ${el("out_cf_yield").textContent}`;
+
+        try{
+          await navigator.clipboard.writeText(text);
+          el("copyBtn").textContent = "Kopiert ✓";
+          setTimeout(() => (el("copyBtn").textContent = "Ergebnisse kopieren"), 1200);
+        }catch(e){
+          alert("Kopieren nicht möglich (Browser-Einstellung).");
+        }
+      });
+
+      // Start: 0
+      applyDefaults(defaultsZero);
+    }
+
+    bind();
+  </script>
+
+</body>
+</html>
