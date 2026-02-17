@@ -1,0 +1,88 @@
+<!-- impressum.html -->
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Impressum</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Impressum von Grundmann Consulting – Immobilienberatung und Objektoptimierung." />
+  <link rel="canonical" href="https://grundmannconsulting.de/impressum/" />
+
+  <!-- Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root{
+      --bg: #f3efe7;
+      --text: #111;
+      --muted: rgba(0,0,0,.72);
+      --accent: #a5671f;
+      --accentDark: #8d551a;
+      --max: 880px;
+      --base: 16px;
+      --radius: 12px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: var(--base);
+      line-height: 1.65;
+    }
+    .container{
+      width:min(var(--max), 92vw);
+      margin: 0 auto;
+      padding: 72px 0;
+    }
+    h1{
+      font-size: 34px;
+      margin: 0 0 18px;
+      font-weight: 700;
+    }
+    .box{
+      background: rgba(255,255,255,.28);
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+    .row{margin: 10px 0;}
+    .label{font-weight:700;}
+    a.btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background: var(--accent);
+      color:#fff;
+      padding: 10px 14px;
+      font-weight:700;
+      text-decoration:none;
+      margin-top: 18px;
+      border-radius: 2px;
+    }
+    a.btn:hover{background: var(--accentDark);}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Impressum</h1>
+
+    <div class="box">
+      <div class="row"><span class="label">Name:</span> <span>André Grundmann</span></div>
+      <div class="row"><span class="label">Straße:</span> <span>Brahmsweg 24</span></div>
+      <div class="row"><span class="label">Telefonnummer:</span> <span>0160/7738676</span></div>
+      <div class="row"><span class="label">PLZ und Stadt:</span> <span>06667 Weißenfels</span></div>
+    </div>
+
+    <a class="btn" href="https://grundmannconsulting.de/">Zurück</a>
+  </div>
+</body>
+</html>

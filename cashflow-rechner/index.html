@@ -1,15 +1,28 @@
-<!-- cashflow-rechner/index.html -->
 <!doctype html>
 <html lang="de">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cashflow-Rechner | Grundmann Consulting</title>
-  <meta name="description" content="Cashflow-Rechner für Eigentumswohnungen & Mehrfamilienhäuser – Kredit, Rate, Nebenkosten und monatlicher Cashflow." />
+
+  <title>Cashflow-Rechner | Mehrfamilienhaus & Eigentumswohnung</title>
+
+  <meta name="description" content="Cashflow-Rechner für Eigentumswohnungen & Mehrfamilienhäuser. Kredit, Rate, Nebenkosten und monatlicher Cashflow realistisch berechnen." />
+
+  <link rel="canonical" href="https://grundmannconsulting.de/cashflow-rechner/" />
+
+  <meta property="og:title" content="Cashflow-Rechner | Grundmann Consulting" />
+  <meta property="og:description" content="Kredit, Rate, Nebenkosten und monatlicher Cashflow realistisch berechnen." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://grundmannconsulting.de/cashflow-rechner/" />
+
+  <meta name="robots" content="index,follow" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<meta property="og:image" content="https://grundmannconsulting.de/assets/Wohngebäude.png" />
+
 
   <style>
     :root{
@@ -177,21 +190,38 @@
       .navlinks{ justify-content:flex-start; overflow-x:auto; white-space:nowrap; }
     }
   </style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Cashflow-Rechner",
+  "applicationCategory":"FinanceApplication",
+  "operatingSystem":"All",
+  "url":"https://grundmannconsulting.de/cashflow-rechner/",
+  "publisher":{
+    "@type":"Organization",
+    "name":"Grundmann Consulting",
+    "url":"https://grundmannconsulting.de/"
+  }
+}
+</script>
+
 </head>
 
 <body>
 
   <nav class="topnav">
     <div class="container">
-      <a class="logo" href="../index.html#top" aria-label="Startseite">
-        <img src="../assets/Logo_Grundmann-Consulting_white.png" alt="Grundmann Consulting Logo" class="logo-img">
-      </a>
-      <div class="navlinks">
-        <a href="/index.html">Home</a>        
-        <a href="../index.html#preise">Beratungsleistungen</a>
-        <a href="../immobilienberatung-leipzig/">Leipzig</a>
-        <a href="../index.html#kontakt">Kontakt</a>
-      </div>
+<a class="logo" href="/" aria-label="Startseite">
+  <img src="/assets/Logo_Grundmann-Consulting_white.png" alt="Grundmann Consulting Logo" class="logo-img">
+</a>
+<div class="navlinks">
+  <a href="/">Home</a>
+  <a href="/#preise">Beratungsleistungen</a>
+  <a href="/immobilienberatung-leipzig/">Leipzig</a>
+  <a href="/#kontakt">Kontakt</a>
+</div>
+
     </div>
   </nav>
 
@@ -281,7 +311,7 @@
             </div>
 
             <div class="row">
-              <div><div class="label">Verwaltung</div><div class="hint">Shift + Pfeil = 10× Schritt</div></div>
+              <div><div class="label">Verwaltung (pro Monat)</div><div class="hint">nicht umlagefähig, € / Monat</div></div>
               <div class="suffix">
                 <input id="verw" type="number" min="0" step="10" value="0" inputmode="numeric">
                 <span>€</span>
@@ -293,9 +323,7 @@
               <button class="btn ghost" type="button" id="copyBtn">Ergebnisse kopieren</button>
               <button class="btn ghost" type="button" id="leipzigDefaultsBtn">Leipzig-Defaults</button>
             </div>
-
-            <p class="small">Rate: Faustformel (Zins+Tilgung). Optional kann ich dir „exakte Annuität“ ergänzen.</p>
-          </div>
+</div>
         </section>
 
         <aside class="panel" aria-label="Ergebnisse">
@@ -328,8 +356,8 @@
             </div>
 
             <div class="btnrow">
-              <a class="btn" href="../index.html#kontakt">Objekt prüfen lassen</a>
-              <a class="btn ghost" href="../index.html#preise">Beratungsleistungen</a>
+              <a class="btn" href="/#kontakt">Objekt prüfen lassen</a>
+              <a class="btn ghost" href="/#preise">Beratungsleistungen</a>
             </div>
           </div>
         </aside>
@@ -529,6 +557,16 @@ CF-Rendite p.a.: ${el("out_cf_yield").textContent}`;
 
     bind();
   </script>
+<footer style="margin-top:54px; padding:22px 0 56px; border-top:1px solid rgba(0,0,0,.25); text-align:center;">
+  <img src="/assets/Logo_Grundmann-Consulting.png"
+       alt="Grundmann Consulting Logo"
+       style="height:44px; width:auto; opacity:.85; display:block; margin:0 auto 6px;">
+  <div>
+    <a href="/impressum/" style="font-size:12px; text-decoration:none; color:#111;">
+      Impressum
+    </a>
+  </div>
+</footer>
 
 </body>
 </html>
