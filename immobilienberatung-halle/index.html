@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Immobilienberatung Halle (Saale) | Mehrfamilienhaus Ankauf, Analyse & Optimierung</title>
+
+  <meta name="description" content="Immobilienberatung Halle (Saale) für Mehrfamilienhäuser & Eigentumswohnungen: Ankaufberatung, Objekt- & Cashflow-Analyse, Bestandsoptimierung, Verkaufsstrategie. Unabhängig (ohne Makler/Provision)." />
+
+  <link rel="canonical" href="https://grundmannconsulting.de/immobilienberatung-halle/" />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Immobilienberatung Halle (Saale) | Grundmann Consulting" />
+  <meta property="og:description" content="Ankaufberatung, Objekt- & Cashflow-Analyse, Bestandsoptimierung für MFH & ETW in Halle (Saale) – unabhängig, ohne Provision." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://grundmannconsulting.de/immobilienberatung-halle/" />
+  <meta property="og:image" content="https://grundmannconsulting.de/assets/hero-halle-mfh.jpg" />
+
+  <!-- Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f3efe7;
+      --text:#111;
+      --muted:rgba(0,0,0,.72);
+      --line:rgba(0,0,0,.18);
+      --radius:12px;
+      --max:1160px;
+      --base:16px;
+      --gap:32px;
+      --heroGrad:linear-gradient(90deg, rgba(16,40,33,.92) 0%, rgba(16,40,33,.75) 58%, rgba(16,40,33,.15) 100%);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      font-size:var(--base);
+      line-height:1.65;
+    }
+    p, li, label, input, textarea, button, a, summary, small { font-size: var(--base); }
+    h1,h2,h3{ margin:0; line-height:1.15; }
+    a{ color:inherit; text-decoration:none; }
+
+    .container{ width:min(var(--max),92vw); margin:0 auto; }
+    .frame-gap{ padding:var(--gap) 0; }
+
+    /* NAV */
+    .topnav{
+      position:sticky; top:0; z-index:50;
+      background:var(--heroGrad);
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+    .topnav .container{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0; gap:14px;
+    }
+    .logo-img{ height:46px; width:auto; display:block; }
+    .navlinks{
+      display:flex; gap:12px;
+      overflow-x:auto; white-space:nowrap;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .navlinks::-webkit-scrollbar{ display:none; }
+    .navlinks a{
+      color:#fff; font-weight:600;
+      padding:8px 10px; border-radius:10px;
+      flex:0 0 auto;
+    }
+    .navlinks a:hover{ background:rgba(255,255,255,.12); }
+
+    /* HERO */
+    .hero{
+      width:min(var(--max),92vw);
+      margin:var(--gap) auto var(--gap);
+      border-radius:var(--radius);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1.15fr 1fr;
+      min-height:520px;
+      background:#e9e5dc;
+    }
+    .hero-left{
+      padding:52px;
+      background:var(--heroGrad);
+      color:#fff;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:14px;
+    }
+    .hero-left h1{ font-size:28px; font-weight:700; }
+    .hero-left p{ margin:0; opacity:.95; max-width:60ch; }
+    .hero-right{ background:#ddd; position:relative; }
+    .hero-right img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* Eyecatcher */
+    .panel{
+      background:rgba(255,255,255,.32);
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:var(--radius);
+      padding:28px;
+    }
+
+    /* Typo */
+    .section-title{
+      font-size:32px; font-weight:700;
+      margin:0 0 18px;
+      text-align:center;
+    }
+    .h2{
+      font-size:24px;
+      font-weight:700;
+      margin:0 0 10px;
+    }
+    .muted{ color:var(--muted); }
+    .divider{ height:1px; background:var(--line); margin:22px 0; }
+
+    /* Lists */
+    .checklist{ list-style:none; padding:0; margin:0; }
+    .checklist li{
+      position:relative;
+      padding-left:28px;
+      margin:0 0 10px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .checklist li::before{
+      content:"✓";
+      position:absolute; left:0; top:0.05em;
+      font-weight:700; color:rgba(0,0,0,.7);
+    }
+
+    /* CTA */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      background:var(--heroGrad);
+      color:#fff;
+      border:none;
+      padding:12px 18px;
+      font-weight:700;
+      border-radius:6px;
+      cursor:pointer;
+      transition:transform .12s ease, filter .12s ease;
+    }
+    .btn:hover{ filter:brightness(1.05); transform:translateY(-1px); }
+    .btn.ghost{
+      background: rgba(0,0,0,.08);
+      color:#111;
+      border: 1px solid rgba(0,0,0,.14);
+    }
+
+    /* Contact */
+    .contact-wrap{ max-width: none; margin:0 auto; }
+    label{ display:block; font-weight:600; color:var(--muted); margin:0 0 6px; }
+    input, textarea{
+      width:100%;
+      border:none;
+      background:rgba(0,0,0,.08);
+      padding:12px;
+      outline:none;
+    }
+    textarea{ min-height:160px; resize:vertical; }
+    .row2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .field{ margin-bottom:14px; }
+
+    /* ======= PRICING (Beratungsleistungen) ======= */
+    .pricing{ padding: 0; }
+    .pricing-panel{
+      width: min(var(--max), 92vw);
+      margin: 0 auto;
+      background: rgba(255,255,255,.22);
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: var(--radius);
+      padding: 40px 22px;
+    }
+    .pricing-panel h2{
+      text-align:center;
+      font-size:32px;           /* angepasst an .section-title */
+      font-weight:700;
+      margin:0 0 32px;
+      letter-spacing: .2px;
+    }
+
+    .price-table{
+      width:min(980px, 100%);
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: 8px;
+      overflow:hidden;
+      background: rgba(255,255,255,.24);
+    }
+
+    .price-col{
+      padding: 22px 18px 20px;
+      border-right: 1px solid rgba(0,0,0,.10);
+      display:flex;
+      flex-direction:column;
+      min-height: 560px;
+    }
+    .price-col:last-child{ border-right:none; }
+
+    .kicker{
+      font-weight: 700;
+      font-size: 18px;          /* vorher 18/12 Mischmasch -> sauberer */
+      margin-bottom: 8px;
+      height: 44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: 0 6px;
+      color: #102821;
+    }
+    .price{
+      font-weight: 700;
+      font-size: 24px;          /* leicht ruhiger */
+      margin: 0;
+      min-height: 34px;
+      text-align: center;
+    }
+    .sub{
+      opacity:.85;
+      font-size: 12px;
+      margin-top: 2px;
+      min-height: 22px;
+      text-align: center;
+    }
+
+    .col-cta{
+      height:52px;              /* fix: gleiche Button-Höhe/Position */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin: 18px 0 18px;
+    }
+    .col-cta .btn{
+      width:100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+    }
+
+    .col-desc{
+      color: rgba(0,0,0,.76);
+      margin: 0;
+      line-height: 1.6;
+      font-size: 16px;          /* angepasst an var(--base) */
+    }
+
+    .checks{
+      list-style:none;
+      padding:0;
+      margin: 12px 0 0;
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+      color: rgba(0,0,0,.78);
+      font-size: 16px;          /* angepasst an var(--base) */
+    }
+    .checks li{
+      display:flex;
+      gap: 8px;
+      align-items:flex-start;
+    }
+    .dot{
+      width:14px;height:14px;
+      border-radius:50%;
+      background: rgba(0,0,0,.10);
+      position:relative;
+      margin-top: 3px;
+      flex: 0 0 14px;
+    }
+    .dot:after{
+      content:"";
+      position:absolute;
+      left:4px; top:3px;
+      width:6px; height:3px;
+      border-left:2px solid rgba(0,0,0,.60);
+      border-bottom:2px solid rgba(0,0,0,.60);
+      transform: rotate(-45deg);
+    }
+
+    /* Footer */
+    footer{
+      margin-top:var(--gap);
+      padding:22px 0 56px;
+      border-top:1px solid rgba(0,0,0,.25);
+      text-align:center;
+    }
+    .footer-logo{ height:44px; width:auto; opacity:.85; display:block; margin:0 auto 6px; }
+    footer a{ font-size:12px; text-decoration:none; color:#111; }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero{ grid-template-columns:1fr; }
+      .hero-left{ padding:34px 22px; }
+      .hero-right{ height:320px; }
+      .row2{ grid-template-columns:1fr; }
+      .section-title{ font-size:26px; }
+      .hero-left h1{ font-size:24px; }
+      .logo-img{ height:38px; }
+
+      .price-table{ grid-template-columns: 1fr; }
+      .price-col{
+        min-height: auto;
+        border-right:none;
+        border-bottom: 1px solid rgba(0,0,0,.10);
+      }
+      .price-col:last-child{ border-bottom:none; }
+    }
+  </style>
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ProfessionalService",
+    "name":"Grundmann Consulting",
+    "url":"https://grundmannconsulting.de/immobilienberatung-halle/",
+    "serviceType":"Immobilienberatung",
+    "areaServed":[
+      {"@type":"City","name":"Halle (Saale)"},
+      {"@type":"AdministrativeArea","name":"Sachsen-Anhalt"}
+    ],
+    "brand":{"@type":"Brand","name":"Grundmann Consulting"}
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="topnav" aria-label="Hauptnavigation">
+    <div class="container">
+      <a class="logo" href="/" aria-label="Startseite">
+        <img class="logo-img" src="/assets/Logo_Grundmann-Consulting_white.png" alt="Grundmann Consulting Logo">
+      </a>
+      <div class="navlinks">
+        <a href="/">Home</a>
+        <a href="#halle">Immobilienberatung</a>
+        <a href="#markt">Markt in Zahlen</a>
+        <a href="#preise">Beratungsleistungen</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="halle">
+    <div class="hero-left">
+      <h1>Immobilienberatung Halle (Saale) für Mehrfamilienhäuser &amp; Eigentumswohnungen</h1>
+      <p>
+        Mehrfamilienhaus &amp; ETW in Halle: Ankauf prüfen, Bestand optimieren, Verkauf sauber vorbereiten.<br>
+        Unabhängig ohne Maklerprovision: Wirtschaftlichkeit, Risiken, Capex, Mietpotenziale und ein belastbarer „Go/No-Go“-Rahmen.
+      </p>
+      <div style="margin-top:8px; display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn" href="/#kontakt">Kostenloses Erstgespräch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="/assets/hero-halle-mfh.jpg" alt="Mehrfamilienhaus in Halle (Saale) – Straßenansicht">
+    </div>
+  </header>
+
+  <!-- LEISTUNGSÜBERBLICK -->
+  <section class="frame-gap" id="leistungen">
+    <div class="container">
+      <div class="section-title">Warum Halle (Saale) für Investoren interessant ist</div>
+
+      <div class="panel">
+        <p class="muted">
+          Halle ist kein Hype-Markt. Und genau das macht ihn spannend.
+          Während in Leipzig und Dresden viele Deals bereits auf knappen Faktoren gehandelt werden, liegen die Einstiegspreise in Halle häufig spürbar darunter – bei gleichzeitig gestiegenen Angebotsmieten.
+          Das eröffnet ein Fenster, das man als Investor nüchtern prüfen sollte.
+        </p>
+
+        <ul class="checklist" style="margin-top:14px;">
+          <li>Geringerer Kapitaleinsatz pro m²</li>
+          <li>Solide Bruttoanfangsrenditen im Marktvergleich</li>
+          <li>Mietanpassungspotenzial im Bestand</li>
+          <li>Weniger überhitzte Preisbildung</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <p class="muted">
+          Aber: auch Halle verzeiht keine Rechenfehler. Der Unterschied zwischen solidem Investment und Kapitalbinder entsteht nicht im Exposé, sondern in der Analyse: Mietrealität, Capex-Logik und Exit-Fähigkeit.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKT IN ZAHLEN -->
+  <section class="frame-gap" id="markt">
+    <div class="container">
+      <div class="section-title">Markt in Zahlen: Halle (Saale)</div>
+
+      <div class="panel">
+        <h2 class="h2">Orientierung – für Entscheidungen zählt die Objektebene</h2>
+
+        <ul class="checklist">
+          <li><strong>Angebotsmiete Ø (2024, nettokalt):</strong> 7,39 € / m²</li>
+          <li><strong>Neubau-Angebote Ø (2024):</strong> 12,03 € / m²</li>
+          <li><strong>Bestand (Zensus 2022, nettokalt):</strong> 5,92 € / m²</li>
+          <li><strong>Leerstand (zuletzt ausgewiesen):</strong> 7,8 % (2022)</li>
+          <li><strong>Mehrfamilienhäuser (MFH, marktüblich):</strong> ca. 1.700 – 2.500 € / m²*</li>
+          <li><strong>Eigentumswohnungen (ETW):</strong> ca. 2.200 – 2.900 € / m²</li>
+          <li><strong>Bauland (mittlere Lage, 2024):</strong> ~250 € / m²</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <p class="muted">
+          Wichtig: Zahlen sind „Marktkompass“. Für Entscheidungen zählt die Objektebene (Mietliste, Capex, Lagenarrativ, Exit-Fähigkeit).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="frame-gap" id="cta">
+    <div class="container">
+      <div class="section-title">Du willst ein Objekt in Halle prüfen?</div>
+
+      <div class="panel">
+        <p class="muted">
+          Der Cashflow-Rechner ist ein schneller Reality-Check für dein Investment. Du gibst Kaufpreis, Eigenkapital, Nebenkosten, Finanzierung, Miete und nicht umlagefähige Kosten ein und siehst sofort, was monatlich wirklich übrig bleibt.
+          Er zeigt dir transparent Kreditsumme, Rate, Cashflow und Cashflow-Rendite – ohne Schönrechnerei oder Exit-Fantasie.
+        </p>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn" href="/cashflow-rechner/">Cashflow berechnen</a>
+        </div>
+
+        <small style="display:block; margin-top:10px; color: rgba(0,0,0,.62);">
+          Hinweis: Keine Rechts-/Steuerberatung.
+        </small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Beratungsleistungen (eingefügt vor Kontakt) ======= -->
+  <section class="frame-gap pricing" id="preise">
+    <div class="pricing-panel">
+      <h2>Beratungsleistungen</h2>
+
+      <div class="price-table">
+        <div class="price-col">
+          <div class="kicker">Kostenloser Objektcheck</div>
+          <div class="price">€0</div>
+          <div class="sub">pro Projekt</div>
+          <div class="col-cta"><a class="btn" href="/#kontakt">Kontakt</a></div>
+          <p class="col-desc">Ziel des kostenlosen Objektchecks ist eine klare wirtschaftliche Ersteinschätzung der Immobilie.</p>
+          <ul class="checks">
+            <li><span class="dot"></span><span>Kurzbewertung der Immobilie</span></li>
+            <li><span class="dot"></span><span>Top 3 Optimierungshebel</span></li>
+            <li><span class="dot"></span><span>Klare Empfehlungen</span></li>
+          </ul>
+        </div>
+
+        <div class="price-col">
+          <div class="kicker">Ankaufsberatung</div>
+          <div class="price">auf Anfrage</div>
+          <div class="sub">pro Projekt</div>
+          <div class="col-cta"><a class="btn" href="/#kontakt">Kontakt</a></div>
+          <p class="col-desc">Erhebliche Einsparpotenziale durch realistische Preiseinschätzung und Identifikation versteckter Risiken.</p>
+          <ul class="checks">
+            <li><span class="dot"></span><span>Standort- und Mikrolagenbewertung</span></li>
+            <li><span class="dot"></span><span>Analyse der bestehenden Mieten und Potenziale</span></li>
+            <li><span class="dot"></span><span>Prüfung der vorhandenen Unterlagen</span></li>
+            <li><span class="dot"></span><span>Klare Entscheidungsempfehlung</span></li>
+            <li><span class="dot"></span><span>Optional: Kontakt zu Maklern / Dienstleistern</span></li>
+            <li><span class="dot"></span><span>Optional: Durchführung von Besichtigungen</span></li>
+          </ul>
+        </div>
+
+        <div class="price-col">
+          <div class="kicker">Objektoptimierung &amp; Strategie</div>
+          <div class="price">auf Anfrage</div>
+          <div class="sub">pro Projekt</div>
+          <div class="col-cta"><a class="btn" href="/#kontakt">Kontakt</a></div>
+          <p class="col-desc">Maximierung der wirtschaftlichen Ergebnisse. Durch strukturierte Immobilienoptimierung werden Betriebskosten reduziert und Erträge langfristig gesteigert.</p>
+          <ul class="checks">
+            <li><span class="dot"></span><span>Analyse von Mietniveau und Erlösstruktur</span></li>
+            <li><span class="dot"></span><span>Prüfung laufender Kosten und Dienstleisterverträge</span></li>
+            <li><span class="dot"></span><span>Bewertung von Optimierungs- und Entwicklungspotenzialen</span></li>
+            <li><span class="dot"></span><span>Priorisierung wirtschaftlich sinnvoller Maßnahmen</span></li>
+            <li><span class="dot"></span><span>Optional: Prüfung der aktuellen Hausverwaltung</span></li>
+          </ul>
+        </div>
+
+        <div class="price-col">
+          <div class="kicker">Verkaufsberatung</div>
+          <div class="price">auf Anfrage</div>
+          <div class="sub">pro Projekt</div>
+          <div class="col-cta"><a class="btn" href="/#kontakt">Kontakt</a></div>
+          <p class="col-desc">Immobilien werden nicht zum Angebotspreis gekauft. Eine strategische Verkaufsvorbereitung ist entscheidend, um den optimalen Marktpreis zu erzielen.</p>
+          <ul class="checks">
+            <li><span class="dot"></span><span>Analyse der Verkaufsreife und Ausgangslage</span></li>
+            <li><span class="dot"></span><span>Bewertung sinnvoller Maßnahmen vor dem Verkauf</span></li>
+            <li><span class="dot"></span><span>Einschätzung des optimalen Verkaufszeitpunkts</span></li>
+            <li><span class="dot"></span><span>Vorbereitung relevanter Unterlagen</span></li>
+            <li><span class="dot"></span><span>Strategische Beratung zur Preisfindung</span></li>
+            <li><span class="dot"></span><span>Optional: Beratung bei Verkauf ohne Makler</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="frame-gap" id="kontakt">
+    <div class="container contact-wrap">
+      <div class="section-title">Kontakt Immobilienberatung Halle (Saale)</div>
+
+      <div class="panel">
+        <h2 class="h2">Kontaktieren Sie mich</h2>
+        <p class="muted" style="margin-top:6px;">
+          Eine kurze Einordnung genügt: Objekttyp oder Adresse, aktueller Status und die zentrale Fragestellung.
+        </p>
+
+        <form
+          action="https://formspree.io/f/mvzqvggb"
+          method="POST"
+          id="kontakt-form"
+        >
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="Name" type="text" required>
+          </div>
+
+          <div class="field">
+            <label for="email">E-Mail-Adresse</label>
+            <input id="email" name="E-Mail" type="email" required>
+          </div>
+
+          <div class="field">
+            <label for="phone">Telefonnummer (optional)</label>
+            <input id="phone" name="Telefon" type="tel">
+          </div>
+
+          <div class="field">
+            <label for="message">Nachricht</label>
+            <textarea id="message" name="Nachricht" required></textarea>
+          </div>
+
+          <button class="btn" type="submit">Nachricht senden</button>
+
+          <p id="form-success" style="display:none; margin-top:16px;">
+            Vielen Dank für Ihre Nachricht. Ich melde mich zeitnah bei Ihnen.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <img class="footer-logo" src="/assets/Logo_Grundmann-Consulting.png" alt="Grundmann Consulting Logo">
+    <div><a href="/impressum/">Impressum</a></div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("kontakt-form");
+      const success = document.getElementById("form-success");
+      if (!form) return;
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const data = new FormData(form);
+
+        try {
+          const response = await fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (response.ok) {
+            form.reset();
+            success.style.display = "block";
+          } else {
+            alert("Beim Senden ist ein Fehler aufgetreten. Bitte erneut versuchen.");
+          }
+        } catch (error) {
+          alert("Verbindung fehlgeschlagen. Bitte später erneut versuchen.");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

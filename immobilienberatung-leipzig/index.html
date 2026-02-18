@@ -10,14 +10,15 @@
   <!-- SEO: harte, präzise Description (ohne Marketing) -->
   <meta name="description" content="Immobilienberatung Leipzig für Mehrfamilienhäuser & Eigentumswohnungen: Ankaufberatung, Objekt- & Wirtschaftlichkeitsanalyse, Bestandsoptimierung, Verkaufsstrategie. Unabhängig (ohne Makler/Provision)." />
 
-  <!-- Canonical (URL anpassen) -->
- <link rel="canonical" href="https://grundmannconsulting.de/immobilienberatung-leipzig/" />
+  <!-- Canonical -->
+  <link rel="canonical" href="https://grundmannconsulting.de/immobilienberatung-leipzig/" />
 
-<meta property="og:title" content="Immobilienberatung Leipzig | Mehrfamilienhaus Ankauf, Analyse & Optimierung" />
-<meta property="og:description" content="Ankaufprüfung, Wirtschaftlichkeitsanalyse, Bestandsoptimierung, Verkaufsstrategie – unabhängig, ohne Maklerinteresse." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://grundmannconsulting.de/immobilienberatung-leipzig/" />
-<meta property="og:image" content="https://grundmannconsulting.de/assets/Wohngebäude.png" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Immobilienberatung Leipzig | Mehrfamilienhaus Ankauf, Analyse & Optimierung" />
+  <meta property="og:description" content="Ankaufprüfung, Wirtschaftlichkeitsanalyse, Bestandsoptimierung, Verkaufsstrategie – unabhängig, ohne Maklerinteresse." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://grundmannconsulting.de/immobilienberatung-leipzig/" />
+  <meta property="og:image" content="https://grundmannconsulting.de/assets/Wohngebäude.png" />
 
   <!-- Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,9 +72,6 @@
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
     }
-#markt .section-title{
-  margin-top: 32px;
-}
     .navlinks::-webkit-scrollbar{ display:none; }
     .navlinks a{
       color:#fff; font-weight:600;
@@ -107,24 +105,12 @@
     .hero-right{ background:#ddd; position:relative; }
     .hero-right img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-    /* Eyecatcher */
+    /* Panels */
     .panel{
       background:rgba(255,255,255,.32);
       border:1px solid rgba(0,0,0,.12);
       border-radius:var(--radius);
       padding:28px;
-    }
-    .thesis-label{
-      font-size:12px; font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:rgba(0,0,0,.55);
-      margin-bottom:8px;
-    }
-    .thesis{
-      font-size:20px;
-      font-weight:700;
-      line-height:1.25;
     }
 
     /* Typo */
@@ -167,8 +153,14 @@
       border-radius:6px;
       cursor:pointer;
       transition:transform .12s ease, filter .12s ease;
+      text-decoration:none;
     }
     .btn:hover{ filter:brightness(1.05); transform:translateY(-1px); }
+    .btn.ghost{
+      background: rgba(0,0,0,.08);
+      color:#111;
+      border:1px solid rgba(0,0,0,.14);
+    }
 
     /* Contact */
     .contact-wrap{ max-width: none; margin:0 auto; }
@@ -179,6 +171,7 @@
       background:rgba(0,0,0,.08);
       padding:12px;
       outline:none;
+      border-radius: 8px;
     }
     textarea{ min-height:160px; resize:vertical; }
     .row2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
@@ -195,6 +188,104 @@
     .footer-logo{ height:44px; width:auto; opacity:.85; display:block; margin:0 auto 6px; }
     footer a{ font-size:12px; text-decoration:none; color:#111; }
 
+    /* ===== Beratungsleistungen (Screenshot) ===== */
+    /* WICHTIG: Section soll wie alle anderen Sectionen wirken -> frame-gap bleibt, kein Sonder-Padding */
+    #pricing{ padding: var(--gap) 0; } /* optional, identisch zu .frame-gap; kann bleiben ohne Effekt */
+
+    .pricing-wrap{
+      background:rgba(255,255,255,.20);
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:var(--radius);
+      padding:18px;
+    }
+
+    /* FIX: Überschrift auf gleiche Größe wie andere Section-Überschriften */
+    .pricing-title{
+      font-size:32px;          /* war 20px */
+      font-weight:700;
+      text-align:center;
+      margin: 0 0 18px;        /* wie .section-title */
+    }
+    @media (max-width: 980px){
+      .pricing-title{ font-size:26px; } /* wie .section-title responsive */
+    }
+
+    .pricing-grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      border:1px solid rgba(0,0,0,.14);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:rgba(255,255,255,.22);
+    }
+
+    .pricing-col{
+      padding:18px 18px 16px;
+      border-right:1px solid rgba(0,0,0,.14);
+
+      /* gleiche Button-Höhe in allen Spalten */
+      display:grid;
+      grid-template-rows: 132px 48px auto 1fr;
+      gap:12px;
+      align-content:start;
+      min-height: 520px;
+    }
+    .pricing-col:last-child{ border-right:none; }
+
+    .pricing-head{
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:4px;
+    }
+    .pricing-name{
+      font-weight:700;
+      font-size:16px;
+      line-height:1.25;
+    }
+    .pricing-price{
+      font-weight:800;
+      font-size:22px;
+      line-height:1.15;
+    }
+    .pricing-unit{
+      font-size:12px;
+      color:rgba(0,0,0,.55);
+    }
+
+    .pricing-btn{
+      width:100%;
+      height:48px;
+      border-radius:8px;
+    }
+
+    .pricing-text{
+      color:var(--muted);
+      margin:0;
+    }
+
+    .pricing-list{
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    .pricing-list li{
+      position:relative;
+      padding-left:20px;
+      margin:0 0 10px;
+      color:var(--muted);
+      line-height:1.55;
+    }
+    .pricing-list li::before{
+      content:"✓";
+      position:absolute;
+      left:0;
+      top:0.05em;
+      font-weight:700;
+      color:rgba(0,0,0,.55);
+    }
+
     /* Responsive */
     @media (max-width: 980px){
       .hero{ grid-template-columns:1fr; }
@@ -203,12 +294,20 @@
       .row2{ grid-template-columns:1fr; }
       .section-title{ font-size:26px; }
       .hero-left h1{ font-size:24px; }
-      .thesis{ font-size:18px; }
       .logo-img{ height:38px; }
+
+      .pricing-grid{ grid-template-columns: 1fr; }
+      .pricing-col{
+        border-right:none;
+        border-bottom:1px solid rgba(0,0,0,.14);
+        grid-template-rows: auto 48px auto auto;
+        min-height: unset;
+      }
+      .pricing-col:last-child{ border-bottom:none; }
     }
   </style>
 
-  <!-- Schema: ProfessionalService + LocalArea (quellenneutral, faktenbasiert) -->
+  <!-- Schema: ProfessionalService -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -227,11 +326,10 @@
       "Verkaufsoptimierung / Exit-Vorbereitung"
     ],
     "url":"https://grundmannconsulting.de/immobilienberatung-leipzig/"
-
   }
   </script>
 
-  <!-- Schema: FAQ (kurz & hart, passend zu Suchintention) -->
+  <!-- Schema: FAQ -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -268,8 +366,8 @@
       <div class="navlinks">
         <a href="/">Home</a>
         <a href="#immobilienberatung-leipzig">Immobilienberatung</a>
-        <a href="#markt">Markteinordnung</a>
-        <a href="#leistungen">Leistungen</a>
+        <a href="#markt-zahlen">Markt in Zahlen</a>
+        <a href="#preise">Beratungsleistungen</a>
         <a href="#kontakt">Kontakt</a>
       </div>
     </div>
@@ -278,10 +376,9 @@
   <!-- HERO -->
   <header class="hero" id="immobilienberatung-leipzig">
     <div class="hero-left">
-      <!-- SEO: H1 exakt auf Suchintention -->
-      <h1>Immobilienberatung Leipzig für Mehrfamilienhäuser & Eigentumswohnungen</h1>
+      <h1>Immobilienberatung Leipzig für Mehrfamilienhäuser &amp; Eigentumswohnungen</h1>
       <p>
-        Ankaufberatung, Objekt- & Wirtschaftlichkeitsanalyse, Bestandsoptimierung und Exit-Vorbereitung –
+        Ankaufberatung, Objekt- &amp; Wirtschaftlichkeitsanalyse, Bestandsoptimierung und Exit-Vorbereitung –
         unabhängig, ohne Makler- oder Provisionsinteresse.
       </p>
       <div style="margin-top:8px;">
@@ -293,7 +390,7 @@
     </div>
   </header>
 
-  <!-- MARKT (keyword-relevant, aber nicht schwafelig) -->
+  <!-- MARKT -->
   <section class="frame-gap" id="markt" style="padding-top:32px;">
     <div class="container">
       <div class="section-title">Markteinordnung Leipzig</div>
@@ -318,50 +415,35 @@
     </div>
   </section>
 
-  <!-- LEISTUNGEN (Keywords als H2/H3, klarer Nutzen) -->
-  <section class="frame-gap" id="leistungen">
+  <!-- MARKT IN ZAHLEN LEIPZIG -->
+  <section class="frame-gap" id="markt-zahlen">
     <div class="container">
-      <div class="section-title">Leistungen in Leipzig</div>
+      <div class="section-title">Markt in Zahlen: Leipzig</div>
 
       <div class="panel">
-        <h2 class="h2">Ankaufsberatung Leipzig - Mehrfamilienhaus & Eigentumswohnung</h2>
-        <p class="muted">
-          Fundierte Prüfung von Mikrolage, Unterlagen, Mietstruktur, Kosten und Risiken. Ziel: eine belastbare Entscheidung
-          inkl. Preis- und Verhandlungskorridor.
-        </p>
+        <h2 class="h2">Orientierung – für Entscheidungen zählt die Objektebene</h2>
 
-        <div class="divider"></div>
-
-        <h2 class="h2">Objekt- & Wirtschaftlichkeitsanalyse</h2>
         <ul class="checklist">
-          <li>Realistische Bewertung von Ist-Mieten, Leerständen und Entwicklungspotenzialen – nicht auf Basis von Exposés, sondern Marktrealität</li>
-          <li>Transparente Analyse der Kostenstruktur: Verwaltung, Dienstleister, Instandhaltung, Energie</li>
-          <li>Klare Chancen-/Risikoanalyse mit wirtschaftlicher Priorisierung</li>
+          <li><strong>Angebotsmiete Ø (2025/2026, nettokalt):</strong> ca. 9,8 – 10,1 € / m²</li>
+          <li><strong>Neubau-Angebote Ø:</strong> ca. 12,0 – 13,1 € / m²</li>
+          <li><strong>Bestandsmiete Ø:</strong> ca. 8,8 – 9,1 € / m²</li>
+          <li><strong>Leerstand (aktuelle Markteinschätzung):</strong> ca. 5 – 7 %</li>
+          <li><strong>Mehrfamilienhäuser (MFH, marktüblich):</strong> ca. 2.200 – 2.900 € / m²</li>
+          <li><strong>Eigentumswohnungen (ETW):</strong> ca. 2.500 – 3.300 € / m²</li>
+          <li><strong>Bauland (mittlere Lage):</strong> ~300 € / m²</li>
         </ul>
 
         <div class="divider"></div>
 
-        <h2 class="h2">Bestandsoptimierung - Cashflow & Struktur</h2>
         <p class="muted">
-          Fokus auf wirtschaftliche Hebel: Mieten, Kosten, Bewirtschaftung, Maßnahmenlogik. Keine „Sanierung um der Sanierung willen“.
+          Wichtig: Zahlen sind „Marktkompass“. Für Entscheidungen zählt die Objektebene
+          (Mietliste, Capex, Mikrolage, Bewirtschaftung, Exit-Fähigkeit).
         </p>
-
-        <div class="divider"></div>
-
-        <h2 class="h2">Verkaufsoptimierung & Exit-Vorbereitung</h2>
-        <p class="muted">
-          Vorbereitung von Unterlagen, Storyline, Maßnahmenpriorität und Timing. Ziel: Entscheidungen auf Basis
-          von Marktlogik und Objektqualität – nicht Bauchgefühl.
-        </p>
-      </div>
-
-      <div style="margin-top:18px; text-align:center;">
-        <a class="btn" href="#kontakt">Kontakt / Objekt anfragen</a>
       </div>
     </div>
   </section>
 
-  <!-- Für wen (Suchintention: Einsteiger, Investoren von außerhalb, HV-Probleme) -->
+  <!-- ZIELGRUPPE -->
   <section class="frame-gap" id="zielgruppe">
     <div class="container">
       <div class="section-title">Für wen Immobilienberatung in Leipzig sinnvoll ist</div>
@@ -377,7 +459,116 @@
     </div>
   </section>
 
-  <!-- KONTAKT (Formspree: deutsche Felder + Telefon) -->
+  <!-- BERATUNGSLEISTUNGEN -->
+  <!-- FIX: Section hat jetzt wie alle anderen Sections .frame-gap (kein extra Abstand),
+            und Überschrift ist auf Section-Title Größe -->
+  <section class="frame-gap" id="preise">
+    <div class="container">
+      <div class="pricing-wrap">
+        <div class="pricing-title">Beratungsleistungen</div>
+
+        <div class="pricing-grid">
+
+          <!-- 1 -->
+          <div class="pricing-col">
+            <div class="pricing-head">
+              <div class="pricing-name">Kostenloser<br>Objektcheck</div>
+              <div class="pricing-price">€0</div>
+              <div class="pricing-unit">pro Projekt</div>
+            </div>
+
+            <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
+
+            <p class="pricing-text">
+              Ziel des kostenlosen Objektchecks ist eine klare wirtschaftliche Ersteinschätzung der Immobilie.
+            </p>
+
+            <ul class="pricing-list">
+              <li>Kurzbewertung der Immobilie</li>
+              <li>Top 3 Optimierungshebel</li>
+              <li>Klare Empfehlungen</li>
+            </ul>
+          </div>
+
+          <!-- 2 -->
+          <div class="pricing-col">
+            <div class="pricing-head">
+              <div class="pricing-name">Ankaufsberatung</div>
+              <div class="pricing-price">auf Anfrage</div>
+              <div class="pricing-unit">pro Projekt</div>
+            </div>
+
+            <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
+
+            <p class="pricing-text">
+              Erhebliche Einsparpotenziale durch realistische Preiseinschätzung und Identifikation versteckter Risiken.
+            </p>
+
+            <ul class="pricing-list">
+              <li>Standort- und Mikrolagenbewertung</li>
+              <li>Analyse der bestehenden Mieten und Potenziale</li>
+              <li>Prüfung der vorhandenen Unterlagen</li>
+              <li>Klare Entscheidungsempfehlung</li>
+              <li>Optional: Kontakt zu Maklern / Dienstleistern</li>
+              <li>Optional: Durchführung von Besichtigungen</li>
+            </ul>
+          </div>
+
+          <!-- 3 -->
+          <div class="pricing-col">
+            <div class="pricing-head">
+              <div class="pricing-name">Objektoptimierung<br>&amp; Strategie</div>
+              <div class="pricing-price">auf Anfrage</div>
+              <div class="pricing-unit">pro Projekt</div>
+            </div>
+
+            <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
+
+            <p class="pricing-text">
+              Maximierung der wirtschaftlichen Ergebnisse. Durch strukturierte Objektoptimierung werden Kosten reduziert
+              und Erträge langfristig gesteigert.
+            </p>
+
+            <ul class="pricing-list">
+              <li>Analyse von Mietniveau und Erlösstruktur</li>
+              <li>Prüfung laufender Kosten und Dienstleisterverträge</li>
+              <li>Bewertung von Optimierungs- und Entwicklungspotenzialen</li>
+              <li>Priorisierung wirtschaftlich sinnvoller Maßnahmen</li>
+              <li>Optional: Prüfung der aktuellen Hausverwaltung</li>
+            </ul>
+          </div>
+
+          <!-- 4 -->
+          <div class="pricing-col">
+            <div class="pricing-head">
+              <div class="pricing-name">Verkaufsberatung</div>
+              <div class="pricing-price">auf Anfrage</div>
+              <div class="pricing-unit">pro Projekt</div>
+            </div>
+
+            <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
+
+            <p class="pricing-text">
+              Immobilien werden nicht zum Angebotspreis gekauft. Deshalb ist eine strategische Verkaufsvorbereitung für
+              den optimalen Marktpreis entscheidend.
+            </p>
+
+            <ul class="pricing-list">
+              <li>Analyse der Verkaufsreife und Ausgangslage</li>
+              <li>Bewertung sinnvoller Maßnahmen vor dem Verkauf</li>
+              <li>Einschätzung des optimalen Verkaufszeitpunkts</li>
+              <li>Vorbereitung relevanter Unterlagen</li>
+              <li>Strategische Beratung zur Preisfindung</li>
+              <li>Optional: Beratung bei Verkauf ohne Makler</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
   <section class="frame-gap" id="kontakt">
     <div class="container contact-wrap">
       <div class="section-title">Kontakt Immobilienberatung Leipzig</div>
@@ -387,38 +578,35 @@
         <p class="muted" style="margin-top:6px;">
           Eine kurze Einordnung genügt: Objekttyp oder Adresse, aktueller Status und die zentrale Fragestellung.
         </p>
-<form
-  action="https://formspree.io/f/mvzqvggb"
-  method="POST"
-  id="kontakt-form"
->
-  <div class="field">
-    <label for="name">Name</label>
-    <input id="name" name="Name" type="text" required>
-  </div>
 
-  <div class="field">
-    <label for="email">E-Mail-Adresse</label>
-    <input id="email" name="E-Mail" type="email" required>
-  </div>
+        <form action="https://formspree.io/f/mvzqvggb" method="POST" id="kontakt-form">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="Name" type="text" required>
+          </div>
 
-  <div class="field">
-    <label for="phone">Telefonnummer (optional)</label>
-    <input id="phone" name="Telefon" type="tel">
-  </div>
+          <div class="field">
+            <label for="email">E-Mail-Adresse</label>
+            <input id="email" name="E-Mail" type="email" required>
+          </div>
 
-  <div class="field">
-    <label for="message">Nachricht</label>
-    <textarea id="message" name="Nachricht" required></textarea>
-  </div>
+          <div class="field">
+            <label for="phone">Telefonnummer (optional)</label>
+            <input id="phone" name="Telefon" type="tel">
+          </div>
 
-  <button class="btn" type="submit">Nachricht senden</button>
+          <div class="field">
+            <label for="message">Nachricht</label>
+            <textarea id="message" name="Nachricht" required></textarea>
+          </div>
 
-  <!-- Erfolgsmeldung -->
-  <p id="form-success" style="display:none; margin-top:16px;">
-    Vielen Dank für Ihre Nachricht. Ich melde mich zeitnah bei Ihnen.
-  </p>
-</form>      </div>
+          <button class="btn" type="submit">Nachricht senden</button>
+
+          <p id="form-success" style="display:none; margin-top:16px;">
+            Vielen Dank für Ihre Nachricht. Ich melde mich zeitnah bei Ihnen.
+          </p>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -427,6 +615,36 @@
     <img class="footer-logo" src="/assets/Logo_Grundmann-Consulting.png" alt="Grundmann Consulting Logo">
     <div><a href="/impressum/">Impressum</a></div>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("kontakt-form");
+      const success = document.getElementById("form-success");
+      if (!form) return;
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const data = new FormData(form);
+
+        try {
+          const response = await fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (response.ok) {
+            form.reset();
+            success.style.display = "block";
+          } else {
+            alert("Beim Senden ist ein Fehler aufgetreten. Bitte erneut versuchen.");
+          }
+        } catch (error) {
+          alert("Verbindung fehlgeschlagen. Bitte später erneut versuchen.");
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
