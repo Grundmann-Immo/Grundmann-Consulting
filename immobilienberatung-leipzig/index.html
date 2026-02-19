@@ -188,26 +188,12 @@
     .footer-logo{ height:44px; width:auto; opacity:.85; display:block; margin:0 auto 6px; }
     footer a{ font-size:12px; text-decoration:none; color:#111; }
 
-    /* ===== Beratungsleistungen (Screenshot) ===== */
-    /* WICHTIG: Section soll wie alle anderen Sectionen wirken -> frame-gap bleibt, kein Sonder-Padding */
-    #pricing{ padding: var(--gap) 0; } /* optional, identisch zu .frame-gap; kann bleiben ohne Effekt */
-
+    /* ===== Beratungsleistungen ===== */
     .pricing-wrap{
       background:rgba(255,255,255,.20);
       border:1px solid rgba(0,0,0,.12);
       border-radius:var(--radius);
       padding:18px;
-    }
-
-    /* FIX: Überschrift auf gleiche Größe wie andere Section-Überschriften */
-    .pricing-title{
-      font-size:32px;          /* war 20px */
-      font-weight:700;
-      text-align:center;
-      margin: 0 0 18px;        /* wie .section-title */
-    }
-    @media (max-width: 980px){
-      .pricing-title{ font-size:26px; } /* wie .section-title responsive */
     }
 
     .pricing-grid{
@@ -223,7 +209,6 @@
       padding:18px 18px 16px;
       border-right:1px solid rgba(0,0,0,.14);
 
-      /* gleiche Button-Höhe in allen Spalten */
       display:grid;
       grid-template-rows: 132px 48px auto 1fr;
       gap:12px;
@@ -367,6 +352,7 @@
         <a href="/">Home</a>
         <a href="#immobilienberatung-leipzig">Immobilienberatung</a>
         <a href="#markt-zahlen">Markt in Zahlen</a>
+        <a href="#cashflow-cta">Cashflow-Rechner</a>
         <a href="#preise">Beratungsleistungen</a>
         <a href="#kontakt">Kontakt</a>
       </div>
@@ -382,7 +368,7 @@
         unabhängig, ohne Makler- oder Provisionsinteresse.
       </p>
       <div style="margin-top:8px;">
-        <a class="btn" href="#kontakt">Objekt anfragen</a>
+        <a class="btn" href="#kontakt">Kostenloses Erstgespräch</a>
       </div>
     </div>
     <div class="hero-right">
@@ -459,111 +445,130 @@
     </div>
   </section>
 
+  <!-- NEU: CASHFLOW-CTA (wie Screenshot) -->
+  <section class="frame-gap" id="cashflow-cta">
+    <div class="container">
+      <div class="section-title">Du willst ein Objekt in Leipzig prüfen?</div>
+
+      <div class="panel">
+        <p class="muted">
+          Der Cashflow-Rechner ist ein schneller Reality-Check für dein Investment. Du gibst Kaufpreis, Eigenkapital, Nebenkosten, Finanzierung, Miete
+          und nicht umlagefähige Kosten ein und siehst sofort, was monatlich wirklich übrig bleibt. Er zeigt dir transparent Kreditsumme, Rate, Cashflow
+          und Cashflow-Rendite – ohne Schönrechnerei oder Exit-Fantasie.
+        </p>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn" href="/cashflow-rechner/">Cashflow berechnen</a>
+        </div>
+
+        <small style="display:block; margin-top:10px; color: rgba(0,0,0,.62);">
+          Hinweis: Keine Rechts-/Steuerberatung.
+        </small>
+      </div>
+    </div>
+  </section>
+
   <!-- BERATUNGSLEISTUNGEN -->
-  <!-- FIX: Section hat jetzt wie alle anderen Sections .frame-gap (kein extra Abstand),
-            und Überschrift ist auf Section-Title Größe -->
   <section class="frame-gap" id="preise">
     <div class="container">
-      <div class="pricing-wrap">
-        <div class="pricing-title">Beratungsleistungen</div>
+      <div class="section-title">Beratungsleistungen</div>
 
-        <div class="pricing-grid">
+      <div class="pricing-grid">
 
-          <!-- 1 -->
-          <div class="pricing-col">
-            <div class="pricing-head">
-              <div class="pricing-name">Kostenloser<br>Objektcheck</div>
-              <div class="pricing-price">€0</div>
-              <div class="pricing-unit">pro Projekt</div>
-            </div>
-
-            <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
-
-            <p class="pricing-text">
-              Ziel des kostenlosen Objektchecks ist eine klare wirtschaftliche Ersteinschätzung der Immobilie.
-            </p>
-
-            <ul class="pricing-list">
-              <li>Kurzbewertung der Immobilie</li>
-              <li>Top 3 Optimierungshebel</li>
-              <li>Klare Empfehlungen</li>
-            </ul>
+        <!-- 1 -->
+        <div class="pricing-col">
+          <div class="pricing-head">
+            <div class="pricing-name">Kostenloser<br>Objektcheck</div>
+            <div class="pricing-price">€0</div>
+            <div class="pricing-unit">pro Projekt</div>
           </div>
 
-          <!-- 2 -->
-          <div class="pricing-col">
-            <div class="pricing-head">
-              <div class="pricing-name">Ankaufsberatung</div>
-              <div class="pricing-price">auf Anfrage</div>
-              <div class="pricing-unit">pro Projekt</div>
-            </div>
+          <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
 
-            <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
+          <p class="pricing-text">
+            Ziel des kostenlosen Objektchecks ist eine klare wirtschaftliche Ersteinschätzung der Immobilie.
+          </p>
 
-            <p class="pricing-text">
-              Erhebliche Einsparpotenziale durch realistische Preiseinschätzung und Identifikation versteckter Risiken.
-            </p>
-
-            <ul class="pricing-list">
-              <li>Standort- und Mikrolagenbewertung</li>
-              <li>Analyse der bestehenden Mieten und Potenziale</li>
-              <li>Prüfung der vorhandenen Unterlagen</li>
-              <li>Klare Entscheidungsempfehlung</li>
-              <li>Optional: Kontakt zu Maklern / Dienstleistern</li>
-              <li>Optional: Durchführung von Besichtigungen</li>
-            </ul>
-          </div>
-
-          <!-- 3 -->
-          <div class="pricing-col">
-            <div class="pricing-head">
-              <div class="pricing-name">Objektoptimierung<br>&amp; Strategie</div>
-              <div class="pricing-price">auf Anfrage</div>
-              <div class="pricing-unit">pro Projekt</div>
-            </div>
-
-            <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
-
-            <p class="pricing-text">
-              Maximierung der wirtschaftlichen Ergebnisse. Durch strukturierte Objektoptimierung werden Kosten reduziert
-              und Erträge langfristig gesteigert.
-            </p>
-
-            <ul class="pricing-list">
-              <li>Analyse von Mietniveau und Erlösstruktur</li>
-              <li>Prüfung laufender Kosten und Dienstleisterverträge</li>
-              <li>Bewertung von Optimierungs- und Entwicklungspotenzialen</li>
-              <li>Priorisierung wirtschaftlich sinnvoller Maßnahmen</li>
-              <li>Optional: Prüfung der aktuellen Hausverwaltung</li>
-            </ul>
-          </div>
-
-          <!-- 4 -->
-          <div class="pricing-col">
-            <div class="pricing-head">
-              <div class="pricing-name">Verkaufsberatung</div>
-              <div class="pricing-price">auf Anfrage</div>
-              <div class="pricing-unit">pro Projekt</div>
-            </div>
-
-            <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
-
-            <p class="pricing-text">
-              Immobilien werden nicht zum Angebotspreis gekauft. Deshalb ist eine strategische Verkaufsvorbereitung für
-              den optimalen Marktpreis entscheidend.
-            </p>
-
-            <ul class="pricing-list">
-              <li>Analyse der Verkaufsreife und Ausgangslage</li>
-              <li>Bewertung sinnvoller Maßnahmen vor dem Verkauf</li>
-              <li>Einschätzung des optimalen Verkaufszeitpunkts</li>
-              <li>Vorbereitung relevanter Unterlagen</li>
-              <li>Strategische Beratung zur Preisfindung</li>
-              <li>Optional: Beratung bei Verkauf ohne Makler</li>
-            </ul>
-          </div>
-
+          <ul class="pricing-list">
+            <li>Kurzbewertung der Immobilie</li>
+            <li>Top 3 Optimierungshebel</li>
+            <li>Klare Empfehlungen</li>
+          </ul>
         </div>
+
+        <!-- 2 -->
+        <div class="pricing-col">
+          <div class="pricing-head">
+            <div class="pricing-name">Ankaufsberatung</div>
+            <div class="pricing-price">auf Anfrage</div>
+            <div class="pricing-unit">pro Projekt</div>
+          </div>
+
+          <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
+
+          <p class="pricing-text">
+            Erhebliche Einsparpotenziale durch realistische Preiseinschätzung und Identifikation versteckter Risiken.
+          </p>
+
+          <ul class="pricing-list">
+            <li>Standort- und Mikrolagenbewertung</li>
+            <li>Analyse der bestehenden Mieten und Potenziale</li>
+            <li>Prüfung der vorhandenen Unterlagen</li>
+            <li>Klare Entscheidungsempfehlung</li>
+            <li>Optional: Kontakt zu Maklern / Dienstleistern</li>
+            <li>Optional: Durchführung von Besichtigungen</li>
+          </ul>
+        </div>
+
+        <!-- 3 -->
+        <div class="pricing-col">
+          <div class="pricing-head">
+            <div class="pricing-name">Objektoptimierung<br>&amp; Strategie</div>
+            <div class="pricing-price">auf Anfrage</div>
+            <div class="pricing-unit">pro Projekt</div>
+          </div>
+
+          <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
+
+          <p class="pricing-text">
+            Maximierung der wirtschaftlichen Ergebnisse. Durch strukturierte Objektoptimierung werden Kosten reduziert
+            und Erträge langfristig gesteigert.
+          </p>
+
+          <ul class="pricing-list">
+            <li>Analyse von Mietniveau und Erlösstruktur</li>
+            <li>Prüfung laufender Kosten und Dienstleisterverträge</li>
+            <li>Bewertung von Optimierungs- und Entwicklungspotenzialen</li>
+            <li>Priorisierung wirtschaftlich sinnvoller Maßnahmen</li>
+            <li>Optional: Prüfung der aktuellen Hausverwaltung</li>
+          </ul>
+        </div>
+
+        <!-- 4 -->
+        <div class="pricing-col">
+          <div class="pricing-head">
+            <div class="pricing-name">Verkaufsberatung</div>
+            <div class="pricing-price">auf Anfrage</div>
+            <div class="pricing-unit">pro Projekt</div>
+          </div>
+
+          <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
+
+          <p class="pricing-text">
+            Immobilien werden nicht zum Angebotspreis gekauft. Deshalb ist eine strategische Verkaufsvorbereitung für
+            den optimalen Marktpreis entscheidend.
+          </p>
+
+          <ul class="pricing-list">
+            <li>Analyse der Verkaufsreife und Ausgangslage</li>
+            <li>Bewertung sinnvoller Maßnahmen vor dem Verkauf</li>
+            <li>Einschätzung des optimalen Verkaufszeitpunkts</li>
+            <li>Vorbereitung relevanter Unterlagen</li>
+            <li>Strategische Beratung zur Preisfindung</li>
+            <li>Optional: Beratung bei Verkauf ohne Makler</li>
+          </ul>
+        </div>
+
       </div>
     </div>
   </section>
