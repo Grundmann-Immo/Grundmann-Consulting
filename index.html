@@ -508,11 +508,42 @@
       font-weight: 700;
       margin: 0 0 14px;
     }
+
     .contact-sub{
       margin: 0 0 22px;
       color: var(--muted);
     }
+.contact-direct{
+  display:flex;
+  gap: 32px;
+  align-items:center;
+  margin: 12px 0 18px;
+  font-weight: 600;
+}
 
+.contact-item{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+
+.contact-item a{
+  text-decoration:none;
+  color: var(--text);
+}
+
+.contact-item a:hover{
+  text-decoration:underline;
+}
+
+.icon{
+  font-size: 16px;
+  opacity:.8;
+}
+.icon svg{
+  display:block;
+  color:#000;
+}
     .contact-grid{
       display:grid;
       grid-template-columns: 1fr;
@@ -816,7 +847,26 @@ und Entscheidungen zum optimalen Verkaufszeitpunkt fundiert vorbereitet.</p>
       <div class="contact-wrap" id="kontakt">
         <div class="contact-title">Kontaktieren Sie mich</div>
         <p class="contact-sub">Eine kurze Beschreibung Ihrer Immobilie und Anliegens genügt.</p>
+<div class="contact-direct">
+  <div class="contact-item">
+    <span class="icon">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M6.6 10.8a15.05 15.05 0 006.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.3
+    1.3.4 2.7.6 4.1.6.7 0 1.3.6 1.3 1.3V21c0 .7-.6 1.3-1.3 1.3
+    C10.4 22.3 1.7 13.6 1.7 3.3 1.7 2.6 2.3 2 3 2h3.3
+    c.7 0 1.3.6 1.3 1.3 0 1.4.2 2.8.6 4.1.1.4 0 .9-.3 1.2l-2.3 2.2z"/>
+  </svg>
+</span>
+    <a href="tel:+491607738676">+49 160 7738676</a>
+  </div>
 
+  <div class="contact-item">
+    <span class="icon">✉</span>
+    <a href="mailto:grundmann.immoplus@gmail.com">
+      grundmann.immoplus@gmail.com
+    </a>
+  </div>
+</div>
         <form
           action="https://formspree.io/f/mvzqvggb"
           method="POST"
