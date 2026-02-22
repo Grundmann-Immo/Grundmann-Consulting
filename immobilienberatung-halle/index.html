@@ -172,7 +172,34 @@
     textarea{ min-height:160px; resize:vertical; }
     .row2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
     .field{ margin-bottom:14px; }
+.contact-direct{
+  display:flex;
+  gap: 36px;
+  align-items:center;
+  margin: 12px 0 18px;
+  font-weight: 600;
+  flex-wrap: wrap;
+}
 
+.contact-item{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+
+.contact-item a{
+  text-decoration:none;
+  color: var(--text);
+}
+
+.contact-item a:hover{
+  text-decoration:underline;
+}
+
+.icon svg{
+  display:block;
+  color:#000;   /* schwarz */
+}
     /* ======= PRICING (Beratungsleistungen) ======= */
     .price-table{
       width:100%;
@@ -506,6 +533,30 @@
 
       <div class="panel">
         <h2 class="h2">Kontaktieren Sie mich</h2>
+<div class="contact-direct">
+  <div class="contact-item">
+    <span class="icon">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+        <path d="M6.6 10.8a15.05 15.05 0 006.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.3
+        1.3.4 2.7.6 4.1.6.7 0 1.3.6 1.3 1.3V21c0 .7-.6 1.3-1.3 1.3
+        C10.4 22.3 1.7 13.6 1.7 3.3 1.7 2.6 2.3 2 3 2h3.3
+        c.7 0 1.3.6 1.3 1.3 0 1.4.2 2.8.6 4.1.1.4 0 .9-.3 1.2l-2.3 2.2z"/>
+      </svg>
+    </span>
+    <a href="tel:+491607738676">+49 160 7738676</a>
+  </div>
+
+  <div class="contact-item">
+    <span class="icon">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+        <path d="M2 4h20a2 2 0 012 2v12a2 2 0 01-2 2H2a2 2 0 01-2-2V6a2 2 0 012-2zm0 2v.01L12 13 22 6.01V6H2zm20 2.24l-9.4 6.27a1 1 0 01-1.2 0L2 8.24V18h20V8.24z"/>
+      </svg>
+    </span>
+    <a href="mailto:grundmann.immoplus@gmail.com">
+      grundmann.immoplus@gmail.com
+    </a>
+  </div>
+</div>
         <p class="muted" style="margin-top:6px;">
           Eine kurze Einordnung genügt: Objekttyp oder Adresse, aktueller Status und die zentrale Fragestellung.
         </p>
