@@ -4,18 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Bundesanleihe 10Y | Marktthermometer für Bauzinsen</title>
+  <title>BUND 10Y | Marktthermometer für Bauzinsen</title>
   <meta name="description" content="10-jährige Bundesanleihe als Marktthermometer: Zusammenhang mit Bauzinsen, Spread-Logik und ein Bankzins-Korridor-Rechner (Best-Base-Worst) für Cashflow-Modelle." />
   <link rel="canonical" href="https://grundmannconsulting.de/bundesanleihe/" />
 
-  <!-- Open Graph -->
   <meta property="og:title" content="Die Bundesanleihe als Marktthermometer" />
   <meta property="og:description" content="Bund 10Y live + Einordnung der Korrelation zu Bauzinsen + Bankzins-Korridor-Rechner." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://grundmannconsulting.de/bundesanleihe/" />
   <meta property="og:image" content="https://grundmannconsulting.de/assets/Wohngebäude.png" />
 
-  <!-- Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -157,12 +155,13 @@
       border:1px solid rgba(0,0,0,.14);
     }
 
-    /* Frames / Embed */
-    .embed-wrap{
+    /* Chart box */
+    .chart-wrap{
       border-radius: 10px;
       overflow:hidden;
       border: 1px solid rgba(0,0,0,.12);
       background: rgba(255,255,255,.20);
+      padding: 14px;
     }
     .embed-title{
       display:flex;
@@ -172,6 +171,20 @@
       margin-bottom:10px;
     }
     .embed-title small{ color: rgba(0,0,0,.55); }
+    .chips{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      font-weight:700;
+    }
+    .chip{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.07);
+      border: 1px solid rgba(0,0,0,.10);
+      font-size: 12px;
+    }
 
     /* Rechner */
     .calc-grid{
@@ -214,15 +227,6 @@
     }
     .kpi:last-child{ border-bottom:none; }
     .kpi b{ font-weight:800; }
-    .pill{
-      display:inline-block;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.07);
-      border: 1px solid rgba(0,0,0,.10);
-      font-weight: 700;
-      font-size: 12px;
-    }
 
     /* Footer */
     footer{
@@ -245,11 +249,13 @@
       .calc-grid{ grid-template-columns: 1fr; }
     }
   </style>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 
 <body>
 
-  <!-- NAV -->
   <nav class="topnav" aria-label="Hauptnavigation">
     <div class="container">
       <a class="logo" href="/" aria-label="Startseite">
@@ -264,12 +270,11 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <header class="hero" id="top">
     <div class="hero-left">
       <h1>Die Bundesanleihe als Marktthermometer</h1>
       <p>
-        Die Rendite der <strong>10-jährigen Bundesanleihe (Bund 10Y)</strong> ist der zentrale Referenzpunkt im Euro-Raum.
+        Die Rendite der <strong>10-jährigen Bundesanleihe (Bund 10Y)</strong> ist ein zentraler Referenzpunkt im Euro-Raum.
         Baufinanzierungszinsen bewegen sich meist in die gleiche Richtung – aber mit einem variablen Aufschlag (Spread).
       </p>
       <div style="margin-top:8px; display:flex; gap:10px; flex-wrap:wrap;">
@@ -289,19 +294,20 @@
 
       <div class="panel">
         <div class="embed-title">
-          <h2 class="h2">10-jährige Bundesanleihe (Rendite)</h2>
-          <small>Automatisch aktualisiert (TradingView)</small>
+          <div>
+            <h2 class="h2">10-jährige Bundesanleihe (Rendite)</h2>
+            <small>Quelle: Deutsche Bundesbank (BBK01 / WT1010) · täglich</small>
+          </div>
+          <div class="chips">
+            <span class="chip">aktuell: <span id="bundNow">—</span></span>
+            <span class="chip">Update: <span id="bundUpdate">—</span></span>
+          </div>
         </div>
 
-<div class="embed-wrap">
-  <iframe
-    title="Bund 10Y Rendite (TradingView)"
-    src="https://s.tradingview.com/widgetembed/?symbol=TVC%3ADE10Y&interval=D&hidesidetoolbar=0&symboledit=0&saveimage=0&toolbarbg=%23f3efe7&studies=%5B%5D&theme=light&style=1&locale=de_DE"
-    style="width:100%;height:520px;border:0;"
-    loading="lazy"
-    allowtransparency="true">
-  </iframe>
-</div>
+        <div class="chart-wrap">
+          <canvas id="bundChart" height="110"></canvas>
+          <div id="bundErr" class="muted" style="margin-top:10px; display:none;"></div>
+        </div>
 
         <div class="divider"></div>
 
@@ -357,7 +363,7 @@
       <div class="section-title">Bankzins-Korridor (Best–Base–Worst)</div>
 
       <div class="panel">
-        <h2 class="h2">Kalkulation als Frame</h2>
+        <h2 class="h2">Kalkulation</h2>
         <p class="muted" style="margin-top:6px;">
           Eingabe: <strong>Bund 10Y + Beleihung + Objektart (ETW/MFH) + Zinsbindung</strong><br>
           Ausgabe: konservativer <strong>„Bankzins-Korridor“ (Best–Base–Worst)</strong> für Cashflow-Modelle.
@@ -366,7 +372,6 @@
         <div class="divider"></div>
 
         <div class="calc-grid">
-          <!-- INPUTS -->
           <div class="calc-form" aria-label="Zins-Korridor Rechner">
             <div class="calc-row">
               <div>
@@ -401,7 +406,7 @@
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;">
               <button class="btn" type="button" id="calcBtn">Korridor berechnen</button>
               <button class="btn ghost" type="button" id="resetBtn">Zurücksetzen</button>
-              <span class="pill" id="modelHint">Modell: Bund + Spread (heuristisch)</span>
+              <button class="btn ghost" type="button" id="useLiveBtn" title="setzt Bund 10Y aus dem Chart als Eingabe">Live-Wert übernehmen</button>
             </div>
 
             <small style="color: rgba(0,0,0,.62); margin-top:8px; display:block;">
@@ -409,25 +414,15 @@
             </small>
           </div>
 
-          <!-- OUTPUTS -->
           <div class="result-box" aria-label="Ergebnis">
-            <div class="kpi">
-              <span>Best (optimistisch)</span>
-              <b id="bestOut">—</b>
-            </div>
-            <div class="kpi">
-              <span>Base (konservativ)</span>
-              <b id="baseOut">—</b>
-            </div>
-            <div class="kpi">
-              <span>Worst (pessimistisch)</span>
-              <b id="worstOut">—</b>
-            </div>
+            <div class="kpi"><span>Best (optimistisch)</span><b id="bestOut">—</b></div>
+            <div class="kpi"><span>Base (konservativ)</span><b id="baseOut">—</b></div>
+            <div class="kpi"><span>Worst (pessimistisch)</span><b id="worstOut">—</b></div>
 
             <div class="divider" style="margin:16px 0;"></div>
 
             <div class="muted" style="font-size:14px;">
-              <b>So kannst du es im Cashflow nutzen:</b><br>
+              <b>So nutzt du es im Cashflow:</b><br>
               • Base = Standardannahme<br>
               • Best/Worst = Sensitivität für Verhandlung & Risikopuffer
             </div>
@@ -437,14 +432,13 @@
     </div>
   </section>
 
-  <!-- KONTAKT -->
   <section class="frame-gap" id="kontakt">
     <div class="container">
       <div class="section-title">Kontakt</div>
       <div class="panel">
         <h2 class="h2">Kontaktieren Sie mich</h2>
         <p class="muted" style="margin-top:6px;">
-          Wenn du willst, kann ich dir auch eine Version bauen, die den Bund 10Y zusätzlich in deinem Cashflow-Rechner als Default-Zins (mit Spread) verwendet.
+          Wenn du willst, kann ich dir auch eine Version bauen, die den Bund 10Y automatisch als Default-Zins (mit Spread) in deinen Cashflow-Rechner übernimmt.
         </p>
 
         <div style="margin-top:12px; display:flex; gap:16px; flex-wrap:wrap; font-weight:600;">
@@ -455,25 +449,176 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <img class="footer-logo" src="/assets/Logo_Grundmann-Consulting.png" alt="Grundmann Consulting Logo">
     <div><a href="/impressum/">Impressum</a></div>
   </footer>
 
-  <!-- TradingView Script -->
   <script>
-  
-    // ===== Korridor-Rechner (heuristisch) =====
+    // =========================
+    // Bund 10Y: Bundesbank SDMX
+    // =========================
+    // Doku: format-Parameter (sdmx_json, sdmx_csv, bbk_csv etc.) :contentReference[oaicite:1]{index=1}
+    //
+    // Hinweis: lokal bitte via http://localhost öffnen (python -m http.server),
+    // sonst können CORS/Status-Probleme auftreten.
+
     const el = (id) => document.getElementById(id);
 
+    function fmtPct2(x){
+      return (Math.round(x * 100) / 100).toFixed(2).replace(".", ",") + " %";
+    }
+
+    function fmtDateISOToDE(iso){
+      // iso kann "2026-02-15" oder "2026-02" sein
+      if (!iso) return "—";
+      const d = new Date(iso.length === 7 ? (iso + "-01") : iso);
+      if (isNaN(d)) return iso;
+      return d.toLocaleDateString("de-DE");
+    }
+
+    // Robust: wir versuchen zwei URL-Varianten, weil manche Serien so/so adressierbar sind.
+    const BB_BASE = "https://api.statistiken.bundesbank.de/rest";
+    const SERIES_TRIES = [
+      `${BB_BASE}/data/BBK01/WT1010?format=sdmx_json&lastNObservations=7300`, // viel Historie
+      `${BB_BASE}/data/BBK01/WT1010?format=sdmx_json`
+    ];
+
+    async function fetchBundSeries(){
+      let lastErr = null;
+
+      for (const url of SERIES_TRIES){
+        try{
+          const res = await fetch(url, {
+            headers: {
+              // explizit SDMX-JSON anfordern
+              "Accept": "application/vnd.sdmx.data+json;version=1.0.0, application/json;q=0.9, */*;q=0.8"
+            },
+            cache: "no-store"
+          });
+
+          if (!res.ok){
+            lastErr = new Error(`HTTP ${res.status}`);
+            continue;
+          }
+
+          const json = await res.json();
+          const parsed = parseSdmxJson(json);
+          if (parsed && parsed.points && parsed.points.length > 5) return parsed;
+
+          lastErr = new Error("Parsing: zu wenig Datenpunkte");
+        }catch(e){
+          lastErr = e;
+        }
+      }
+
+      throw lastErr || new Error("Unbekannter Fehler");
+    }
+
+    function parseSdmxJson(sdmx){
+      // SDMX-JSON Struktur: dataSets[0].series, structure.dimensions.observation etc.
+      // Wir nehmen: erste Serie, und mappen Observation-Index auf Zeitdimension.
+      if (!sdmx || !sdmx.dataSets || !sdmx.dataSets[0] || !sdmx.structure) return null;
+
+      const ds = sdmx.dataSets[0];
+      const seriesObj = ds.series || {};
+      const seriesKeys = Object.keys(seriesObj);
+      if (!seriesKeys.length) return null;
+
+      const firstSeries = seriesObj[seriesKeys[0]];
+      const obs = firstSeries.observations || {};
+      const timeDim = (sdmx.structure.dimensions && sdmx.structure.dimensions.observation)
+        ? sdmx.structure.dimensions.observation.find(d => d.id === "TIME_PERIOD") || sdmx.structure.dimensions.observation[0]
+        : null;
+
+      const timeValues = (timeDim && timeDim.values) ? timeDim.values.map(v => v.id) : [];
+      const pts = [];
+
+      // obs ist ein Objekt: { "0": [value], "1": [value], ... }
+      for (const idxStr of Object.keys(obs)){
+        const idx = parseInt(idxStr, 10);
+        const arr = obs[idxStr];
+        const val = Array.isArray(arr) ? arr[0] : null;
+        const t = timeValues[idx] || null;
+        if (t && typeof val === "number") pts.push({ t, val });
+      }
+
+      pts.sort((a,b) => (a.t > b.t ? 1 : -1));
+
+      return {
+        points: pts,
+        last: pts.length ? pts[pts.length - 1] : null
+      };
+    }
+
+    let bundLiveValue = null;
+    let bundChart = null;
+
+    async function initBundChart(){
+      const errBox = el("bundErr");
+      errBox.style.display = "none";
+      errBox.textContent = "";
+
+      try{
+        const data = await fetchBundSeries();
+
+        const pts = data.points;
+        const labels = pts.map(p => p.t);
+        const values = pts.map(p => p.val);
+
+        bundLiveValue = data.last ? data.last.val : null;
+        el("bundNow").textContent = (bundLiveValue == null) ? "—" : fmtPct2(bundLiveValue);
+        el("bundUpdate").textContent = data.last ? fmtDateISOToDE(data.last.t) : "—";
+
+        const ctx = el("bundChart").getContext("2d");
+        bundChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels,
+            datasets: [{
+              label: "Bund 10Y (Rendite)",
+              data: values,
+              borderWidth: 2,
+              pointRadius: 0,
+              tension: 0.18
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) => ` ${fmtPct2(ctx.parsed.y)}`
+                }
+              }
+            },
+            scales: {
+              x: { ticks: { maxTicksLimit: 8 } },
+              y: {
+                ticks: {
+                  callback: (v) => (Number(v).toFixed(1).replace(".", ",") + " %")
+                }
+              }
+            }
+          }
+        });
+
+      }catch(e){
+        errBox.style.display = "block";
+        errBox.textContent =
+          `Bund 10Y konnte nicht geladen werden. Teste bitte: Datei über einen lokalen Server öffnen (statt file://). Details: ${e && e.message ? e.message : e}`;
+      }
+    }
+
+    // =========================
+    // Korridor-Rechner
+    // =========================
     function clamp(n, min, max){
       n = Number.isFinite(n) ? n : min;
       return Math.max(min, Math.min(max, n));
-    }
-
-    function fmtPct(x){
-      return (Math.round(x * 100) / 100).toFixed(2).replace(".", ",") + " %";
     }
 
     function calcCorridor(){
@@ -484,27 +629,22 @@
 
       const bundSafe = Number.isFinite(bund) ? bund : 0;
 
-      // --- Spread-Bausteine (konservativ, aber simpel) ---
-      // Objektart
+      // Spread-Bausteine (heuristisch)
       const assetAdd = (asset === "MFH") ? 1.50 : 1.20;
 
-      // LTV Buckets
       let ltvAdd = 0.90;
       if (ltv <= 60) ltvAdd = 0.60;
       else if (ltv <= 80) ltvAdd = 0.90;
       else if (ltv <= 90) ltvAdd = 1.20;
       else ltvAdd = 1.50;
 
-      // Zinsbindung
       let fixAdd = 0.00;
       if (fix === 5) fixAdd = -0.10;
       if (fix === 15) fixAdd = 0.15;
       if (fix === 20) fixAdd = 0.25;
 
-      // Basisspread
       const spreadBase = assetAdd + ltvAdd + fixAdd;
 
-      // Bandbreite (je riskanter, desto breiter)
       let band = 0.25;
       if (ltv > 80) band = 0.35;
       if (ltv > 90) band = 0.45;
@@ -513,9 +653,9 @@
       const best = base - band;
       const worst = base + band;
 
-      el("bestOut").textContent = fmtPct(best);
-      el("baseOut").textContent = fmtPct(base);
-      el("worstOut").textContent = fmtPct(worst);
+      el("bestOut").textContent = fmtPct2(best);
+      el("baseOut").textContent = fmtPct2(base);
+      el("worstOut").textContent = fmtPct2(worst);
     }
 
     el("calcBtn").addEventListener("click", calcCorridor);
@@ -529,8 +669,18 @@
       el("worstOut").textContent = "—";
     });
 
-    // direkt initial rechnen
+    el("useLiveBtn").addEventListener("click", () => {
+      if (bundLiveValue == null) return;
+      el("bund").value = (Math.round(bundLiveValue * 100) / 100).toFixed(2);
+      calcCorridor();
+      el("useLiveBtn").textContent = "Live übernommen ✓";
+      setTimeout(() => el("useLiveBtn").textContent = "Live-Wert übernehmen", 1200);
+    });
+
+    // Init
     calcCorridor();
+    initBundChart();
   </script>
+
 </body>
 </html>
