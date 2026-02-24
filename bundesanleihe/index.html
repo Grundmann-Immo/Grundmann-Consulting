@@ -304,9 +304,7 @@
 
   <nav class="topnav" aria-label="Hauptnavigation">
     <div class="container">
-      <!-- FIX: absolut, damit es auf GitHub Pages NICHT auf / (github.io) zeigt -->
       <a class="logo" href="https://grundmannconsulting.de/" aria-label="Startseite">
-        <!-- FIX: absoluter Asset-Pfad -->
         <img class="logo-img" src="https://grundmannconsulting.de/assets/Logo_Grundmann-Consulting_white.png" alt="Grundmann Consulting Logo">
       </a>
       <div class="navlinks">
@@ -331,7 +329,6 @@
       </div>
     </div>
     <div class="hero-right">
-      <!-- FIX: absoluter Asset-Pfad -->
       <img src="https://grundmannconsulting.de/assets/Wohngebäude.png" alt="Immobilie – Symbolbild">
     </div>
   </header>
@@ -345,7 +342,7 @@
         <div class="embed-title">
           <div>
             <h2 class="h2">10-jährige Bundesanleihe (Rendite)</h2>
-            <small>Quelle: Deutsche Bundesbank (BBK01 / WT1010) · täglich</small>
+            <small>Quelle: Deutsche Bundesbank (BBSSY · WT1010) · täglich</small>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
             <span class="badge">aktuell: <span id="bundNow">—</span></span>
@@ -371,7 +368,8 @@
 
           <div class="errorbox" id="bundError"></div>
           <small style="display:block; margin-top:10px; color: rgba(0,0,0,.62);">
-            Hinweis: Wenn du diese Datei per <b>file://</b> öffnest, kann der Datenabruf scheitern. Nutze <b>http://localhost</b> oder eine echte HTTPS-URL (z.B. GitHub Pages).
+            Hinweis: Wenn du diese Datei per <b>file://</b> öffnest, kann der Datenabruf scheitern.
+            Nutze <b>http://localhost</b> oder eine echte HTTPS-URL (z.B. GitHub Pages).
           </small>
         </div>
 
@@ -520,9 +518,7 @@
   </section>
 
   <footer>
-    <!-- FIX: absoluter Asset-Pfad -->
     <img class="footer-logo" src="https://grundmannconsulting.de/assets/Logo_Grundmann-Consulting.png" alt="Grundmann Consulting Logo">
-    <!-- FIX: absoluter Link, damit GitHub Pages nicht auf /impressum/ (github.io) zeigt -->
     <div><a href="https://grundmannconsulting.de/impressum/">Impressum</a></div>
   </footer>
 
@@ -531,10 +527,16 @@
 
   <script>
     // ==========================
-    // BUND 10Y: Bundesbank API (BBK01/WT1010)
+    // BUND 10Y: Bundesbank SDMX (BBSSY)
     // ==========================
-    // Doku SDMX Webservice: https://api.statistiken.bundesbank.de/rest/data/{flowRef}/{key}
-    const BBK_URL = "https://api.statistiken.bundesbank.de/rest/data/BBK01/WT1010?format=bbk_csv";
+    // Zeitreihe: BBSSY.D.REN.EUR.A630.000000WT1010.A
+    // REST: /rest/data/{flowRef}/{key}
+    // -> flowRef = BBSSY
+    // -> key     = D.REN.EUR.A630.000000WT1010.A
+    // Begrenzen wir auf ~12-18 Monate Datenpunkte.
+    const BBK_URL =
+      "https://api.statistiken.bundesbank.de/rest/data/BBSSY/D.REN.EUR.A630.000000WT1010.A" +
+      "?format=bbk_csv&lastNObservations=450";
 
     const $ = (id) => document.getElementById(id);
 
@@ -556,9 +558,9 @@
       const header = lines[0];
       const delim = header.includes(";") ? ";" : ",";
 
-      const hdrParts = header.split(delim);
-      const idxTime = hdrParts.findIndex(h => h.toUpperCase().includes("TIME"));
-      const idxVal  = hdrParts.findIndex(h => h.toUpperCase().includes("OBS_VALUE"));
+      const hdr = header.split(delim);
+      const idxTime = hdr.findIndex(h => h.toUpperCase().includes("TIME"));
+      const idxVal  = hdr.findIndex(h => h.toUpperCase().includes("OBS_VALUE"));
       if (idxTime === -1 || idxVal === -1) return [];
 
       const rows = [];
@@ -585,10 +587,7 @@
       try{
         const res = await fetch(BBK_URL, {
           method: "GET",
-          // mode:"cors" ist default; explizit lassen geht auch
-          headers: {
-            "Accept": "text/csv,application/vnd.bbk.data+csv;version=1.0.0"
-          }
+          headers: { "Accept": "text/csv,application/vnd.bbk.data+csv;version=1.0.0" }
         });
 
         if (!res.ok) throw new Error("HTTP " + res.status);
@@ -606,7 +605,7 @@
         $("bundNow").textContent = fmtPct(last.value);
         $("bundUpdated").textContent = last.date;
 
-        // Optional: Bund-Wert in den Rechner übernehmen (wenn du das willst, Kommentar entfernen)
+        // Optional: Bund-Wert in den Rechner übernehmen
         // $("bund").value = (Math.round(last.value * 100) / 100).toFixed(2);
 
         const ctx = $("bundChart").getContext("2d");
@@ -629,9 +628,7 @@
             plugins: {
               legend: { display: false },
               tooltip: {
-                callbacks: {
-                  label: (ctx) => " " + fmtPct(ctx.parsed.y)
-                }
+                callbacks: { label: (ctx) => " " + fmtPct(ctx.parsed.y) }
               }
             },
             scales: {
@@ -647,9 +644,7 @@
 
       } catch (e){
         showBundError(
-          "Bund 10Y konnte nicht geladen werden. " +
-          "Wenn du GitHub Pages nutzt, muss die Seite über HTTPS laufen (tut sie i.d.R.). " +
-          "Details: " + (e?.message || e)
+          "Bund 10Y konnte nicht geladen werden. Details: " + (e?.message || e)
         );
         $("bundNow").textContent = "—";
         $("bundUpdated").textContent = "—";
@@ -671,7 +666,7 @@
     function calcCorridor(){
       const bund = parseFloat(el("bund").value);
       const ltv = clamp(parseFloat(el("ltv").value), 0, 100);
-      const asset = el("asset").value;
+      const asset = el("asset").value; // ETW/MFH
       const fix = parseInt(el("fix").value, 10);
 
       const bundSafe = Number.isFinite(bund) ? bund : 0;
@@ -715,6 +710,7 @@
       el("worstOut").textContent = "—";
     });
 
+    // Init
     calcCorridor();
     loadBund();
   </script>
