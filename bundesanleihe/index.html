@@ -55,23 +55,37 @@
       position:sticky; top:0; z-index:50;
       background:var(--heroGrad);
       border-bottom:1px solid rgba(255,255,255,.12);
+      overflow:hidden; /* verhindert optische "Ränder" beim Scroll */
     }
     .topnav .container{
       display:flex; align-items:center; justify-content:space-between;
       padding:12px 0; gap:14px;
+      min-width:0; /* wichtig für Flex+Overflow */
     }
     .logo-img{ height:46px; width:auto; display:block; }
+
+    /* WICHTIG: Nav rechts darf NICHT abgeschnitten werden -> Horizontal Scroll */
     .navlinks{
-      display:flex; gap:12px;
-      overflow-x:auto; white-space:nowrap;
+      display:flex;
+      align-items:center;
+      gap:12px;
+
+      flex:1;
+      justify-content:flex-end;
+
+      min-width:0;               /* erlaubt schrumpfen */
+      overflow-x:auto;           /* statt "abschneiden" */
+      overflow-y:hidden;
+      white-space:nowrap;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
+      padding:0 4px;             /* kleiner Puffer, damit letztes Item nicht "anklebt" */
     }
     .navlinks::-webkit-scrollbar{ display:none; }
     .navlinks a{
       color:#fff; font-weight:600;
       padding:8px 10px; border-radius:10px;
-      flex:0 0 auto;
+      flex:0 0 auto;             /* verhindert Umbruch + Schrumpfen */
     }
     .navlinks a:hover{ background:rgba(255,255,255,.12); }
 
@@ -263,14 +277,110 @@
     }
     .kpi:last-child{ border-bottom:none; }
     .kpi b{ font-weight:800; }
-    .pill{
-      display:inline-block;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.07);
+
+    /* ===== Beratungsleistungen (Pricing) ===== */
+    .pricing-panel{
+      background: rgba(255,255,255,.22);
       border: 1px solid rgba(0,0,0,.10);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .pricing-panel h2{
+      text-align:center;
+      font-size: 18px;
       font-weight: 700;
+      margin: 0 0 18px;
+      letter-spacing: .2px;
+    }
+    .price-table{
+      width:100%;
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: 10px;
+      overflow:hidden;
+      background: rgba(255,255,255,.24);
+    }
+    .price-col{
+      padding: 16px 14px 14px;
+      border-right: 1px solid rgba(0,0,0,.10);
+      min-height: 560px;
+      display:flex;
+      flex-direction:column;
+    }
+    .price-col:last-child{ border-right:none; }
+
+    .kicker{
+      font-weight: 700;
+      font-size: 18px;
+      opacity:.95;
+      margin-bottom: 6px;
+      height: 44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: 0 6px;
+      color: #102821;
+    }
+    .price{
+      font-weight: 700;
+      font-size: 26px;
+      margin: 0;
+      min-height: 34px;
+      text-align: center;
+    }
+    .sub{
+      opacity:.85;
       font-size: 12px;
+      margin-top: 2px;
+      min-height: 22px;
+      text-align: center;
+    }
+    .col-cta{
+      height: 48px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin: 10px 0 10px;
+    }
+    .col-cta .btn{ width:100%; }
+    .col-desc{
+      color: rgba(0,0,0,.76);
+      margin: 6px 0 10px;
+      line-height: 1.6;
+    }
+    .checks{
+      list-style:none;
+      padding:0;
+      margin: 0;
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+      color: rgba(0,0,0,.78);
+    }
+    .checks li{
+      display:flex;
+      gap: 8px;
+      align-items:flex-start;
+    }
+    .dot{
+      width:14px;height:14px;
+      border-radius:50%;
+      background: rgba(0,0,0,.10);
+      position:relative;
+      margin-top: 3px;
+      flex: 0 0 14px;
+    }
+    .dot:after{
+      content:"";
+      position:absolute;
+      left:4px; top:3px;
+      width:6px; height:3px;
+      border-left:2px solid rgba(0,0,0,.60);
+      border-bottom:2px solid rgba(0,0,0,.60);
+      transform: rotate(-45deg);
     }
 
     /* ===== Kontaktformular ===== */
@@ -316,6 +426,14 @@
       .logo-img{ height:38px; }
       .calc-grid{ grid-template-columns: 1fr; }
       #bundCanvas{ height:420px; }
+
+      .price-table{ grid-template-columns: 1fr; }
+      .price-col{
+        min-height:auto;
+        border-right:none;
+        border-bottom: 1px solid rgba(0,0,0,.10);
+      }
+      .price-col:last-child{ border-bottom:none; }
     }
   </style>
 </head>
@@ -328,7 +446,7 @@
       <a class="logo" href="/" aria-label="Startseite">
         <img class="logo-img" src="/assets/Logo_Grundmann-Consulting_white.png" alt="Grundmann Consulting Logo">
       </a>
-      <div class="navlinks">
+      <div class="navlinks" aria-label="Navigation">
         <a href="/">Home</a>
         <a href="https://grundmannconsulting.de/immobilienberatung-halle/">Halle</a>
         <a href="https://grundmannconsulting.de/immobilienberatung-leipzig/">Leipzig</a>
@@ -368,7 +486,6 @@
             <h2 class="h2">10-jährige Bundesanleihe (Rendite)</h2>
             <small>Quelle: Deutsche Bundesbank (BBSSY · WT1010) · letzte 12 Monate</small>
           </div>
-         
         </div>
 
         <div class="embed-wrap">
@@ -388,7 +505,7 @@
 
           <div id="bundError" class="bund-error"></div>
         </div>
-
+      </div>
     </div>
   </section>
 
@@ -399,18 +516,24 @@
 
       <div class="panel">
         <h2 class="h2">Wie korreliert die Bundesanleihe mit den Bauzinsen?</h2>
-       
-          Die Rendite der 10-jährigen Bundesanleihe ist für Banken ein zentraler Referenzwert.  Wenn die Bundesanleihe steigt, ziehen Bauzinsen meist mit an – und umgekehrtn oder verengen.</p>
-Bauzins ≈ Bundesanleihe + Aufschlag (Spread)</p>
-Dieser Aufschlag schwankt – je nach Markt und Bank – teils deutlich.  Genau deshalb passiert es manchmal  „Bund fällt“, doch Bauzinsen bleiben trotzdem hoch.
 
+        <p class="muted">
+          Die Rendite der 10-jährigen Bundesanleihe ist für Banken ein zentraler Referenzwert.
+          Wenn die Bundesanleihe steigt, ziehen Bauzinsen meist mit an – und umgekehrt.
+        </p>
+
+        <p class="muted" style="margin-top:10px;">
+          <strong>Bauzins ≈ Bundesanleihe + Aufschlag (Spread)</strong><br>
+          Dieser Aufschlag schwankt – je nach Markt und Bank – teils deutlich. Genau deshalb kann es passieren:
+          „Bund fällt“, aber Bauzinsen bleiben trotzdem hoch.
+        </p>
 
         <div class="divider"></div>
 
         <h3 class="h2" style="font-size:20px;">Warum Bauzinsen nicht 1:1 folgen (Spread bewegt sich)</h3>
         <ul class="checklist">
           <li><strong>Bank-Refinanzierung:</strong> Banken refinanzieren sich nicht nur über den Bund. Wenn z. B. Pfandbrief- oder Swap-Konditionen schlechter werden, bleibt der Bauzins höher – selbst wenn der Bund sinkt.</li>
-          <li><strongBankmargen & Kapazität:</strong> Banken steuern aktiv ihre Preise. Wenn viele Anfragen reinkommen oder Risikoappetit sinkt, werden Margen erhöht – unabhängig vom Bund.</li>
+          <li><strong>Bankmargen &amp; Kapazität:</strong> Banken steuern aktiv ihre Preise. Wenn viele Anfragen reinkommen oder Risikoappetit sinkt, werden Margen erhöht – unabhängig vom Bund.</li>
           <li><strong>Dein Risiko-Profil (LTV/Objekt/Region):</strong> Höhere Beleihung, „schwierige“ Objekte oder schwächere Mikrolagen bedeuten mehr Risikoaufschlag – selbst bei gleichem Markt.</li>
           <li><strong>Stressphasen:</strong> In unsicheren Zeiten springen Risikoaufschläge oft abrupt. Dann wirkt die Korrelation „unsauber“: Bund bewegt sich, aber Bauzinsen reagieren verzögert oder weniger.</li>
         </ul>
@@ -423,8 +546,6 @@ Dieser Aufschlag schwankt – je nach Markt und Bank – teils deutlich.  Genau 
           <li><strong>Bestand / Refinanzierung:</strong> Nicht nur auf „Bund fällt“ hoffen. Entscheidend ist, ob der Spread mitfällt – das ist oft der Hebel für bessere Konditionen.</li>
           <li><strong>Verkauf:</strong> Das Zinsniveau beeinflusst direkt, was Käufer rechnen können. Ob das am Markt ankommt, hängt davon ab, wie schnell Bund und Spread beim Endkunden-Zins landen.</li>
         </ul>
-
-
       </div>
     </div>
   </section>
@@ -479,9 +600,7 @@ Dieser Aufschlag schwankt – je nach Markt und Bank – teils deutlich.  Genau 
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;">
               <button class="btn" type="button" id="calcBtn">Korridor berechnen</button>
               <button class="btn ghost" type="button" id="resetBtn">Zurücksetzen</button>
-             
             </div>
-
           </div>
 
           <!-- OUTPUTS -->
@@ -504,8 +623,81 @@ Dieser Aufschlag schwankt – je nach Markt und Bank – teils deutlich.  Genau 
             <div class="muted" style="font-size:14px;">
               <b>So kannst du es im Cashflow nutzen:</b><br>
               • Base = Standardannahme<br>
-              • Best/Worst = Sensitivität für Verhandlung & Risikopuffer
+              • Best/Worst = Sensitivität für Verhandlung &amp; Risikopuffer
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Beratungsleistungen ===== -->
+  <section class="frame-gap" id="preise">
+    <div class="container">
+      <div class="section-title">Beratungsleistungen</div>
+
+      <div class="pricing-panel">
+        <h2>Beratungsleistungen</h2>
+
+        <div class="price-table">
+          <div class="price-col">
+            <div class="kicker">Kostenloser Objektcheck</div>
+            <div class="price">€0</div>
+            <div class="sub">pro Projekt</div>
+            <div class="col-cta"><a class="btn" href="#kontakt">Kontakt</a></div>
+            <div class="col-desc">Ziel des kostenlosen Objektchecks ist eine klare wirtschaftliche Ersteinschätzung der Immobilie.</div>
+            <ul class="checks">
+              <li><span class="dot"></span><span>Kurzbewertung der Immobilie</span></li>
+              <li><span class="dot"></span><span>Top 3 Optimierungshebel</span></li>
+              <li><span class="dot"></span><span>Klare Empfehlungen</span></li>
+            </ul>
+          </div>
+
+          <div class="price-col">
+            <div class="kicker">Ankaufsberatung</div>
+            <div class="price">auf Anfrage</div>
+            <div class="sub">pro Projekt</div>
+            <div class="col-cta"><a class="btn" href="#kontakt">Kontakt</a></div>
+            <div class="col-desc">Erhebliche Einsparpotenziale durch realistische Preiseinschätzung und Identifikation versteckter Risiken.</div>
+            <ul class="checks">
+              <li><span class="dot"></span><span>Standort- und Mikrolagenbewertung</span></li>
+              <li><span class="dot"></span><span>Analyse der bestehenden Mieten und Potenziale</span></li>
+              <li><span class="dot"></span><span>Prüfung der vorhandenen Unterlagen</span></li>
+              <li><span class="dot"></span><span>Klare Entscheidungsempfehlung</span></li>
+              <li><span class="dot"></span><span>Optional: Kontakt zu Maklern / Dienstleistern</span></li>
+              <li><span class="dot"></span><span>Optional: Durchführung von Besichtigungen</span></li>
+            </ul>
+          </div>
+
+          <div class="price-col">
+            <div class="kicker">Objektoptimierung &amp; Strategie</div>
+            <div class="price">auf Anfrage</div>
+            <div class="sub">pro Projekt</div>
+            <div class="col-cta"><a class="btn" href="#kontakt">Kontakt</a></div>
+            <div class="col-desc">Maximierung der wirtschaftlichen Ergebnisse. Durch strukturierte Immobilienoptimierung werden Betriebskosten reduziert und Erträge langfristig gesteigert.</div>
+            <ul class="checks">
+              <li><span class="dot"></span><span>Analyse von Mietniveau und Erlösstruktur</span></li>
+              <li><span class="dot"></span><span>Prüfung laufender Kosten und Dienstleisterverträge</span></li>
+              <li><span class="dot"></span><span>Bewertung von Optimierungs- und Entwicklungspotenzialen</span></li>
+              <li><span class="dot"></span><span>Priorisierung wirtschaftlich sinnvoller Maßnahmen</span></li>
+              <li><span class="dot"></span><span>Optional: Prüfung der aktuellen Hausverwaltung</span></li>
+            </ul>
+          </div>
+
+          <div class="price-col">
+            <div class="kicker">Verkaufsberatung</div>
+            <div class="price">auf Anfrage</div>
+            <div class="sub">pro Projekt</div>
+            <div class="col-cta"><a class="btn" href="#kontakt">Kontakt</a></div>
+            <div class="col-desc">Immobilien werden nicht zum Angebotspreis gekauft. Deshalb ist eine strategische Verkaufsvorbereitung zur Erzielung des optimalen Marktpreises enorm wichtig. Auf Wunsch auch mit Begleitung des Eigenverkaufs ohne Makler (objektabhängig).</div>
+            <ul class="checks">
+              <li><span class="dot"></span><span>Analyse der Verkaufsreife und Ausgangslage</span></li>
+              <li><span class="dot"></span><span>Bewertung sinnvoller Maßnahmen vor dem Verkauf</span></li>
+              <li><span class="dot"></span><span>Einschätzung des optimalen Verkaufszeitpunkts</span></li>
+              <li><span class="dot"></span><span>Vorbereitung relevanter Unterlagen</span></li>
+              <li><span class="dot"></span><span>Strategische Beratung zur Preisfindung</span></li>
+              <li><span class="dot"></span><span>Optional: Beratung bei Verkauf ohne Makler</span></li>
+            </ul>
           </div>
         </div>
       </div>
