@@ -52,6 +52,7 @@
       background: var(--heroGrad);
       color:#fff;
       border-bottom: 1px solid rgba(255,255,255,.10);
+      overflow:hidden;
     }
     .topnav .container{
       display:flex;
@@ -59,14 +60,33 @@
       justify-content:space-between;
       padding: 12px 0;
       gap: 18px;
+      min-width:0;
     }
     .logo{ display:flex; align-items:center; text-decoration:none; color:#fff; font-weight:700; }
     .logo-img{ height: 50px; width:auto; display:block; }
 
-    .navlinks{ display:flex; align-items:center; gap: 10px; flex: 1; justify-content: flex-end; }
+    /* NAV: immer scrollbar statt abschneiden */
+    .navlinks{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+
+      flex: 1;
+      justify-content: flex-end;
+
+      min-width:0;
+      overflow-x:auto;
+      overflow-y:hidden;
+      white-space:nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 0 4px;
+    }
+    .navlinks::-webkit-scrollbar{ display:none; }
     .navlinks a{
       color:#fff; text-decoration:none; font-weight:600;
       padding: 8px 8px; border-radius: 10px;
+      flex: 0 0 auto;
     }
     .navlinks a:hover{ background: rgba(255,255,255,.10); }
 
@@ -169,7 +189,7 @@
 
     .btnrow{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
 
-    /* NEU: Button-Anordnung wie gewünscht (Reset oben links, Leipzig darunter) */
+    /* Button-Anordnung */
     .btnrow.controls{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -192,14 +212,175 @@
     .btn:hover{ filter: brightness(1.05); transform: translateY(-1px); }
     .btn.ghost{ background: rgba(0,0,0,.08); color:#111; border: 1px solid rgba(0,0,0,.14); }
 
+    /* ===== Beratungsleistungen (Pricing) ===== */
+    .section-title{
+      text-align:center;
+      font-weight: 700;
+      font-size: 32px;
+      margin: 0 0 18px;
+    }
+    .pricing-panel{
+      background: var(--panel);
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .pricing-panel h2{
+      text-align:center;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 18px;
+      letter-spacing: .2px;
+    }
+    .price-table{
+      width:100%;
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: 10px;
+      overflow:hidden;
+      background: rgba(255,255,255,.24);
+    }
+    .price-col{
+      padding: 16px 14px 14px;
+      border-right: 1px solid rgba(0,0,0,.10);
+      min-height: 560px;
+      display:flex;
+      flex-direction:column;
+    }
+    .price-col:last-child{ border-right:none; }
+
+    .kicker{
+      font-weight: 700;
+      font-size: 18px;
+      opacity:.95;
+      margin-bottom: 6px;
+      height: 44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: 0 6px;
+      color: #102821;
+    }
+    .price{
+      font-weight: 700;
+      font-size: 26px;
+      margin: 0;
+      min-height: 34px;
+      text-align: center;
+    }
+    .sub{
+      opacity:.85;
+      font-size: 12px;
+      margin-top: 2px;
+      min-height: 22px;
+      text-align: center;
+    }
+    .col-cta{
+      height: 48px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin: 10px 0 10px;
+    }
+    .col-cta .btn{ width:100%; }
+    .col-desc{
+      color: rgba(0,0,0,.76);
+      margin: 6px 0 10px;
+      line-height: 1.6;
+    }
+    .checks{
+      list-style:none;
+      padding:0;
+      margin: 0;
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+      color: rgba(0,0,0,.78);
+    }
+    .checks li{
+      display:flex;
+      gap: 8px;
+      align-items:flex-start;
+    }
+    .dot{
+      width:14px;height:14px;
+      border-radius:50%;
+      background: rgba(0,0,0,.10);
+      position:relative;
+      margin-top: 3px;
+      flex: 0 0 14px;
+    }
+    .dot:after{
+      content:"";
+      position:absolute;
+      left:4px; top:3px;
+      width:6px; height:3px;
+      border-left:2px solid rgba(0,0,0,.60);
+      border-bottom:2px solid rgba(0,0,0,.60);
+      transform: rotate(-45deg);
+    }
+
+    /* ===== Kontakt ===== */
+    .contact-direct{
+      display:flex;
+      gap:36px;
+      align-items:center;
+      margin:12px 0 18px;
+      font-weight:600;
+      flex-wrap:wrap;
+    }
+    .contact-item{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .contact-item a{
+      text-decoration:none;
+      color:var(--text);
+    }
+    .contact-item a:hover{ text-decoration:underline; }
+    .icon svg{ display:block; color:#000; }
+    .field{ margin-bottom:14px; }
+    textarea{
+      width:100%;
+      border:none;
+      background:rgba(0,0,0,.08);
+      padding:12px;
+      outline:none;
+      border-radius: 8px;
+      font-family: inherit;
+      min-height:160px;
+      resize:vertical;
+    }
+
+    /* Footer */
+    footer{
+      margin-top:54px;
+      padding:22px 0 56px;
+      border-top:1px solid rgba(0,0,0,.25);
+      text-align:center;
+    }
+    .footer-logo{ height:44px; width:auto; opacity:.85; display:block; margin:0 auto 6px; }
+    footer a{ font-size:12px; text-decoration:none; color:#111; }
+
     @media (max-width: 980px){
       .grid{ grid-template-columns: 1fr; }
       .row{ grid-template-columns: 1fr; }
       input{ text-align:left; }
       .logo-img{ height: 40px; }
-      .navlinks{ justify-content:flex-start; overflow-x:auto; white-space:nowrap; }
       .ek-grid{ grid-template-columns: 1fr; }
       .btnrow.controls{ grid-template-columns: 1fr; }
+
+      .price-table{ grid-template-columns: 1fr; }
+      .price-col{
+        min-height:auto;
+        border-right:none;
+        border-bottom: 1px solid rgba(0,0,0,.10);
+      }
+      .price-col:last-child{ border-bottom:none; }
     }
   </style>
 
@@ -353,7 +534,6 @@
               </div>
             </div>
 
-            <!-- Buttons: Reset = ghost, Leipzig darunter, Copy rechts -->
             <div class="btnrow controls">
               <div class="btncol">
                 <button class="btn ghost" type="button" id="resetBtn">Zurücksetzen</button>
@@ -401,7 +581,7 @@
             <p class="small" id="out_note">Trage Werte ein, um eine Erstabschätzung zu erhalten.</p>
 
             <div class="btnrow">
-              <a class="btn" href="/#kontakt">Objekt prüfen lassen</a>
+              <a class="btn" href="#kontakt">Objekt prüfen lassen</a>
             </div>
           </div>
         </aside>
@@ -409,6 +589,155 @@
       </div>
     </div>
   </main>
+
+  <!-- ===== Beratungsleistungen ===== -->
+  <section class="frame-gap" id="preise">
+    <div class="container">
+      <div class="section-title">Beratungsleistungen</div>
+
+      <div class="pricing-panel">
+        <h2>Beratungsleistungen</h2>
+
+        <div class="price-table">
+          <div class="price-col">
+            <div class="kicker">Kostenloser Objektcheck</div>
+            <div class="price">€0</div>
+            <div class="sub">pro Projekt</div>
+            <div class="col-cta"><a class="btn" href="#kontakt">Kontakt</a></div>
+            <div class="col-desc">Ziel des kostenlosen Objektchecks ist eine klare wirtschaftliche Ersteinschätzung der Immobilie.</div>
+            <ul class="checks">
+              <li><span class="dot"></span><span>Kurzbewertung der Immobilie</span></li>
+              <li><span class="dot"></span><span>Top 3 Optimierungshebel</span></li>
+              <li><span class="dot"></span><span>Klare Empfehlungen</span></li>
+            </ul>
+          </div>
+
+          <div class="price-col">
+            <div class="kicker">Ankaufsberatung</div>
+            <div class="price">auf Anfrage</div>
+            <div class="sub">pro Projekt</div>
+            <div class="col-cta"><a class="btn" href="#kontakt">Kontakt</a></div>
+            <div class="col-desc">Erhebliche Einsparpotenziale durch realistische Preiseinschätzung und Identifikation versteckter Risiken.</div>
+            <ul class="checks">
+              <li><span class="dot"></span><span>Standort- und Mikrolagenbewertung</span></li>
+              <li><span class="dot"></span><span>Analyse der bestehenden Mieten und Potenziale</span></li>
+              <li><span class="dot"></span><span>Prüfung der vorhandenen Unterlagen</span></li>
+              <li><span class="dot"></span><span>Klare Entscheidungsempfehlung</span></li>
+              <li><span class="dot"></span><span>Optional: Kontakt zu Maklern / Dienstleistern</span></li>
+              <li><span class="dot"></span><span>Optional: Durchführung von Besichtigungen</span></li>
+            </ul>
+          </div>
+
+          <div class="price-col">
+            <div class="kicker">Objektoptimierung &amp; Strategie</div>
+            <div class="price">auf Anfrage</div>
+            <div class="sub">pro Projekt</div>
+            <div class="col-cta"><a class="btn" href="#kontakt">Kontakt</a></div>
+            <div class="col-desc">Maximierung der wirtschaftlichen Ergebnisse. Durch strukturierte Immobilienoptimierung werden Betriebskosten reduziert und Erträge langfristig gesteigert.</div>
+            <ul class="checks">
+              <li><span class="dot"></span><span>Analyse von Mietniveau und Erlösstruktur</span></li>
+              <li><span class="dot"></span><span>Prüfung laufender Kosten und Dienstleisterverträge</span></li>
+              <li><span class="dot"></span><span>Bewertung von Optimierungs- und Entwicklungspotenzialen</span></li>
+              <li><span class="dot"></span><span>Priorisierung wirtschaftlich sinnvoller Maßnahmen</span></li>
+              <li><span class="dot"></span><span>Optional: Prüfung der aktuellen Hausverwaltung</span></li>
+            </ul>
+          </div>
+
+          <div class="price-col">
+            <div class="kicker">Verkaufsberatung</div>
+            <div class="price">auf Anfrage</div>
+            <div class="sub">pro Projekt</div>
+            <div class="col-cta"><a class="btn" href="#kontakt">Kontakt</a></div>
+            <div class="col-desc">Immobilien werden nicht zum Angebotspreis gekauft. Deshalb ist eine strategische Verkaufsvorbereitung zur Erzielung des optimalen Marktpreises enorm wichtig. Auf Wunsch auch mit Begleitung des Eigenverkaufs ohne Makler (objektabhängig).</div>
+            <ul class="checks">
+              <li><span class="dot"></span><span>Analyse der Verkaufsreife und Ausgangslage</span></li>
+              <li><span class="dot"></span><span>Bewertung sinnvoller Maßnahmen vor dem Verkauf</span></li>
+              <li><span class="dot"></span><span>Einschätzung des optimalen Verkaufszeitpunkts</span></li>
+              <li><span class="dot"></span><span>Vorbereitung relevanter Unterlagen</span></li>
+              <li><span class="dot"></span><span>Strategische Beratung zur Preisfindung</span></li>
+              <li><span class="dot"></span><span>Optional: Beratung bei Verkauf ohne Makler</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Kontaktieren Sie mich ===== -->
+  <section class="frame-gap" id="kontakt">
+    <div class="container">
+      <div class="section-title">Kontakt</div>
+
+      <div class="panel">
+        <h2 style="font-size:18px; margin:0 0 14px; letter-spacing:.2px;">Kontaktieren Sie mich</h2>
+
+        <div class="contact-direct">
+          <div class="contact-item">
+            <span class="icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                <path d="M6.6 10.8a15.05 15.05 0 006.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.3
+                1.3.4 2.7.6 4.1.6.7 0 1.3.6 1.3 1.3V21c0 .7-.6 1.3-1.3 1.3
+                C10.4 22.3 1.7 13.6 1.7 3.3 1.7 2.6 2.3 2 3 2h3.3
+                c.7 0 1.3.6 1.3 1.3 0 1.4.2 2.8.6 4.1.1.4 0 .9-.3 1.2l-2.3 2.2z"/>
+              </svg>
+            </span>
+            <a href="tel:+491607738676">+49 160 7738676</a>
+          </div>
+
+          <div class="contact-item">
+            <span class="icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                <path d="M2 4h20a2 2 0 012 2v12a2 2 0 01-2 2H2a2 2 0 01-2-2V6a2 2 0 012-2zm0 2v.01L12 13 22 6.01V6H2zm20 2.24l-9.4 6.27a1 1 0 01-1.2 0L2 8.24V18h20V8.24z"/>
+              </svg>
+            </span>
+            <a href="mailto:grundmann.immoplus@gmail.com">grundmann.immoplus@gmail.com</a>
+          </div>
+        </div>
+
+        <p style="margin-top:6px; color: var(--muted);">
+          Eine kurze Einordnung genügt: Objekttyp oder Adresse, aktueller Status und die zentrale Fragestellung.
+        </p>
+
+        <form
+          action="https://formspree.io/f/mvzqvggb"
+          method="POST"
+          id="kontakt-form"
+        >
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="Name" type="text" required style="text-align:left;">
+          </div>
+
+          <div class="field">
+            <label for="email">E-Mail-Adresse</label>
+            <input id="email" name="E-Mail" type="email" required style="text-align:left;">
+          </div>
+
+          <div class="field">
+            <label for="phone">Telefonnummer (optional)</label>
+            <input id="phone" name="Telefon" type="tel" style="text-align:left;">
+          </div>
+
+          <div class="field">
+            <label for="message">Nachricht</label>
+            <textarea id="message" name="Nachricht" required></textarea>
+          </div>
+
+          <button class="btn" type="submit" style="width:auto; border-radius:10px; padding:10px 14px;">Nachricht senden</button>
+
+          <p id="form-success" style="display:none; margin-top:16px;">
+            Vielen Dank für Ihre Nachricht. Ich melde mich zeitnah bei Ihnen.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <img class="footer-logo" src="/assets/Logo_Grundmann-Consulting.png" alt="Grundmann Consulting Logo">
+    <div><a href="/impressum/">Impressum</a></div>
+  </footer>
 
   <script>
     const nf2 = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -455,7 +784,6 @@
       verw: "30"
     };
 
-    // neue Defaults (konservativ/neutral; passe bei Bedarf an)
     const defaultsHalle = {
       kaufpreis: "200000",
       ek_pct: "20",
@@ -657,6 +985,35 @@
     }
 
     bind();
+
+    // Kontaktformular (Formspree) – Async Submit + Erfolgstext
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("kontakt-form");
+      const success = document.getElementById("form-success");
+      if (!form) return;
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const data = new FormData(form);
+
+        try {
+          const response = await fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (response.ok) {
+            form.reset();
+            success.style.display = "block";
+          } else {
+            alert("Beim Senden ist ein Fehler aufgetreten. Bitte erneut versuchen.");
+          }
+        } catch (error) {
+          alert("Verbindung fehlgeschlagen. Bitte später erneut versuchen.");
+        }
+      });
+    });
   </script>
 
 </body>
