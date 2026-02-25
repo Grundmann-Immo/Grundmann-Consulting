@@ -185,6 +185,13 @@
     .kpi.green{ background: rgba(34,139,34,.10); border-color: rgba(34,139,34,.22); }
     .kpi.red{ background: rgba(200,0,0,.08); border-color: rgba(200,0,0,.18); }
 
+    /* Trennlinien im Ergebnisse-Panel */
+    .kpi-divider{
+      height: 1px;
+      background: rgba(0,0,0,.10);
+      margin: 10px 0;
+    }
+
     .small{ color: var(--muted); font-size: 12px; margin: 6px 0 0; }
 
     .btnrow{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
@@ -561,14 +568,25 @@
             <div class="kpi"><div class="name">Grunderwerbsteuer</div><div class="val" id="out_nk_grest_line">0,00&nbsp;€</div></div>
             <div class="kpi"><div class="name">Makler</div><div class="val" id="out_nk_makler_line">0,00&nbsp;€</div></div>
 
+            <div class="kpi-divider"></div>
+
             <div class="kpi"><div class="name">Eigenkapital</div><div class="val" id="out_ek">0,00&nbsp;€</div></div>
+
+            <div class="kpi-divider"></div>
+
             <div class="kpi"><div class="name">Kredit</div><div class="val" id="out_kredit">0,00&nbsp;€</div></div>
             <div class="kpi"><div class="name">Rate</div><div class="val" id="out_rate">0,00&nbsp;€ / Monat</div></div>
+
+            <div class="kpi-divider"></div>
 
             <div class="kpi"><div class="name">Miete (soll)</div><div class="val" id="out_miete">0,00&nbsp;€ / Monat</div></div>
             <div class="kpi"><div class="name">Nicht umlagefähige NK</div><div class="val" id="out_nuk">0,00&nbsp;€ / Monat</div></div>
 
+            <div class="kpi-divider"></div>
+
             <div class="kpi"><div class="name">Kaufpreis je m²</div><div class="val" id="out_price_qm">—</div></div>
+
+            <div class="kpi-divider"></div>
 
             <div class="kpi" id="kpi_cashflow">
               <div class="name">Cashflow</div>
@@ -577,8 +595,6 @@
 
             <div class="kpi"><div class="name">Cashflow-Rendite (p.a.)</div><div class="val" id="out_cf_yield">—</div></div>
             <div class="kpi"><div class="name">Eigenkapitalrendite (p.a.)</div><div class="val" id="out_roe">—</div></div>
-
-            <p class="small" id="out_note">Trage Werte ein, um eine Erstabschätzung zu erhalten.</p>
 
             <div class="btnrow">
               <a class="btn" href="#kontakt">Objekt prüfen lassen</a>
