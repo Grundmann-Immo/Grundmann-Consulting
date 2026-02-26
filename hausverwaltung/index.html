@@ -248,6 +248,8 @@
       padding: 0;
       background: transparent;
     }
+
+    /* Panel-Style bleibt für später erhalten, wird aber nicht mehr genutzt */
     .pricing-panel{
       width: min(var(--max), 92vw);
       margin: 0 auto;
@@ -265,7 +267,7 @@
     }
 
     .price-table{
-      width:min(980px, 100%);
+      width: 100%; /* vorher min(980px, 100%) -> jetzt gleiche Breite wie alle anderen Bereiche */
       margin: 0 auto;
       display:grid;
       grid-template-columns: repeat(4, 1fr);
@@ -559,9 +561,9 @@
     <div class="hero-left">
       <h1>Verwalten wie ein Eigentümer - steuern wie ein Investor.</h1>
       <p>
-Der Markt ist dicht besetzt – aber in der Praxis häufig überlastet: lange Reaktionszeiten, unklare Verantwortlichkeiten und Zahlen, die erst kommen, wenn Entscheidungen längst hätten getroffen werden müssen.</p>
-Eigentümer & Investoren erwarten Verbindlichkeit, transparente Prozesse und konsequente Umsetzung.
-Ein mandatsbegrenztes, investorenorientiertes Verwaltungsmodell mit klaren Zuständigkeiten, definierten Service-Leveln und strukturiertem Reporting. Digitale Prozesse sind dabei kein Selbstzweck, sondern Infrastruktur – das Ziel ist wirtschaftliche Steuerbarkeit
+        Der Markt ist dicht besetzt – aber in der Praxis häufig überlastet: lange Reaktionszeiten, unklare Verantwortlichkeiten und Zahlen, die erst kommen, wenn Entscheidungen längst hätten getroffen werden müssen.
+        Eigentümer &amp; Investoren erwarten Verbindlichkeit, transparente Prozesse und konsequente Umsetzung.
+        Ein mandatsbegrenztes, investorenorientiertes Verwaltungsmodell mit klaren Zuständigkeiten, definierten Service-Leveln und strukturiertem Reporting. Digitale Prozesse sind dabei kein Selbstzweck, sondern Infrastruktur – das Ziel ist wirtschaftliche Steuerbarkeit
       </p>
       <div style="margin-top:10px;">
         <a class="btn" href="#kontakt">Kostenloses Erstgespräch</a>
@@ -573,7 +575,7 @@ Ein mandatsbegrenztes, investorenorientiertes Verwaltungsmodell mit klaren Zust�
   <!-- SERVICES -->
   <section class="frame-gap" id="leistungen">
     <div class="container">
-      <div class="section-title">Was Eigentümer & Investoren von einer Verwaltung erwarten dürfen</div>
+      <div class="section-title">Was Eigentümer &amp; Investoren von einer Verwaltung erwarten dürfen</div>
 
       <div class="svc-grid-3">
         <article class="svc">
@@ -611,10 +613,10 @@ Ein mandatsbegrenztes, investorenorientiertes Verwaltungsmodell mit klaren Zust�
     </div>
   </section>
 
-  <!-- PRICING -->
+  <!-- PRICING (Rahmen entfernt + Breite wie alle anderen Bereiche) -->
   <section class="frame-gap pricing" id="preise">
-    <div class="pricing-panel">
-      <h2>Leistungsmodelle</h2>
+    <div class="container">
+      <div class="section-title">Leistungsmodelle</div>
 
       <div class="price-table">
         <div class="price-col">
@@ -681,9 +683,9 @@ Ein mandatsbegrenztes, investorenorientiertes Verwaltungsmodell mit klaren Zust�
         <details open>
           <summary>Woran erkenne ich, ob „digital“ wirklich etwas bringt? <span class="chev">⌃</span></summary>
           <div class="acc-body">
-Vorgänge werden als Tickets geführt, mit klarer Zuständigkeit, Status und Fälligkeit – nicht über verstreute E-Mails.
-Status und Dokumente sind jederzeit einsehbar.
-Finanzkennzahlen kommen in einem festen Reporting-Takt, vollständig, übersichtlich und belastbar.
+            Vorgänge werden als Tickets geführt, mit klarer Zuständigkeit, Status und Fälligkeit – nicht über verstreute E-Mails.
+            Status und Dokumente sind jederzeit einsehbar.
+            Finanzkennzahlen kommen in einem festen Reporting-Takt, vollständig, übersichtlich und belastbar.
           </div>
         </details>
 
@@ -691,17 +693,17 @@ Finanzkennzahlen kommen in einem festen Reporting-Takt, vollständig, übersicht
           <summary>Welche KPIs sind für Investoren entscheidend? <span class="chev">⌃</span></summary>
           <div class="acc-body">
             Definierte Core KPIs, die Entscheidungen treiben: Cashflow (nach nicht umlagefähigen Kosten &amp; Instandhaltung), Leerstand/Mietausfall,
-            Forderungsquote, Instandhaltungsquote und CapEx Budget vs. Forecast.</p>
-Diese Kennzahlen zeigen, ob der Bestand wirtschaftlich stabil läuft, wo Liquidität gebunden ist und welche Maßnahmen priorisiert werden müssen. Entscheidend ist dabei nicht „Echtzeit um jeden Preis“, sondern ein klarer Reporting-Rhythmus mit belastbaren, nachvollziehbaren Zahlen.
+            Forderungsquote, Instandhaltungsquote und CapEx Budget vs. Forecast.
+            Diese Kennzahlen zeigen, ob der Bestand wirtschaftlich stabil läuft, wo Liquidität gebunden ist und welche Maßnahmen priorisiert werden müssen. Entscheidend ist dabei nicht „Echtzeit um jeden Preis“, sondern ein klarer Reporting-Rhythmus mit belastbaren, nachvollziehbaren Zahlen.
           </div>
         </details>
 
         <details>
           <summary>Wie verhindert man „Maßnahmenstau“ bei Reparaturen und Modernisierung? <span class="chev">⌃</span></summary>
           <div class="acc-body">
-            Maßnahmenstau entsteht, wenn Entscheidungen immer wieder vertagt werden oder unklar vorbereitet sind bzw. Projekte ohne Struktur ablaufen.</p>
-Verhindern lässt sich das durch eine klare Projektlogik: Ab einer definierten Schwelle werden mindestens drei Angebote eingeholt, eine nachvollziehbare Entscheidungsvorlage erstellt und ein verbindlicher Terminplan festgelegt. Umsetzung, Fotodokumentation und Abnahme sind Bestandteil des Prozesses – Nachträge erfolgen nur schriftlich, Zahlungen nach geprüfter Leistung.</p>
-So werden Reparaturen und Modernisierungen planbar, beschlussfähig und konsequent umgesetzt
+            Maßnahmenstau entsteht, wenn Entscheidungen immer wieder vertagt werden oder unklar vorbereitet sind bzw. Projekte ohne Struktur ablaufen.
+            Verhindern lässt sich das durch eine klare Projektlogik: Ab einer definierten Schwelle werden mindestens drei Angebote eingeholt, eine nachvollziehbare Entscheidungsvorlage erstellt und ein verbindlicher Terminplan festgelegt. Umsetzung, Fotodokumentation und Abnahme sind Bestandteil des Prozesses – Nachträge erfolgen nur schriftlich, Zahlungen nach geprüfter Leistung.
+            So werden Reparaturen und Modernisierungen planbar, beschlussfähig und konsequent umgesetzt
           </div>
         </details>
 
@@ -714,26 +716,22 @@ So werden Reparaturen und Modernisierungen planbar, beschlussfähig und konseque
       </div>
 
       <!-- KONTAKT -->
-<div class="contact-wrap" id="kontakt">
-  <div class="contact-title">Kontaktieren Sie mich</div>
+      <div class="contact-wrap" id="kontakt">
+        <div class="contact-title">Kontaktieren Sie mich</div>
 
-  <p class="contact-sub">Bitte mit kurzer Information zu:</p>
+        <p class="contact-sub">Bitte mit kurzer Information zu:</p>
 
-  <ul class="checks">
-    <li><span class="dot"></span><span>Objektart</span></li>
-    <li><span class="dot"></span><span>Stadt</span></li>
-    <li><span class="dot"></span><span>Anzahl Einheiten</span></li>
-    <li><span class="dot"></span><span>Vorstellungen</span></li>
-    <li><span class="dot"></span><span>Aktuelle Herausforderungen</span></li>
-  </ul>
-</p>
-  <p class="contact-sub">Ich melde mich mit einer klaren Einordnung.</p>
+        <ul class="checks">
+          <li><span class="dot"></span><span>Objektart</span></li>
+          <li><span class="dot"></span><span>Stadt</span></li>
+          <li><span class="dot"></span><span>Anzahl Einheiten</span></li>
+          <li><span class="dot"></span><span>Vorstellungen</span></li>
+          <li><span class="dot"></span><span>Aktuelle Herausforderungen</span></li>
+        </ul>
 
-        <form
-          action="https://formspree.io/f/mvzqvggb"
-          method="POST"
-          id="kontakt-form"
-        >
+        <p class="contact-sub">Ich melde mich mit einer klaren Einordnung.</p>
+
+        <form action="https://formspree.io/f/mvzqvggb" method="POST" id="kontakt-form">
           <div class="field">
             <label for="name">Name</label>
             <input id="name" name="Name" type="text" required>

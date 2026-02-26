@@ -35,7 +35,7 @@
       --radius: 12px;
 
       --base: 16px;
-      --gap: 72px;
+      --gap: 56px; /* vereinheitlicht: gleicher Abstand für alle Bereiche */
 
       --heroGrad: linear-gradient(90deg, rgba(16,40,33,.92) 0%, rgba(16,40,33,.75) 58%, rgba(16,40,33,.15) 100%);
 
@@ -113,7 +113,6 @@
       padding-left: 6px;
       scroll-padding-left: 12px;
 
-      /* UX: weniger “hakelig” */
       scroll-behavior: smooth;
       overscroll-behavior-x: contain;
       cursor: grab;
@@ -142,9 +141,7 @@
       white-space: nowrap;
       flex: 0 0 auto;
     }
-    .navlinks a:hover{
-      background: rgba(255,255,255,.10);
-    }
+    .navlinks a:hover{ background: rgba(255,255,255,.10); }
 
     .frame-gap{ padding: var(--gap) 0; }
 
@@ -202,11 +199,6 @@
       margin:0;
       max-width: 56ch;
       opacity:.95;
-    }
-
-    .hero-left strong{
-      color: rgba(255,255,255,.92);
-      font-weight: 700;
     }
 
     .hero-right{
@@ -279,29 +271,10 @@
     }
 
     /* ===== PRICING ===== */
-    .pricing{
-      position:relative;
-      padding: 0;
-      background: transparent;
-    }
-    .pricing-panel{
-      width: min(var(--max), 92vw);
-      margin: 0 auto;
-      background: rgba(255,255,255,.22);
-      border: 1px solid rgba(0,0,0,.10);
-      border-radius: var(--radius);
-      padding: 40px 22px;
-    }
-    .pricing-panel h2{
-      text-align:center;
-      font-size: 18px;
-      font-weight: 700;
-      margin: 0 0 22px;
-      letter-spacing: .2px;
-    }
+    .pricing{ background: transparent; }
 
     .price-table{
-      width:min(980px, 100%);
+      width: 100%;
       margin: 0 auto;
       display:grid;
       grid-template-columns: repeat(4, 1fr);
@@ -348,27 +321,6 @@
       text-align: center;
     }
 
-    .acc-checklist{
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .acc-checklist li{
-      position: relative;
-      padding-left: 28px;
-      margin: 0 0 10px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-    .acc-checklist li::before{
-      content: "✓";
-      position: absolute;
-      left: 0;
-      top: 0.05em;
-      font-weight: 700;
-      color: rgba(0,0,0,.70);
-    }
-
     .btn{
       display:inline-flex;
       align-items:center;
@@ -386,38 +338,6 @@
     .btn:hover{
       filter: brightness(1.05);
       transform: translateY(-1px);
-    }
-
-    .footerbar{
-      margin-top: 72px;
-      padding-top: 2px;
-      display:flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      width: min(var(--max), 92vw);
-      margin-left: auto;
-      margin-right: auto;
-      border-top: 1px solid rgba(0,0,0,.25);
-    }
-
-    .footer-logo{
-      height: 50px;
-      width: auto;
-      display:block;
-      margin: 0;
-      opacity: .85;
-    }
-
-    .footerbar a{
-      color: #111;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.7em;
-      margin: 0;
-    }
-    .footerbar a:hover{
-      text-decoration: underline;
     }
 
     .col-cta{
@@ -467,6 +387,31 @@
       transform: rotate(-45deg);
     }
 
+    /* CTA-Panel + Ghost Button */
+    .panel{
+      width: 100%;
+      max-width: 100%;
+      background: rgba(255,255,255,.22);
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: var(--radius);
+      padding: 22px 22px;
+      margin: 0 auto;
+    }
+    .muted{ color: var(--muted); }
+    .panel p{ margin: 0 0 10px; }
+    .panel p:last-child{ margin-bottom: 0; }
+
+    .btn.ghost{
+      background: transparent;
+      color: #102821;
+      border: 1px solid rgba(0,0,0,.22);
+    }
+    .btn.ghost:hover{
+      filter: none;
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.18);
+    }
+
     /* ===== INFO + KONTAKT ===== */
     .info-title{
       font-size: 28px;
@@ -506,15 +451,11 @@
       max-width: 92ch;
     }
 
-    .contact-wrap{
-      padding-top: 48px;
-    }
     .contact-title{
       font-size: 24px;
       font-weight: 700;
       margin: 0 0 14px;
     }
-
     .contact-sub{
       margin: 0 0 22px;
       color: var(--muted);
@@ -526,30 +467,19 @@
       margin: 12px 0 18px;
       font-weight: 600;
     }
-
     .contact-item{
       display:flex;
       align-items:center;
       gap: 8px;
     }
-
     .contact-item a{
       text-decoration:none;
       color: var(--text);
     }
+    .contact-item a:hover{ text-decoration:underline; }
 
-    .contact-item a:hover{
-      text-decoration:underline;
-    }
-
-    .icon{
-      font-size: 16px;
-      opacity:.8;
-    }
-    .icon svg{
-      display:block;
-      color:#000;
-    }
+    .icon{ font-size: 16px; opacity:.8; }
+    .icon svg{ display:block; color:#000; }
 
     .row2{
       display:grid;
@@ -573,6 +503,34 @@
     }
     textarea{ min-height: 160px; resize: vertical; }
     .field{ margin-bottom: 14px; }
+
+    .footerbar{
+      margin-top: 72px;
+      padding-top: 2px;
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      width: min(var(--max), 92vw);
+      margin-left: auto;
+      margin-right: auto;
+      border-top: 1px solid rgba(0,0,0,.25);
+    }
+    .footer-logo{
+      height: 50px;
+      width: auto;
+      display:block;
+      margin: 0;
+      opacity: .85;
+    }
+    .footerbar a{
+      color: #111;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.7em;
+      margin: 0;
+    }
+    .footerbar a:hover{ text-decoration: underline; }
 
     /* Responsive */
     @media (max-width: 980px){
@@ -599,7 +557,7 @@
       .topnav .container{ gap: 10px; }
       .logo-img{ height: 36px; }
       .navlinks a{ padding: 8px 8px; }
-      .navscroll{ cursor: default; } /* auf Mobile lieber normales Scroll */
+      .navscroll{ cursor: default; }
     }
   </style>
 </head>
@@ -632,7 +590,7 @@
     </div>
   </nav>
 
-  <!-- HERO (integriert, ohne img) -->
+  <!-- HERO -->
   <header class="hero-frame" id="top">
     <div class="hero-left">
       <h1>Objektoptimierung und strategische Immobilienberatung für Mehrfamilienhäuser &amp; Eigentumswohnungen</h1>
@@ -694,8 +652,8 @@ und Entscheidungen zum optimalen Verkaufszeitpunkt fundiert vorbereitet.</p>
 
   <!-- PRICING -->
   <section class="frame-gap pricing" id="preise">
-    <div class="pricing-panel">
-      <h2>Beratungsleistungen</h2>
+    <div class="container">
+      <div class="section-title">Beratungsleistungen</div>
 
       <div class="price-table">
         <div class="price-col">
@@ -761,7 +719,32 @@ und Entscheidungen zum optimalen Verkaufszeitpunkt fundiert vorbereitet.</p>
     </div>
   </section>
 
-  <!-- ERFAHRUNG / INFO -->
+  <!-- CTA -->
+  <section class="frame-gap" id="cashflow-cta">
+    <div class="container">
+      <div class="section-title">Du willst ein Objekt schnell sauber einordnen?</div>
+
+      <div class="panel">
+        <p class="muted">
+          Wenn du neue Objekte prüfen willst, deine Prozesse professionalisieren möchtest, eine eigene Verwaltung aufbauen willst oder perspektivisch einen Verkauf planst, brauchst du vor allem eine saubere Entscheidungsbasis.
+        </p>
+        <p class="muted">
+          Im kostenlosen Erstgespräch analysieren wir deine aktuelle Situation sachlich, strategisch und ohne Verkaufsdruck.
+        </p>
+        <p class="muted">
+          Du bekommst eine ehrliche, strukturierte Einschätzung aus Investorensicht – mit klaren nächsten Schritten.
+          Klarheit, die dir wirklich weiterhilft - unabhängig davon, ob wir zusammenarbeiten oder nicht.
+        </p>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn" href="/cashflow-rechner/">Cashflow berechnen</a>
+          <a class="btn ghost" href="#kontakt">Kostenloses Erstgespräch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ERFAHRUNG / INFO (ohne Kontakt drin, damit Abstände wie bei allen Bereichen sind) -->
   <section class="frame-gap" id="erfahrung">
     <div class="container">
       <div class="info-title">Heben Sie das Potenzial Ihrer Immobilie</div>
@@ -815,65 +798,67 @@ und Entscheidungen zum optimalen Verkaufszeitpunkt fundiert vorbereitet.</p>
           </div>
         </details>
       </div>
+    </div>
+  </section>
 
-      <!-- KONTAKT -->
-      <div class="contact-wrap" id="kontakt">
-        <div class="contact-title">Kontaktieren Sie mich</div>
-        <div class="contact-direct">
-          <div class="contact-item">
-            <span class="icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M6.6 10.8a15.05 15.05 0 006.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.3
-                1.3.4 2.7.6 4.1.6.7 0 1.3.6 1.3 1.3V21c0 .7-.6 1.3-1.3 1.3
-                C10.4 22.3 1.7 13.6 1.7 3.3 1.7 2.6 2.3 2 3 2h3.3
-                c.7 0 1.3.6 1.3 1.3 0 1.4.2 2.8.6 4.1.1.4 0 .9-.3 1.2l-2.3 2.2z"/>
-              </svg>
-            </span>
-            <a href="tel:+491607738676">+49 160 7738676</a>
-          </div>
+  <!-- KONTAKT (eigener Bereich mit gleichem Rahmen-Abstand wie alle anderen) -->
+  <section class="frame-gap" id="kontakt">
+    <div class="container">
+      <div class="contact-title">Kontaktieren Sie mich</div>
 
-          <div class="contact-item">
-            <span class="icon">✉</span>
-            <a href="mailto:grundmann.immoplus@gmail.com">grundmann.immoplus@gmail.com</a>
-          </div>
+      <div class="contact-direct">
+        <div class="contact-item">
+          <span class="icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6.6 10.8a15.05 15.05 0 006.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.3
+              1.3.4 2.7.6 4.1.6.7 0 1.3.6 1.3 1.3V21c0 .7-.6 1.3-1.3 1.3
+              C10.4 22.3 1.7 13.6 1.7 3.3 1.7 2.6 2.3 2 3 2h3.3
+              c.7 0 1.3.6 1.3 1.3 0 1.4.2 2.8.6 4.1.1.4 0 .9-.3 1.2l-2.3 2.2z"/>
+            </svg>
+          </span>
+          <a href="tel:+491607738676">+49 160 7738676</a>
         </div>
 
-        <p class="contact-sub">Eine kurze Beschreibung Ihrer Immobilie und Anliegens genügt.</p>
-
-        <form action="https://formspree.io/f/mvzqvggb" method="POST" id="kontakt-form">
-          <div class="field">
-            <label for="name">Name</label>
-            <input id="name" name="Name" type="text" required>
-          </div>
-
-          <div class="field">
-            <label for="email">E-Mail-Adresse</label>
-            <input id="email" name="E-Mail" type="email" required>
-          </div>
-
-          <div class="field">
-            <label for="phone">Telefonnummer (optional)</label>
-            <input id="phone" name="Telefon" type="tel">
-          </div>
-
-          <div class="field">
-            <label for="message">Nachricht</label>
-            <textarea id="message" name="Nachricht" required></textarea>
-          </div>
-
-          <button class="btn" type="submit">Nachricht senden</button>
-
-          <p id="form-success" style="display:none; margin-top:16px;">
-            Vielen Dank für Ihre Nachricht. Ich melde mich zeitnah bei Ihnen.
-          </p>
-        </form>
+        <div class="contact-item">
+          <span class="icon">✉</span>
+          <a href="mailto:grundmann.immoplus@gmail.com">grundmann.immoplus@gmail.com</a>
+        </div>
       </div>
+
+      <p class="contact-sub">Eine kurze Beschreibung Ihrer Immobilie und Anliegens genügt.</p>
+
+      <form action="https://formspree.io/f/mvzqvggb" method="POST" id="kontakt-form">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="Name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="email">E-Mail-Adresse</label>
+          <input id="email" name="E-Mail" type="email" required>
+        </div>
+
+        <div class="field">
+          <label for="phone">Telefonnummer (optional)</label>
+          <input id="phone" name="Telefon" type="tel">
+        </div>
+
+        <div class="field">
+          <label for="message">Nachricht</label>
+          <textarea id="message" name="Nachricht" required></textarea>
+        </div>
+
+        <button class="btn" type="submit">Nachricht senden</button>
+
+        <p id="form-success" style="display:none; margin-top:16px;">
+          Vielen Dank für Ihre Nachricht. Ich melde mich zeitnah bei Ihnen.
+        </p>
+      </form>
 
       <div class="footerbar">
         <img src="assets/Logo_Grundmann-Consulting.png" alt="Grundmann Consulting Logo" class="footer-logo">
         <a href="/impressum/">Impressum</a>
       </div>
-
     </div>
   </section>
 
@@ -884,25 +869,18 @@ und Entscheidungen zum optimalen Verkaufszeitpunkt fundiert vorbereitet.</p>
       if (!scroller) return;
 
       scroller.addEventListener("wheel", function (e) {
-        // Wenn Shift gedrückt ist, lässt Browser eh horizontal scrollen -> nichts ändern
         if (e.shiftKey) return;
 
-        // Nur wenn wirklich horizontal gescrollt werden kann
         const maxScrollLeft = scroller.scrollWidth - scroller.clientWidth;
         if (maxScrollLeft <= 0) return;
 
-        // Vertikales Mausrad in horizontale Bewegung übersetzen
-        // deltaY ist Standard bei Maus (hoch/runter)
         const delta = e.deltaY;
-
-        // preventDefault nur, wenn wir wirklich horizontal schieben wollen,
-        // damit die Seite nicht ungewollt vertikal scrollt während Maus über Nav ist.
         e.preventDefault();
         scroller.scrollLeft += delta;
       }, { passive: false });
     })();
 
-    // 2) Optional: Click-&-Drag (Desktop) für “greifen und ziehen”
+    // 2) Optional: Click-&-Drag (Desktop)
     (function () {
       const scroller = document.getElementById("navscroll");
       if (!scroller) return;
@@ -912,7 +890,6 @@ und Entscheidungen zum optimalen Verkaufszeitpunkt fundiert vorbereitet.</p>
       let scrollLeft = 0;
 
       scroller.addEventListener("mousedown", (e) => {
-        // Nur linke Maustaste
         if (e.button !== 0) return;
         isDown = true;
         startX = e.pageX;

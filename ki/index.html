@@ -132,81 +132,77 @@
     /* ===== Abstände zwischen Frames ===== */
     .frame-gap{ padding: var(--gap) 0; }
 
-    /* ===== HERO (integriertes Foto mit Grün-Overlay) ===== */
-/* ===== HERO: EIN Bild + Overlay links (ohne Blur) ===== */
-.hero-frame{
-  width: min(var(--max), 92vw);
-  margin: var(--gap) auto 0;
-  border-radius: var(--radius);
-  overflow:hidden;
+    /* ===== HERO: EIN Bild + Overlay links (ohne Blur) ===== */
+    .hero-frame{
+      width: min(var(--max), 92vw);
+      margin: var(--gap) auto 0;
+      border-radius: var(--radius);
+      overflow:hidden;
 
-  display:grid;
-  grid-template-columns: 1.05fr 1.25fr;
-  min-height: 560px;
+      display:grid;
+      grid-template-columns: 1.05fr 1.25fr;
+      min-height: 560px;
 
-  position: relative;
+      position: relative;
 
-  /* EIN Background fürs ganze Hero */
-  background-image: url("/assets/KI_Wohngebäude.png");
-  background-size: cover;
-  background-position: right 40%;
-}
+      /* EIN Background fürs ganze Hero */
+      background-image: url("/assets/KI_Wohngebäude.png");
+      background-size: cover;
+      background-position: right 40%;
+    }
 
-/* Overlay links, läuft weich nach rechts aus */
-.hero-frame::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
+    /* Overlay links, läuft weich nach rechts aus */
+    .hero-frame::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
 
-  /* nur links stark, nach rechts transparent */
-  background: linear-gradient(
-    90deg,
-    rgba(32,64,36,.92) 0%,
-    rgba(32,64,36,.86) 42%,
-    rgba(32,64,36,.45) 60%,
-    rgba(32,64,36,0.00) 72%
-  );
-}
+      /* nur links stark, nach rechts transparent */
+      background: linear-gradient(
+        90deg,
+        rgba(32,64,36,.92) 0%,
+        rgba(32,64,36,.86) 42%,
+        rgba(32,64,36,.45) 60%,
+        rgba(32,64,36,0.00) 72%
+      );
+    }
 
-.hero-left{
-  position: relative;      /* damit Text über dem Overlay liegt */
-  z-index: 1;
-  padding: 54px 52px;
-  color: #fff;
+    .hero-left{
+      position: relative;      /* damit Text über dem Overlay liegt */
+      z-index: 1;
+      padding: 54px 52px;
+      color: #fff;
 
-  /* WICHTIG: kein eigener Hintergrund mehr */
-  background: transparent;
+      background: transparent;
 
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap: 14px;
-}
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap: 14px;
+    }
 
-.hero-left h1{
-  font-size: 26px;
-  font-weight: 700;
-}
+    .hero-left h1{
+      font-size: 26px;
+      font-weight: 700;
+    }
 
-.hero-left p{
-  margin:0;
-  max-width: 56ch;
-  opacity:.95;
-}
+    .hero-left p{
+      margin:0;
+      max-width: 56ch;
+      opacity:.95;
+    }
 
-/* kein Gelb */
-.hero-left strong{
-  color: rgba(255,255,255,.92);
-  font-weight: 700;
-}
+    .hero-left strong{
+      color: rgba(255,255,255,.92);
+      font-weight: 700;
+    }
 
-/* Rechte Spalte bleibt nur Layout, KEIN Bild/Keil/Overlay */
-.hero-right{
-  position: relative;
-  z-index: 1;
-  background: transparent;
-}
+    .hero-right{
+      position: relative;
+      z-index: 1;
+      background: transparent;
+    }
 
     /* ===== SERVICES ===== */
     .section-title{
@@ -231,7 +227,6 @@
       margin-top: 44px;
     }
 
-    /* Karten: gleiche Bildgrößen + gleiche Textstart-Höhe */
     .svc{
       text-align:center;
       display:flex;
@@ -240,7 +235,7 @@
     }
     .svc .img{
       width:100%;
-      height: 260px;                 /* alle 5 Fotos exakt gleich groß */
+      height: 260px;
       border-radius: var(--radius);
       overflow:hidden;
       background:#ddd;
@@ -256,10 +251,10 @@
       font-weight: 700;
       margin: 14px 0 8px;
 
-      height: 56px;                 /* feste Höhe für ALLE Karten */
+      height: 56px;
       display: flex;
-      align-items: center;          /* vertikal zentriert */
-      justify-content: center;      /* horizontal zentriert */
+      align-items: center;
+      justify-content: center;
 
       line-height: 1.25;
       padding: 0 8px;
@@ -272,12 +267,14 @@
       padding: 0 10px;
     }
 
-    /* ===== PRICING (ohne schwarzen Hintergrund) ===== */
+    /* ===== PRICING (Rahmen entfernt + Breite an Container angepasst) ===== */
     .pricing{
       position:relative;
       padding: 0;
       background: transparent;
     }
+
+    /* pricing-panel bleibt bewusst ungenutzt (kann später gelöscht werden) */
     .pricing-panel{
       width: min(var(--max), 92vw);
       margin: 0 auto;
@@ -286,16 +283,9 @@
       border-radius: var(--radius);
       padding: 40px 22px;
     }
-    .pricing-panel h2{
-      text-align:center;
-      font-size: 18px;
-      font-weight: 700;
-      margin: 0 0 22px;
-      letter-spacing: .2px;
-    }
 
     .price-table{
-      width:min(980px, 100%);
+      width: 100%;                 /* vorher min(980px, 100%) -> jetzt gleiche Breite wie andere Frames */
       margin: 0 auto;
       display:grid;
       grid-template-columns: repeat(4, 1fr);
@@ -513,37 +503,39 @@
       margin: 0 0 22px;
       color: var(--muted);
     }
-.contact-direct{
-  display:flex;
-  gap: 32px;
-  align-items:center;
-  margin: 12px 0 18px;
-  font-weight: 600;
-}
 
-.contact-item{
-  display:flex;
-  align-items:center;
-  gap: 8px;
-}
+    .contact-direct{
+      display:flex;
+      gap: 32px;
+      align-items:center;
+      margin: 12px 0 18px;
+      font-weight: 600;
+    }
 
-.contact-item a{
-  text-decoration:none;
-  color: var(--text);
-}
+    .contact-item{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
 
-.contact-item a:hover{
-  text-decoration:underline;
-}
+    .contact-item a{
+      text-decoration:none;
+      color: var(--text);
+    }
 
-.icon{
-  font-size: 16px;
-  opacity:.8;
-}
-.icon svg{
-  display:block;
-  color:#000;
-}
+    .contact-item a:hover{
+      text-decoration:underline;
+    }
+
+    .icon{
+      font-size: 16px;
+      opacity:.8;
+    }
+    .icon svg{
+      display:block;
+      color:#000;
+    }
+
     .contact-grid{
       display:grid;
       grid-template-columns: 1fr;
@@ -584,9 +576,8 @@
       .hero-frame{ grid-template-columns: 1fr; }
       .hero-left{ padding: 38px 22px; }
       .hero-right{ height: 320px; }
- .hero-frame{
-    background-position: center 30%;
-  }
+      .hero-frame{ background-position: center 30%; }
+
       .svc-grid-3{ grid-template-columns: 1fr; }
       .svc-grid-2{ grid-template-columns: 1fr; }
 
@@ -604,12 +595,8 @@
 
     /* Mobile Menü: horizontal scroll (Android + iPhone sicher) */
     @media (max-width: 700px){
-      .topnav .container{
-        gap: 10px;
-      }
-      .logo-img{
-        height: 36px;
-      }
+      .topnav .container{ gap: 10px; }
+      .logo-img{ height: 36px; }
       .navlinks{
         min-width: 0;
         flex: 1;
@@ -626,12 +613,8 @@
         scrollbar-width: none;
         touch-action: pan-x;
       }
-      .navlinks::-webkit-scrollbar{
-        display: none;
-      }
-      .navlinks a{
-        flex: 0 0 auto;
-      }
+      .navlinks::-webkit-scrollbar{ display: none; }
+      .navlinks a{ flex: 0 0 auto; }
     }
   </style>
 </head>
@@ -660,7 +643,7 @@
     </div>
   </nav>
 
-  <!-- HERO (integriert, ohne img) -->
+  <!-- HERO -->
   <header class="hero-frame" id="top">
     <div class="hero-left">
       <h1>KI-gestützte Objektoptimierung &amp; Investoren-Workflows</h1>
@@ -668,9 +651,10 @@
         Immobilieninvestoren erwarten von KI nicht mehr "Tools“, sondern bessere Abläufe: weniger operative Reibung, schnellere Entscheidungen und strukturierte Umsetzung.
         KI soll dort unterstützen, wo Prozesse sauber strukturiert werden können und bewusst dort nicht, wo sie keinen Mehrwert bringt.
         <br><br>
-        Heute ist bereits realistisch umsetzbar: Akquise effizienter (Suchaufträge + Vorqualifizierung), Due Diligence schneller (Dokumenten- & Exposé-Vorprüfung, Datenräume),
-       Bestand entlasten (Telefon, Inbox & Tickets) und Verkauf professionalisieren (Transaktions-Readiness, Visuals).
+        Heute ist bereits realistisch umsetzbar: Akquise effizienter (Suchaufträge + Vorqualifizierung), Due Diligence schneller (Dokumenten- &amp; Exposé-Vorprüfung, Datenräume),
+        Bestand entlasten (Telefon, Inbox &amp; Tickets) und Verkauf professionalisieren (Transaktions-Readiness, Visuals).
         Grenzen bleiben: Datenqualität, Nachweisbarkeit, DSGVO.
+      </p>
     </div>
     <div class="hero-right" aria-label="Mehrfamilienhaus in Leipzig, Dresden und Halle – Straßenansicht einer Bestandsimmobilie"></div>
   </header>
@@ -687,7 +671,7 @@
           <p>
             Dealflow strukturieren statt Inserate manuell suchen: Suchaufträge/Alerts (z.&nbsp;B. ImmoScout24, Immowelt, Kleinanzeigen) plus KI-gestützte
             Vorqualifizierung und standardisierte Rückfragen.
-        </p>
+          </p>
         </article>
 
         <article class="svc">
@@ -731,10 +715,10 @@
     </div>
   </section>
 
-  <!-- PRICING (hell, ohne schwarzen Hintergrund) -->
+  <!-- PRICING (Rahmen entfernt + Breite wie alle anderen Bereiche) -->
   <section class="frame-gap pricing" id="preise">
-    <div class="pricing-panel">
-      <h2>Beratungsleistungen</h2>
+    <div class="container">
+      <div class="section-title">Beratungsleistungen</div>
 
       <div class="price-table">
         <div class="price-col">
@@ -815,10 +799,8 @@
               <li><strong>Akquise:</strong> schneller reagieren, Deals vorqualifizieren, Standardfragen automatisieren (z.&nbsp;B. Suchaufträge/Alerts + KI-Triage).</li>
               <li><strong>Prüfung:</strong> Exposés und Unterlagen effizient auswerten; KI ist stark bei repetitiver Arbeit.</li>
               <li><strong>Bestand:</strong> Telefon/Inbox entlasten, Vorgänge schneller verstehen und bearbeiten.</li>
-              <li><strong>Exit:</strong> Transaktions-Readiness, Datenräume/Visuals, weniger Rückfragen. </li>
+              <li><strong>Exit:</strong> Transaktions-Readiness, Datenräume/Visuals, weniger Rückfragen.</li>
             </ul>
-
-
           </div>
         </details>
 
@@ -828,15 +810,15 @@
             <p><strong>Heute möglich:</strong></p>
             <ul class="acc-checklist">
               <li>Dealflow per Suchauftrag/Benachrichtigung (ImmoScout24/Immowelt/Kleinanzeigen).</li>
-              <li>Exposé-Parsing &amp; Erst-Scoring („Triage“) – sinnvoll v.&nbsp;a. bei repetitiven Aufgaben.</a></li>
+              <li>Exposé-Parsing &amp; Erst-Scoring („Triage“) – sinnvoll v.&nbsp;a. bei repetitiven Aufgaben.</li>
               <li>Standardisierte Rückfragen &amp; strukturierte Datenerfassung (Mieten, nicht umlagefähige Kosten, Capex, Fristen).</li>
             </ul>
 
             <p><strong>Praktische Benefits:</strong> weniger Zeit auf unpassenden Deals; schnellere Erstreaktion; sauberere Datengrundlage für Cashflow/Bank/Verhandlung.</p>
-
             <p><strong>Limitierungen/Risiken:</strong> KI kann falsche Annahmen treffen (z.&nbsp;B. lokale Zuordnung), Daten fehlen häufig; daher: menschliche Prüfung und klare Templates.</p>
 
-            <p><strong>Entwicklung 1–3 Jahre:</strong> mehr „Agenten“-Workflows (mehrstufig: Deal → Dokumente → Rückfragen → Decision Memo). </p><strong>Trends 3–7 Jahre:</strong> stärkere Integration in Plattformen, aber weiterhin hoher Wert des Netzwerks/Off-Market und menschlicher Verhandlung.</p>
+            <p><strong>Entwicklung 1–3 Jahre:</strong> mehr „Agenten“-Workflows (mehrstufig: Deal → Dokumente → Rückfragen → Decision Memo).</p>
+            <p><strong>Trends 3–7 Jahre:</strong> stärkere Integration in Plattformen, aber weiterhin hoher Wert des Netzwerks/Off-Market und menschlicher Verhandlung.</p>
           </div>
         </details>
 
@@ -852,9 +834,7 @@
             </ul>
 
             <p><strong>Praktische Benefits:</strong> weniger manuelles Lesen/Sortieren, schnellere „Red Flags“, bessere Nachvollziehbarkeit bei Szenarien (Capex/Mieten/Finanzierung).</p>
-
             <p><strong>Limitierungen:</strong> Wertindikationen funktionieren besser bei Standardobjekten; Sonderfälle brauchen Expertenprüfung. Außerdem: Ergebnisqualität hängt stark von Datenqualität und Dokumentenvolumen ab.</p>
-
             <p><strong>Recht/Haftung:</strong> KI-Ausgaben sind zu prüfen; keine automatisierte Letztentscheidung und transparente Dokumentation sind zentrale Leitplanken.</p>
           </div>
         </details>
@@ -870,15 +850,15 @@
             </ul>
 
             <p><strong>Praktische Benefits:</strong> weniger Telefonstress, bessere Erreichbarkeit, schnellere Erstreaktion, konsistentere Dokumentation (Tickets). Das ist oft der stärkste ROI im Bestand.</p>
-
             <p><strong>Limitierungen/Risiken:</strong> hohe Sensibilität personenbezogener Daten (Mieter, Eigentümer, Abrechnungen). Erfordert klare interne Regeln, Datensparsamkeit und Ergebnisprüfung.</p>
 
-            <p><strong>Entwicklung 1–3 Jahre:</strong> stärker „embedded“ KI in Hausverwaltungssoftware (nicht als extra Tool).</p> <strong>Trends 3–7 Jahre:</strong> mehr End-to-End-Automation (Meldung → Dienstleister → Abschluss), abhängig von Schnittstellen/Standards.</p>
+            <p><strong>Entwicklung 1–3 Jahre:</strong> stärker „embedded“ KI in Hausverwaltungssoftware (nicht als extra Tool).</p>
+            <p><strong>Trends 3–7 Jahre:</strong> mehr End-to-End-Automation (Meldung → Dienstleister → Abschluss), abhängig von Schnittstellen/Standards.</p>
           </div>
         </details>
 
         <details>
-          <summary>Exit &amp; Verkauf<span class="chev">⌃</span></summary>
+          <summary>Exit &amp; Verkauf <span class="chev">⌃</span></summary>
           <div class="acc-body">
             <p><strong>Heute möglich:</strong></p>
             <ul class="acc-checklist">
@@ -887,13 +867,12 @@
             </ul>
 
             <p><strong>Nutzen:</strong> bessere Präsentation, weniger Rückfragen, schnellere Transaktionsfähigkeit (DD-ready).</p>
-
             <p><strong>Risiken:</strong> KI-generierte Inhalte können irreführend wirken. Der EU AI Act enthält Transparenzanforderungen/Labeling (Zeitplan &amp; Leitlinien).</p>
           </div>
         </details>
 
         <details>
-          <summary>Recht &amp; Ethik: DSGVO, Art. 22, AGG, AI Act<span class="chev">⌃</span></summary>
+          <summary>Recht &amp; Ethik: DSGVO, Art. 22, AGG, AI Act <span class="chev">⌃</span></summary>
           <div class="acc-body">
             <p>
               KI ist kein rechtsfreier Raum. Gerade in Vermietungs-/Verwaltungsprozessen sind automatisierte Entscheidungen und Diskriminierungsrisiken zentral.
@@ -910,78 +889,70 @@
         </details>
 
         <details>
-          <summary>MVPs &amp; Pilotprojekte<span class="chev">⌃</span></summary>
-<div class="acc-body">
-  <p><strong>Empfohlene MVPs:</strong></p>
+          <summary>MVPs &amp; Pilotprojekte <span class="chev">⌃</span></summary>
+          <div class="acc-body">
+            <p><strong>Empfohlene MVPs:</strong></p>
 
-  <ul class="acc-checklist">
-    <li>
-      <strong>MVP 1 (Woche 1-3):</strong>
-      Maklerangebote und Suchaufträge werden automatisch ausgelesen, strukturiert und bewertet.
-      Ergebnis: Deal-Score + standardisierter Rückfragenkatalog.
-      <div class="mvp-sub">→ Schnellere Vorauswahl, klare Entscheidungsbasis.</div>
-    </li>
+            <ul class="acc-checklist">
+              <li>
+                <strong>MVP 1 (Woche 1-3):</strong>
+                Maklerangebote und Suchaufträge werden automatisch ausgelesen, strukturiert und bewertet.
+                Ergebnis: Deal-Score + standardisierter Rückfragenkatalog.
+              </li>
 
-    <li>
-      <strong>MVP 2 (Woche 4-6):</strong>
-      DD-Checkliste + Quellenbezug (RAG).
-      Mietverträge, Protokolle, Abrechnungen etc. werden zentral analysierbar.
-      Antworten erfolgen ausschließlich mit Originalquelle.
-      <div class="mvp-sub">→ Halbierte Prüfzeit, saubere Dokumentation.</div>
-    </li>
+              <li>
+                <strong>MVP 2 (Woche 4-6):</strong>
+                DD-Checkliste + Quellenbezug (RAG).
+                Mietverträge, Protokolle, Abrechnungen etc. werden zentral analysierbar.
+                Antworten erfolgen ausschließlich mit Originalquelle.
+              </li>
 
-    <li>
-      <strong>MVP 3 (Woche 7-9):</strong>
-      Bestands-Frontdoor.
-      Telefon, WhatsApp und E-Mail laufen in ein Ticketsystem mit Priorisierung.
-      <div class="mvp-sub">→ Struktur im Bestand, Grundlage für eigene Verwaltung.</div>
-    </li>
+              <li>
+                <strong>MVP 3 (Woche 7-9):</strong>
+                Bestands-Frontdoor.
+                Telefon, WhatsApp und E-Mail laufen in ein Ticketsystem mit Priorisierung.
+              </li>
 
-    <li>
-      <strong>MVP 4 (Woche 10-12):</strong>
-      Exit-Readiness.
-      Automatisch strukturierter Datenraum mit Index und Q&A.
-      <div class="mvp-sub">→ Jederzeit verkaufsfähig, schnellere Käufer-DD, bessere Verhandlungsposition.</div>
-    </li>
-  </ul>
-</div>
+              <li>
+                <strong>MVP 4 (Woche 10-12):</strong>
+                Exit-Readiness.
+                Automatisch strukturierter Datenraum mit Index und Q&amp;A.
+              </li>
+            </ul>
+          </div>
         </details>
 
-           </div>
+      </div>
 
       <!-- KONTAKT -->
       <div class="contact-wrap" id="kontakt">
         <div class="contact-title">Kontaktieren Sie mich</div>
-<div class="contact-direct">
-  <div class="contact-item">
-    <span class="icon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M6.6 10.8a15.05 15.05 0 006.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.3
-    1.3.4 2.7.6 4.1.6.7 0 1.3.6 1.3 1.3V21c0 .7-.6 1.3-1.3 1.3
-    C10.4 22.3 1.7 13.6 1.7 3.3 1.7 2.6 2.3 2 3 2h3.3
-    c.7 0 1.3.6 1.3 1.3 0 1.4.2 2.8.6 4.1.1.4 0 .9-.3 1.2l-2.3 2.2z"/>
-  </svg>
-</span>
-    <a href="tel:+491607738676">+49 160 7738676</a>
-  </div>
 
-  <div class="contact-item">
-    <span class="icon">✉</span>
-    <a href="mailto:grundmann.immoplus@gmail.com">
-      grundmann.immoplus@gmail.com
-    </a>
-  </div>
-</div>
+        <div class="contact-direct">
+          <div class="contact-item">
+            <span class="icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.6 10.8a15.05 15.05 0 006.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.3
+                1.3.4 2.7.6 4.1.6.7 0 1.3.6 1.3 1.3V21c0 .7-.6 1.3-1.3 1.3
+                C10.4 22.3 1.7 13.6 1.7 3.3 1.7 2.6 2.3 2 3 2h3.3
+                c.7 0 1.3.6 1.3 1.3 0 1.4.2 2.8.6 4.1.1.4 0 .9-.3 1.2l-2.3 2.2z"/>
+              </svg>
+            </span>
+            <a href="tel:+491607738676">+49 160 7738676</a>
+          </div>
+
+          <div class="contact-item">
+            <span class="icon">✉</span>
+            <a href="mailto:grundmann.immoplus@gmail.com">grundmann.immoplus@gmail.com</a>
+          </div>
+        </div>
+
         <p class="contact-sub">
           Eine kurze Beschreibung genügt: Portfolio/Standort, Ziel (Akquise, DD, Bestand, Exit) und wo heute der größte Engpass sitzt.
           Ich antworte mit einem konkreten MVP-/Pilotvorschlag inkl. Datenbedarf, Tool-Optionen und Governance.
         </p>
 
-        <form
-          action="https://formspree.io/f/mvzqvggb"
-          method="POST"
-          id="kontakt-form"
-        >
+        <form action="https://formspree.io/f/mvzqvggb" method="POST" id="kontakt-form">
           <div class="field">
             <label for="name">Name</label>
             <input id="name" name="Name" type="text" required>
@@ -1004,13 +975,13 @@
 
           <button class="btn" type="submit">Nachricht senden</button>
 
-          <!-- Erfolgsmeldung -->
           <p id="form-success" style="display:none; margin-top:16px;">
             Vielen Dank für Ihre Nachricht. Ich melde mich zeitnah bei Ihnen.
           </p>
 
-          <p class="smallnote" style="margin-top:10px;">
+          <p class="smallnote">
             Datenschutz-Hinweis: Bitte keine sensiblen personenbezogenen Daten (z.&nbsp;B. Ausweise, Gesundheitsdaten) in das Formular einfügen.
+          </p>
         </form>
       </div>
 

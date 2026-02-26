@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- SEO: klarer, keyword-fokussierter Title -->
+  <title>Makler Halle, Leipzig, Dresden | Provision, Qualität, Off-Market & Investor-Checkliste</title>
+
+  <!-- SEO: harte, präzise Description (ohne Marketing) -->
+  <meta name="description" content="Maklervergleich Halle, Leipzig, Dresden: Provisionen, Angebotsumfang, Marktliquidität, Qualitätssignale, Off-Market-Zugang. Checkliste für Investoren + effiziente Zusammenarbeit & Alternativen zum Makler." />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://grundmannconsulting.de/makler-halle-leipzig-dresden/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Makler Halle, Leipzig, Dresden | Provision, Qualität, Off-Market & Investor-Checkliste" />
+  <meta property="og:description" content="Provisionen, Angebotsumfang, Qualität, Off-Market, Schmerzpunkte – und wie Investoren Makler richtig steuern." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://grundmannconsulting.de/makler-halle-leipzig-dresden/" />
+  <meta property="og:image" content="https://grundmannconsulting.de/assets/Wohngebäude.png" />
+
+  <!-- Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f3efe7;
+      --text:#111;
+      --muted:rgba(0,0,0,.72);
+      --line:rgba(0,0,0,.18);
+      --radius:12px;
+      --max:1160px;
+      --base:16px;
+      --gap:32px;
+      --heroGrad:linear-gradient(90deg, rgba(16,40,33,.92) 0%, rgba(16,40,33,.75) 58%, rgba(16,40,33,.15) 100%);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      font-size:var(--base);
+      line-height:1.65;
+    }
+    p, li, label, input, textarea, button, a, summary, small { font-size: var(--base); }
+    h1,h2,h3{ margin:0; line-height:1.15; }
+    a{ color:inherit; text-decoration:none; }
+
+    .container{ width:min(var(--max),92vw); margin:0 auto; }
+    .frame-gap{ padding:var(--gap) 0; }
+
+    /* NAV */
+    .topnav{
+      position:sticky; top:0; z-index:50;
+      background:var(--heroGrad);
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+    .topnav .container{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0; gap:14px;
+    }
+    .logo-img{ height:46px; width:auto; display:block; }
+    .navlinks{
+      display:flex; gap:12px;
+      overflow-x:auto; white-space:nowrap;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .navlinks::-webkit-scrollbar{ display:none; }
+    .navlinks a{
+      color:#fff; font-weight:600;
+      padding:8px 10px; border-radius:10px;
+      flex:0 0 auto;
+    }
+    .navlinks a:hover{ background:rgba(255,255,255,.12); }
+
+    /* HERO */
+    .hero{
+      width:min(var(--max),92vw);
+      margin:var(--gap) auto 0;
+      border-radius:var(--radius);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1.15fr 1fr;
+      min-height:520px;
+      background:#e9e5dc;
+    }
+    .hero-left{
+      padding:52px;
+      background:var(--heroGrad);
+      color:#fff;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:14px;
+    }
+    .hero-left h1{ font-size:28px; font-weight:700; }
+    .hero-left p{ margin:0; opacity:.95; max-width:60ch; }
+    .hero-right{ background:#ddd; position:relative; }
+    .hero-right img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* Panels */
+    .panel{
+      background:rgba(255,255,255,.32);
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:var(--radius);
+      padding:28px;
+    }
+
+    /* Typo */
+    .section-title{
+      font-size:32px; font-weight:700;
+      margin:0 0 18px;
+      text-align:center;
+    }
+    .h2{
+      font-size:24px;
+      font-weight:700;
+      margin:0 0 10px;
+    }
+    .muted{ color:var(--muted); }
+    .divider{ height:1px; background:var(--line); margin:22px 0; }
+
+    /* Lists */
+    .checklist{ list-style:none; padding:0; margin:0; }
+    .checklist li{
+      position:relative;
+      padding-left:28px;
+      margin:0 0 10px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .checklist li::before{
+      content:"✓";
+      position:absolute; left:0; top:0.05em;
+      font-weight:700; color:rgba(0,0,0,.7);
+    }
+
+    /* CTA */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      background:var(--heroGrad);
+      color:#fff;
+      border:none;
+      padding:12px 18px;
+      font-weight:700;
+      border-radius:6px;
+      cursor:pointer;
+      transition:transform .12s ease, filter .12s ease;
+      text-decoration:none;
+    }
+    .btn:hover{ filter:brightness(1.05); transform:translateY(-1px); }
+    .btn.ghost{
+      background: rgba(0,0,0,.08);
+      color:#111;
+      border:1px solid rgba(0,0,0,.14);
+    }
+
+    /* Contact */
+    .contact-wrap{ max-width: none; margin:0 auto; }
+    label{ display:block; font-weight:600; color:var(--muted); margin:0 0 6px; }
+    input, textarea{
+      width:100%;
+      border:none;
+      background:rgba(0,0,0,.08);
+      padding:12px;
+      outline:none;
+      border-radius: 8px;
+    }
+    textarea{ min-height:160px; resize:vertical; }
+    .row2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .field{ margin-bottom:14px; }
+    .note{ margin-top:10px; color:rgba(0,0,0,.55); }
+.contact-direct{
+  display:flex;
+  gap:36px;
+  align-items:center;
+  margin:12px 0 18px;
+  font-weight:600;
+  flex-wrap:wrap;
+}
+
+.contact-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.contact-item a{
+  text-decoration:none;
+  color:var(--text);
+}
+
+.contact-item a:hover{
+  text-decoration:underline;
+}
+
+.icon svg{
+  display:block;
+  color:#000;
+}
+    /* Footer */
+    footer{
+      margin-top:var(--gap);
+      padding:22px 0 56px;
+      border-top:1px solid rgba(0,0,0,.25);
+      text-align:center;
+    }
+    .footer-logo{ height:44px; width:auto; opacity:.85; display:block; margin:0 auto 6px; }
+    footer a{ font-size:12px; text-decoration:none; color:#111; }
+
+    /* ===== Beratungsleistungen ===== */
+    .pricing-wrap{
+      background:rgba(255,255,255,.20);
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:var(--radius);
+      padding:18px;
+    }
+
+    .pricing-grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      border:1px solid rgba(0,0,0,.14);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background:rgba(255,255,255,.22);
+    }
+
+    .pricing-col{
+      padding:18px 18px 16px;
+      border-right:1px solid rgba(0,0,0,.14);
+
+      display:grid;
+      grid-template-rows: 132px 48px auto 1fr;
+      gap:12px;
+      align-content:start;
+      min-height: 520px;
+    }
+    .pricing-col:last-child{ border-right:none; }
+
+    .pricing-head{
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:4px;
+    }
+    .pricing-name{
+      font-weight:700;
+      font-size:16px;
+      line-height:1.25;
+    }
+    .pricing-price{
+      font-weight:800;
+      font-size:22px;
+      line-height:1.15;
+    }
+    .pricing-unit{
+      font-size:12px;
+      color:rgba(0,0,0,.55);
+    }
+
+    .pricing-btn{
+      width:100%;
+      height:48px;
+      border-radius:8px;
+    }
+
+    .pricing-text{
+      color:var(--muted);
+      margin:0;
+    }
+
+    .pricing-list{
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    .pricing-list li{
+      position:relative;
+      padding-left:20px;
+      margin:0 0 10px;
+      color:var(--muted);
+      line-height:1.55;
+    }
+    .pricing-list li::before{
+      content:"✓";
+      position:absolute;
+      left:0;
+      top:0.05em;
+      font-weight:700;
+      color:rgba(0,0,0,.55);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero{ grid-template-columns:1fr; }
+      .hero-left{ padding:34px 22px; }
+      .hero-right{ height:320px; }
+      .row2{ grid-template-columns:1fr; }
+      .section-title{ font-size:26px; }
+      .hero-left h1{ font-size:24px; }
+      .logo-img{ height:38px; }
+
+      .pricing-grid{ grid-template-columns: 1fr; }
+      .pricing-col{
+        border-right:none;
+        border-bottom:1px solid rgba(0,0,0,.14);
+        grid-template-rows: auto 48px auto auto;
+        min-height: unset;
+      }
+      .pricing-col:last-child{ border-bottom:none; }
+    }
+  </style>
+
+  <!-- Schema: ProfessionalService -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ProfessionalService",
+    "name":"Grundmann Consulting",
+    "areaServed":[
+      {"@type":"City","name":"Halle (Saale)"},
+      {"@type":"City","name":"Leipzig"},
+      {"@type":"City","name":"Dresden"},
+      {"@type":"State","name":"Sachsen"},
+      {"@type":"State","name":"Sachsen-Anhalt"}
+    ],
+    "serviceType":[
+      "Investorenberatung Immobilien",
+      "Ankaufberatung Mehrfamilienhaus",
+      "Maklersteuerung & Prozessaufbau",
+      "Objekt- und Wirtschaftlichkeitsanalyse",
+      "Bestandsoptimierung",
+      "Exit-Vorbereitung"
+    ],
+    "url":"https://grundmannconsulting.de/makler-halle-leipzig-dresden/"
+  }
+  </script>
+
+  <!-- Schema: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"Wie hoch ist die typische Maklerprovision in Halle, Leipzig und Dresden?",
+        "acceptedAnswer":{"@type":"Answer","text":"In der Praxis liegt die Kauf-Courtage häufig bei rund 7,14% inkl. MwSt. insgesamt und wird oft zwischen Käufer und Verkäufer geteilt (z.B. je 3,57%). Die konkrete Ausgestaltung hängt vom Einzelfall und dem Vertrag ab."}
+      },
+      {
+        "@type":"Question",
+        "name":"Gibt es Makler, die in Halle, Leipzig und Dresden präsent sind?",
+        "acceptedAnswer":{"@type":"Answer","text":"Ja. Unter den großen Ketten sind u.a. Engel & Völkers sowie VON POLL IMMOBILIEN mit Standorten in allen drei Städten vertreten. Zusätzlich gibt es regionale Bank-Maklerstrukturen über Sparkassenverbünde."}
+      },
+      {
+        "@type":"Question",
+        "name":"Woran erkennt man gute Makler für Kapitalanleger?",
+        "acceptedAnswer":{"@type":"Answer","text":"Gute Makler liefern belastbare Unterlagen, sind schnell erreichbar, bewerten realistisch, verstehen Rendite-/Capex-Logik, haben Referenzen im Anlagebereich und arbeiten transparent (Prozess, Reporting, klare Verantwortlichkeiten)."}
+      },
+      {
+        "@type":"Question",
+        "name":"Welche Alternativen gibt es zur Maklerakquise?",
+        "acceptedAnswer":{"@type":"Answer","text":"Alternativen sind Direktakquise (Eigentümeransprache), Zwangsversteigerungen/Auktionen, Netzwerk-Deals (Verwalter, Handwerker, Nachlass/Erbengemeinschaften), sowie der Aufbau eigener Akquise- und Dealflow-Prozesse."}
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="topnav" aria-label="Hauptnavigation">
+    <div class="container">
+      <a class="logo" href="/" aria-label="Startseite">
+        <img class="logo-img" src="/assets/Logo_Grundmann-Consulting_white.png" alt="Grundmann Consulting Logo">
+      </a>
+      <div class="navlinks">
+        <a href="/">Home</a>
+        <a href="https://grundmannconsulting.de/immobilienberatung-halle/">Halle</a>
+        <a href="https://grundmannconsulting.de/immobilienberatung-leipzig/">Leipzig</a>
+        <a href="https://grundmannconsulting.de/immobilienberatung-dresden/">Dresden</a>
+        <a href="https://grundmannconsulting.de/cashflow-rechner/">Cashflow-Rechner</a>
+        <a href="https://grundmannconsulting.de/hausverwaltung/">Hausverwaltung</a>
+        <a href="#preise">Beratungsleistungen</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="makler-guide">
+    <div class="hero-left">
+      <h1>Makler in Halle, Leipzig &amp; Dresden – was Investoren wirklich wissen müssen</h1>
+      <p>
+        Provision, Angebotsumfang, Qualität, Off-Market und typische Reibungsverluste.
+        Plus: Checkliste für gute Makler.
+      </p>
+      <div style="margin-top:8px;">
+        <a class="btn" href="#kontakt">Kostenloses Erstgespräch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="/assets/Wohngebäude.png" alt="Mehrfamilienhaus – Beispielmotiv">
+    </div>
+  </header>
+
+  <!-- KURZFAZIT -->
+  <section class="frame-gap" id="kurzfazit" style="padding-top:32px;">
+    <div class="container">
+      <div class="section-title">Die wichtigsten Punkte auf einen Blick</div>
+      <div class="panel">
+        <h2 class="h2">Für Investoren, Eigentümer und Kapitalanleger</h2>
+        <ul class="checklist">
+          <li><strong>Provision:</strong> In allen drei Städten ist die Kauf-Courtage in der Praxis häufig ähnlich (oft rund 7,14% inkl. MwSt. gesamt, typischerweise geteilt). Entscheidend ist die konkrete Vertragsgestaltung.</li>
+          <li><strong>Markttiefe:</strong> Leipzig und Dresden haben deutlich mehr laufende Angebote als Halle – dadurch mehr Auswahl, aber auch mehr Wettbewerb und „Rauschen“.</li>
+          <li><strong>Off-Market zählt:</strong> Der größte Mehrwert guter Makler ist nicht das Portal-Listing, sondern Zugang, Vorqualifizierung und Tempo.</li>
+          <li><strong>Schmerzpunkte sind oft prozessual:</strong> Unterlagenlage, Reaktionszeiten, unklare Kommunikation, unrealistische Preis-/Mietannahmen, fehlende Verbindlichkeit.</li>
+          <li><strong>Gute Makler erkennt man an Output:</strong> saubere Datenräume, nachvollziehbare Herleitung, klare Priorisierung, schnelle Loops – nicht an Hochglanztexten.</li>
+          <li><strong>Effizienz entsteht durch Steuerung:</strong> Suchprofil, KPI-Set, Reporting-Takt und klare Zuständigkeiten – sonst bist du einer von vielen Interessenten.</li>
+          <li><strong>Alternativen existieren:</strong> Direktakquise, Auktionen/ZV, Netzwerkdeals, eigener Dealflow – häufig als Parallelspur sinnvoll.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKT -->
+  <section class="frame-gap" id="markt">
+    <div class="container">
+      <div class="section-title">Markteinordnung: Halle vs. Leipzig vs. Dresden</div>
+      <div class="panel">
+        <h2 class="h2">Was der Markt für dich praktisch bedeutet</h2>
+        <p class="muted">
+          Halle ist ein kleinerer Angebotsmarkt. Leipzig und Dresden sind größer, mit mehr laufenden Inseraten und mehr aktiven Maklern.
+          Für Investoren heißt das: In Leipzig/Dresden brauchst du bessere Prozesse (Speed + Screening), in Halle brauchst du bessere Quellen (Netzwerk + Direktzugang),
+          weil die öffentliche Auswahl kleiner ist.
+        </p>
+
+        <div class="divider"></div>
+
+        <h3 class="h2" style="font-size:20px;">Typische Unterschiede (Investorensicht)</h3>
+        <ul class="checklist">
+          <li><strong>Leipzig:</strong> mehr Dealflow, oft schneller Wettbewerb, mehr „Portal-Rauschen“ – klare Filter und schnelle Rückmeldung entscheiden.</li>
+          <li><strong>Dresden:</strong> ebenfalls größerer Markt; je nach Segment teils anspruchsvoller in Lage/Objektqualität – saubere Unterlagen und Rendite-Story sind Pflicht.</li>
+          <li><strong>Halle:</strong> weniger laufende Angebote – daher stärker abhängig von Beziehungen (Makler/Verwalter/Owner) und Direktakquise.</li>
+          <li><strong>Qualität:</strong> schwankt in allen Städten stark; Top-Makler unterscheiden sich vor allem über Datenqualität, Verbindlichkeit und Netzwerkzugang.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKT IN ZAHLEN -->
+  <section class="frame-gap" id="markt-zahlen">
+    <div class="container">
+      <div class="section-title">Markt in Zahlen: Angebotsumfang</div>
+
+      <div class="panel">
+        <h2 class="h2">Portal-Snapshot (Stand Anfang 2026, Orientierung)</h2>
+
+        <ul class="checklist">
+          <li><strong>Leipzig:</strong> ca. 1.637 Eigentumswohnungen, ca. 586 Häuser, ca. 1.629 Gewerbe-Objekte gelistet</li>
+          <li><strong>Dresden:</strong> ca. 826 Eigentumswohnungen, ca. 541 Häuser, ca. 1.525 Gewerbe-Objekte gelistet</li>
+          <li><strong>Halle (Saale):</strong> ca. 125 Eigentumswohnungen, ca. 157 Häuser, ca. 306 Gewerbe-Objekte gelistet</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <p class="muted">
+          Wichtig: Das sind Momentaufnahmen aus Portalen.
+      </div>
+    </div>
+  </section>
+
+   <!-- INVESTOREN: ERWARTUNGEN + SCHMERZPUNKTE -->
+  <section class="frame-gap" id="investoren-sicht">
+    <div class="container">
+      <div class="section-title">Was Investoren von Maklern erwarten – und was häufig schiefgeht</div>
+      <div class="panel">
+        <h2 class="h2">Erwartungen</h2>
+        <ul class="checklist">
+          <li><strong>Tempo:</strong> Rückmeldung innerhalb 24–48h, klare Termin- und Unterlagen-Disziplin</li>
+          <li><strong>Vorqualifizierung:</strong> Mietliste, Hausgeld/WEG, Capex-Hinweise, Lasten/Grundbuch, Energie, Leerstand – bevor du Zeit investierst</li>
+          <li><strong>Transparenz:</strong> klare Courtage, klare Rolle (wer vertritt wen), klare Aussage zu Risiken</li>
+          <li><strong>Netzwerk:</strong> Zugang zu Off-Market, Tippgebern, Verwaltern, Nachlass/Erbengemeinschaften, Bauträgern</li>
+          <li><strong>Investor-Logik:</strong> Rendite/Capex/Exit verstehen – statt reiner „Lage + Gefühl“-Argumentation</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <h3 class="h2" style="font-size:20px;">Häufige Schmerzpunkte</h3>
+        <ul class="checklist">
+          <li><strong>Unterlagen kommen spät oder unvollständig</strong> (DD wird zur Sucharbeit)</li>
+          <li><strong>Unrealistische Preis-/Mietstory</strong> (Schönrechnen, fehlende Vergleichbarkeit)</li>
+          <li><strong>Unklare Kommunikation</strong> (keine Status-Updates, wechselnde Aussagen)</li>
+          <li><strong>Fehlende Verbindlichkeit</strong> (keine Exklusivität, „gleichzeitig an zehn Käufer“)</li>
+          <li><strong>Interessenkonflikt</strong> (Speed über Qualität; Verkäuferdruck; fehlende Käufersteuerung)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAKLER ODER ALTERNATIVEN -->
+  <section class="frame-gap" id="alternativen">
+    <div class="container">
+      <div class="section-title">Mit Maklern arbeiten – Vorteile / Nachteile</div>
+      <div class="panel">
+        <h2 class="h2">Vorteile / Nachteile / Alternativen</h2>
+
+        <div class="divider"></div>
+
+        <h3 class="h2" style="font-size:20px;">Vorteile (wenn der Makler gut ist)</h3>
+        <ul class="checklist">
+          <li>Zeitersparnis durch Vorqualifizierung und Termin-/Prozesssteuerung</li>
+          <li>Netzwerkzugang und Off-Market-Pipeline</li>
+          <li>Verhandlungsführung und Closing-Routine (Notar, Fristen, Abstimmungen)</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <h3 class="h2" style="font-size:20px;">Nachteile (realistisch einpreisen)</h3>
+        <ul class="checklist">
+          <li>Courtage drückt Rendite – besonders bei knappen Cashflows</li>
+          <li>Risiko von Interessenkonflikten (schneller Abschluss vs. beste Kondition)</li>
+          <li>Viele Makler liefern nur „Portal-Deals“ – ohne echten Informationsvorsprung</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <h3 class="h2" style="font-size:20px;">Alternativen (oft als Parallelspur sinnvoll)</h3>
+        <ul class="checklist">
+          <li><strong>Direktakquise:</strong> Eigentümeransprache (provisionsfrei, aber aufwändig)</li>
+          <li><strong>Auktionen/Zwangsversteigerungen:</strong> schneller Zugang, aber höherer Know-how-Bedarf</li>
+          <li><strong>Netzwerkdeals:</strong> Verwalter, Handwerker, Hausmeister, Nachlass, Eigentümerkreise</li>
+          <li><strong>Eigener Dealflow-Prozess:</strong> Suchprofile, CRM, Outreach, standardisierte DD</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLISTE: GUTE MAKLER -->
+  <section class="frame-gap" id="gute-makler">
+    <div class="container">
+      <div class="section-title">Woran man gute Makler erkennt</div>
+      <div class="panel">
+        <h2 class="h2">Checkliste (schnell, aber treffsicher)</h2>
+
+        <ul class="checklist">
+          <li><strong>Unterlagen-Standard:</strong> Mietliste, Protokolle/Abrechnungen (WEG), Grundrisse, Energie, Nachweise – ohne Nachlaufen</li>
+          <li><strong>Herleitung statt Behauptung:</strong> Preis-/Mietargumentation mit Vergleichsfällen und Fakten</li>
+          <li><strong>Reaktionszeit:</strong> erreichbar, verbindliche Zusagen, klare nächste Schritte</li>
+          <li><strong>Investor-Fit:</strong> fragt nach Renditeziel, Haltedauer, Capex-Toleranz, Risiko-Profil</li>
+          <li><strong>Transparenz:</strong> Courtage, Rolle, Prozess – sauber und schriftlich</li>
+          <li><strong>Referenzen:</strong> nachweisbare Deals im Anlagebereich (nicht nur „Eigennutzer“)</li>
+          <li><strong>Qualitätssignale:</strong> Verbands-/Qualifikationshinweise (z.B. IVD/IHK) als Plus – aber entscheidend bleibt die Leistung</li>
+        </ul>
+
+        <p class="muted" style="margin-top:12px;">
+          Der schnellste Test: Bitte um eine vollständige Unterlagenliste + einen konkreten Zeitplan bis Notar. Ein guter Makler liefert beides ohne Ausweichen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="frame-gap" id="cashflow-cta">
+    <div class="container">
+      <div class="section-title">Du willst ein Objekt schnell sauber einordnen?</div>
+
+      <div class="panel">
+        <p class="muted">
+Wenn du neue Objekte prüfen willst, deine Prozesse professionalisieren möchtest, eine eigene Verwaltung aufbauen willst oder perspektivisch einen Verkauf planst, brauchst du vor allem eine saubere Entscheidungsbasis.</p>
+Im kostenlosen Erstgespräch analysieren wir deine aktuelle Situation sachlich, strategisch und ohne Verkaufsdruck.</p>
+Du bekommst eine ehrliche, strukturierte Einschätzung aus Investorensicht – mit klaren nächsten Schritten.
+Klarheit, die dir wirklich weiterhilft - unabhängig davon, ob wir zusammenarbeiten oder nicht.
+        </p>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn" href="/cashflow-rechner/">Cashflow berechnen</a>
+          <a class="btn ghost" href="#kontakt">Kostenloses Erstgespräch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BERATUNGSLEISTUNGEN -->
+  <section class="frame-gap" id="preise">
+    <div class="container">
+      <div class="section-title">Beratungsleistungen</div>
+
+      <div class="pricing-grid">
+
+        <!-- 1 -->
+        <div class="pricing-col">
+          <div class="pricing-head">
+            <div class="pricing-name">Kostenloser<br>Objektcheck</div>
+            <div class="pricing-price">€0</div>
+            <div class="pricing-unit">pro Projekt</div>
+          </div>
+
+          <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
+
+          <p class="pricing-text">
+            Schnelle Ersteinschätzung: Wirtschaftlichkeit, Risiken, Unterlagenlage, nächste Schritte.
+          </p>
+
+          <ul class="pricing-list">
+            <li>Kurzcheck Zahlen &amp; Annahmen</li>
+            <li>Top 3 Deal-Killer / Hebel</li>
+            <li>Konkrete To-dos für Makler/Verkäufer</li>
+          </ul>
+        </div>
+
+        <!-- 2 -->
+        <div class="pricing-col">
+          <div class="pricing-head">
+            <div class="pricing-name">Ankaufsberatung</div>
+            <div class="pricing-price">auf Anfrage</div>
+            <div class="pricing-unit">pro Projekt</div>
+          </div>
+
+          <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
+
+          <p class="pricing-text">
+            Strukturierte Prüfung statt Bauchgefühl: Preis, Mieten, Capex, Risiken, Exit-Fähigkeit.
+          </p>
+
+          <ul class="pricing-list">
+            <li>Standort- &amp; Mikrolagenbewertung</li>
+            <li>Mietliste, Kosten, Capex-Logik</li>
+            <li>Unterlagen-Check &amp; DD-Plan</li>
+            <li>Entscheidungsempfehlung</li>
+            <li>Optional: Makler-/Verkäufer-Steuerung</li>
+            <li>Optional: Besichtigung/Abstimmungen</li>
+          </ul>
+        </div>
+
+        <!-- 3 -->
+        <div class="pricing-col">
+          <div class="pricing-head">
+            <div class="pricing-name">Dealflow-Setup<br>&amp; Maklersteuerung</div>
+            <div class="pricing-price">auf Anfrage</div>
+            <div class="pricing-unit">pro Setup</div>
+          </div>
+
+          <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
+
+          <p class="pricing-text">
+            Suchprofil + KPIs + Reporting + Datenraum: weniger Zeitverlust, bessere Trefferquote.
+          </p>
+
+          <ul class="pricing-list">
+            <li>OnePager-Suchprofil &amp; Filterlogik</li>
+            <li>Standard-DD-Checkliste</li>
+            <li>KPI-Set &amp; Reporting-Template</li>
+            <li>Prozessdesign (Lead → Offer → Notar)</li>
+            <li>Optional: Tool-/CRM-Einrichtung</li>
+          </ul>
+        </div>
+
+        <!-- 4 -->
+        <div class="pricing-col">
+          <div class="pricing-head">
+            <div class="pricing-name">Bestands- &amp;<br>Exit-Beratung</div>
+            <div class="pricing-price">auf Anfrage</div>
+            <div class="pricing-unit">pro Projekt</div>
+          </div>
+
+          <a class="btn pricing-btn" href="#kontakt">Kontakt</a>
+
+          <p class="pricing-text">
+            Bestandsoptimierung und Verkaufsreife: Maßnahmen priorisieren, Risiken reduzieren, Exit sauber aufsetzen.
+          </p>
+
+          <ul class="pricing-list">
+            <li>Bestandsanalyse (Mieten/Kosten/Capex)</li>
+            <li>Maßnahmen-Priorisierung nach Wirkung</li>
+            <li>Unterlagen &amp; Prozess für Verkauf/Refi</li>
+            <li>Strategie: Makler vs. Direktverkauf</li>
+            <li>Optional: HV-/Dienstleister-Struktur</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="frame-gap" id="kontakt">
+    <div class="container contact-wrap">
+      <div class="section-title">Kontakt</div>
+
+      <div class="panel">
+        <h2 class="h2">Kontaktieren Sie mich</h2>
+<div class="contact-direct">
+  <div class="contact-item">
+    <span class="icon">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+        <path d="M6.6 10.8a15.05 15.05 0 006.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.3
+        1.3.4 2.7.6 4.1.6.7 0 1.3.6 1.3 1.3V21c0 .7-.6 1.3-1.3 1.3
+        C10.4 22.3 1.7 13.6 1.7 3.3 1.7 2.6 2.3 2 3 2h3.3
+        c.7 0 1.3.6 1.3 1.3 0 1.4.2 2.8.6 4.1.1.4 0 .9-.3 1.2l-2.3 2.2z"/>
+      </svg>
+    </span>
+    <a href="tel:+491607738676">+49 160 7738676</a>
+  </div>
+
+  <div class="contact-item">
+    <span class="icon">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+        <path d="M2 4h20a2 2 0 012 2v12a2 2 0 01-2 2H2a2 2 0 01-2-2V6a2 2 0 012-2zm0 2v.01L12 13 22 6.01V6H2zm20 2.24l-9.4 6.27a1 1 0 01-1.2 0L2 8.24V18h20V8.24z"/>
+      </svg>
+    </span>
+    <a href="mailto:grundmann.immoplus@gmail.com">
+      grundmann.immoplus@gmail.com
+    </a>
+  </div>
+</div>
+        <p class="muted" style="margin-top:6px;">
+          Eine kurze Einordnung genügt: Objekttyp oder Adresse, aktueller Status und die zentrale Fragestellung.
+        </p>
+
+        <form action="https://formspree.io/f/mvzqvggb" method="POST" id="kontakt-form">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="Name" type="text" required>
+          </div>
+
+          <div class="field">
+            <label for="email">E-Mail-Adresse</label>
+            <input id="email" name="E-Mail" type="email" required>
+          </div>
+
+          <div class="field">
+            <label for="phone">Telefonnummer (optional)</label>
+            <input id="phone" name="Telefon" type="tel">
+          </div>
+
+          <div class="field">
+            <label for="message">Nachricht</label>
+            <textarea id="message" name="Nachricht" required></textarea>
+          </div>
+
+          <button class="btn" type="submit">Nachricht senden</button>
+
+          <p id="form-success" style="display:none; margin-top:16px;">
+            Vielen Dank für Ihre Nachricht. Ich melde mich zeitnah bei Ihnen.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <img class="footer-logo" src="/assets/Logo_Grundmann-Consulting.png" alt="Grundmann Consulting Logo">
+    <div><a href="/impressum/">Impressum</a></div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("kontakt-form");
+      const success = document.getElementById("form-success");
+      if (!form) return;
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const data = new FormData(form);
+
+        try {
+          const response = await fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (response.ok) {
+            form.reset();
+            success.style.display = "block";
+          } else {
+            alert("Beim Senden ist ein Fehler aufgetreten. Bitte erneut versuchen.");
+          }
+        } catch (error) {
+          alert("Verbindung fehlgeschlagen. Bitte später erneut versuchen.");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
