@@ -213,6 +213,30 @@
     .btn:hover{ filter: brightness(1.05); transform: translateY(-1px); }
     .btn.ghost{ background: rgba(0,0,0,.08); color:#111; border: 1px solid rgba(0,0,0,.14); }
 
+    /* ===== Mietsteigerung Radios: kein Umbruch ===== */
+    .rent-radio{
+      display:flex;
+      gap:12px;
+      margin:10px 0 10px;
+      align-items:center;
+
+      flex-wrap:nowrap;
+      white-space:nowrap;
+
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .rent-radio::-webkit-scrollbar{ display:none; }
+    .rent-radio-item{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      font-weight:600;
+      white-space:nowrap;
+      flex:0 0 auto;
+    }
+
     /* ===== Beratungsleistungen ===== */
     .section-title{
       text-align:center;
@@ -504,7 +528,6 @@
       <div class="grid">
 
         <section class="panel" aria-label="Eingaben">
-          <h2>Kreditsumme</h2>
 
           <div class="rows">
 
@@ -702,21 +725,21 @@
             <div class="row" style="border-bottom:none; padding-bottom:0;">
               <div>
                 <div class="label">Mietsteigerung</div>
-                <div class="hint">p.a. oder Kappung (Sprung in Jahr 1, dann Jahr 4/7/10/...)</div>
+                <div class="hint">jährlich oder Kappung (Sprung in Jahr 1, dann Jahr 4/7/10/...)</div>
 
-                <div style="display:flex; gap:12px; margin:10px 0 10px; align-items:center;">
-                  <label style="display:flex; align-items:center; gap:6px; font-weight:600;">
+                <div class="rent-radio">
+                  <label class="rent-radio-item">
                     <input type="radio" name="rentMode" value="pa" checked>
-                    p.a.
+                    Jährlich
                   </label>
-                  <label style="display:flex; align-items:center; gap:6px; font-weight:600;">
+                  <label class="rent-radio-item">
                     <input type="radio" name="rentMode" value="3y">
-                    3 Jahre (Kappung)
+                    15% innerhalb 3 Jahren (Kappung)
                   </label>
                 </div>
 
                 <div id="rent_pa_box">
-                  <div class="hint">jährliche Steigerung p.a.</div>
+                  <div class="hint">jährliche Steigerung</div>
                   <div class="suffix" style="max-width:220px;">
                     <input id="ass_miete_pct" type="text" inputmode="decimal" value="2,0" autocomplete="off">
                     <span>%</span>
@@ -1461,7 +1484,6 @@
         : `15%-Regel (Jahr 1–3 kumuliert): Summe ${eur(rule.sum)} | Schwelle ${eur(rule.threshold)} | Behandlung: ${rule.capitalized ? "Aktivierung (AfA)" : "Sofort abziehbar"}`;
       if (el("out_15rule_note")) el("out_15rule_note").textContent = ruleTxt;
 
-      // ===== Betrachtungsjahr: robust + Label live =====
       const viewYearRaw = parseDeNumber(el("view_year")?.value);
       const viewYear = Math.max(1, Math.min(20, Math.round(viewYearRaw || 1)));
 
@@ -1471,7 +1493,6 @@
       if (vyEl && document.activeElement !== vyEl) {
         vyEl.value = String(viewYear);
       }
-      // ==============================================
 
       const assAusfall = Math.min(100, Math.max(0, parseDeNumber(el("ass_ausfall_pct").value)))/100;
 
@@ -1589,7 +1610,6 @@
     function bind(){
       ids.forEach(id => attachAutoFormat(id));
 
-      // EXTRA: Label sofort beim Tippen aktualisieren (auch ohne blur)
       const vy = el("view_year");
       if (vy){
         vy.addEventListener("input", () => {
@@ -1664,7 +1684,7 @@
         lines.push(`- Wertsteigerung p.a.: ${el("ass_wert_pct").value} %`);
         const rentMode = document.querySelector('input[name="rentMode"]:checked')?.value || "pa";
         if (rentMode === "3y") lines.push(`- Mietsteigerung: 3 Jahre (Kappung) ${el("ass_miete_3y_pct").value} %`);
-        else lines.push(`- Mietsteigerung: p.a. ${el("ass_miete_pct").value} %`);
+        else lines.push(`- Mietsteigerung: jährlich ${el("ass_miete_pct").value} %`);
         lines.push(`- Mietausfall: ${el("ass_ausfall_pct").value} %`);
 
         lines.push("");
