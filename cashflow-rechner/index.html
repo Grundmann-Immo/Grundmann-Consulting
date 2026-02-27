@@ -29,6 +29,7 @@
       --base: 16px;
       --heroGrad: linear-gradient(90deg, rgba(16,40,33,.92) 0%, rgba(16,40,33,.75) 58%, rgba(16,40,33,.15) 100%);
       --panel: rgba(255,255,255,.22);
+      --sectionGap: 32px;
     }
 
     *{ box-sizing:border-box; }
@@ -86,7 +87,7 @@
     }
     .navlinks a:hover{ background: rgba(255,255,255,.10); }
 
-    .frame-gap{ padding: 54px 0; }
+    .frame-gap{ padding: var(--sectionGap) 0; }
 
     .pagehead{
       width: min(var(--max), 92vw);
@@ -102,10 +103,13 @@
 
     .grid{
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
+      /* Ergebnisse etwas breiter (vorher: 1.05fr .95fr) */
+      grid-template-columns: .95fr 1.05fr;
       gap: 26px;
-      align-items:start;
+      /* gleiche Höhe wie Eingaben (stretch) */
+      align-items: stretch;
     }
+
     .panel{
       background: var(--panel);
       border: 1px solid rgba(0,0,0,.10);
@@ -140,6 +144,12 @@
       text-align: right;
     }
 
+    input.auto-muted{
+      background: rgba(0,0,0,.04);
+      color: rgba(0,0,0,.62);
+    }
+    input.auto-muted::selection{ background: rgba(0,0,0,.12); }
+
     .suffix{ position: relative; }
     .suffix span{
       position:absolute;
@@ -166,7 +176,39 @@
       gap: 6px;
     }
 
-    .result{ display:flex; flex-direction:column; gap: 12px; }
+    .chip-row{ display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 0; }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(0,0,0,.06);
+      border: 1px solid rgba(0,0,0,.12);
+      cursor:pointer;
+      user-select:none;
+      font-weight:600;
+      color:#111;
+    }
+    .chip input{ width:auto; margin:0; }
+    .chip small{ font-size:12px; color: rgba(0,0,0,.62); font-weight:600; }
+
+    /* Ergebnisse: gleiche Höhe wie Eingaben, Inhalt ggf. scrollbar */
+    aside.panel[aria-label="Ergebnisse"]{
+      display:flex;
+      flex-direction:column;
+      height: 100%;
+      min-height: 0;
+    }
+    .result{
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      overflow:auto;
+      min-height: 0;
+      padding-right: 4px;
+    }
+
     .kpi{
       display:flex;
       justify-content:space-between;
@@ -175,9 +217,10 @@
       border-radius: 10px;
       background: rgba(255,255,255,.28);
       border: 1px solid rgba(0,0,0,.10);
+      gap: 10px;
     }
     .kpi .name{ font-weight: 700; }
-    .kpi .val{ font-weight: 700; }
+    .kpi .val{ font-weight: 700; text-align:right; }
     .kpi.green{ background: rgba(34,139,34,.10); border-color: rgba(34,139,34,.22); }
     .kpi.red{ background: rgba(200,0,0,.08); border-color: rgba(200,0,0,.18); }
 
@@ -213,42 +256,19 @@
     .btn:hover{ filter: brightness(1.05); transform: translateY(-1px); }
     .btn.ghost{ background: rgba(0,0,0,.08); color:#111; border: 1px solid rgba(0,0,0,.14); }
 
-    /* ===== Mietsteigerung Radios: kein Umbruch ===== */
-    .rent-radio{
-      display:flex;
-      gap:12px;
-      margin:10px 0 10px;
-      align-items:center;
-
-      flex-wrap:nowrap;
-      white-space:nowrap;
-
-      overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
-      scrollbar-width:none;
-    }
-    .rent-radio::-webkit-scrollbar{ display:none; }
-    .rent-radio-item{
-      display:flex;
-      align-items:center;
-      gap:6px;
-      font-weight:600;
-      white-space:nowrap;
-      flex:0 0 auto;
-    }
-
-    /* ===== Beratungsleistungen ===== */
     .section-title{
       text-align:center;
       font-weight: 700;
       font-size: 32px;
       margin: 0 0 18px;
     }
+
+    /* Preise: helleren Hintergrund entfernen */
     .pricing-panel{
-      background: var(--panel);
-      border: 1px solid rgba(0,0,0,.10);
-      border-radius: var(--radius);
-      padding: 28px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
     }
     .pricing-panel h2{
       text-align:center;
@@ -265,7 +285,7 @@
       border: 1px solid rgba(0,0,0,.12);
       border-radius: 10px;
       overflow:hidden;
-      background: rgba(255,255,255,.24);
+      background: transparent; /* war: rgba(255,255,255,.24) */
     }
     .price-col{
       padding: 16px 14px 14px;
@@ -348,7 +368,6 @@
       transform: rotate(-45deg);
     }
 
-    /* ===== Prognose ===== */
     .forecast-panel{
       background: var(--panel);
       border: 1px solid rgba(0,0,0,.10);
@@ -386,7 +405,6 @@
       line-height: 1.5;
     }
 
-    /* ===== Steuerbox ===== */
     .taxbox{
       margin-top: 10px;
       border-radius: 12px;
@@ -411,7 +429,6 @@
     .taxline{ height:1px; background: rgba(0,0,0,.10); margin: 10px 0; }
     .taxhint{ color: var(--muted); font-size: 12px; margin-top: 10px; line-height:1.5; }
 
-    /* ===== Feldbeschreibungen ===== */
     .desc-wrap{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -437,7 +454,6 @@
       font-size: 12px;
     }
 
-    /* ===== Kontakt ===== */
     .contact-direct{
       display:flex;
       gap:36px;
@@ -490,6 +506,10 @@
         border-bottom: 1px solid rgba(0,0,0,.10);
       }
       .price-col:last-child{ border-bottom:none; }
+
+      /* auf Mobile kein internes Scrollen erzwingen */
+      aside.panel[aria-label="Ergebnisse"]{ height:auto; }
+      .result{ overflow: visible; }
     }
   </style>
 
@@ -511,7 +531,6 @@
         <a href="https://grundmannconsulting.de/ki/">KI</a>
         <a href="https://grundmannconsulting.de/hausverwaltung/">Hausverwaltung</a>
         <a href="https://grundmannconsulting.de/bundesanleihe/">Bundesanleihe</a>
-        <a href="#prognose">Prognose</a>
         <a href="#preise">Beratungsleistungen</a>
         <a href="#kontakt">Kontakt</a>
       </div>
@@ -528,13 +547,12 @@
       <div class="grid">
 
         <section class="panel" aria-label="Eingaben">
-
           <div class="rows">
 
             <div class="row">
               <div>
                 <div class="label">Kaufpreis</div>
-                <div class="hint"></div>
+                <div class="hint">Kaufpreis ohne Nebenkosten/Capex. Basis für EK, Kredit und Kennzahlen.</div>
               </div>
               <div class="suffix">
                 <input id="kaufpreis" type="text" inputmode="numeric" value="0" autocomplete="off">
@@ -547,7 +565,7 @@
             <div class="ek-grid">
               <div class="ekbox">
                 <div class="label">Baujahr</div>
-                <div class="hint">AfA: vor 1925 = 2,5%, ab 1925 = 2,0%</div>
+                <div class="hint">AfA: vor 1925 = 2,5%, ab 1925 = 2,0% (vereinfachtes Modell).</div>
                 <div class="suffix">
                   <input id="baujahr" type="text" inputmode="numeric" value="1900" autocomplete="off">
                   <span>J</span>
@@ -556,7 +574,7 @@
 
               <div class="ekbox">
                 <div class="label">Gebäudeanteil (%)</div>
-                <div class="hint">Anteil an AK, der abschreibbar ist</div>
+                <div class="hint">Anteil der Anschaffungskosten (KP+NK), der als Gebäude (AfA) angesetzt wird.</div>
                 <div class="suffix">
                   <input id="geb_anteil_pct" type="text" inputmode="decimal" value="70,0" autocomplete="off">
                   <span>%</span>
@@ -565,14 +583,17 @@
             </div>
 
             <div class="row">
-              <div><div class="label">Grenzsteuersatz</div><div class="hint">Default: 42% (vereinfachend, ohne Soli/KiSt)</div></div>
+              <div>
+                <div class="label">Grenzsteuersatz</div>
+                <div class="hint">Vereinfachung: nur Einkommensteuer (ohne Soli/KiSt). Wirkt auf Steuerbox &amp; Liquidität nach Steuer.</div>
+              </div>
               <div class="suffix"><input id="tax_pct" type="text" inputmode="decimal" value="42,0" autocomplete="off"><span>%</span></div>
             </div>
 
             <div class="ek-grid" style="margin-top:6px;">
               <div class="ekbox">
                 <div class="label">Eigenkapital (%)</div>
-                <div class="hint">Anteil vom Kaufpreis</div>
+                <div class="hint">Anteil vom Kaufpreis (ohne NK/Capex). Wird ignoriert, wenn EK (€) &gt; 0.</div>
                 <div class="suffix">
                   <input id="ek_pct" type="text" inputmode="decimal" value="0" autocomplete="off">
                   <span>%</span>
@@ -581,7 +602,7 @@
 
               <div class="ekbox">
                 <div class="label">Eigenkapital (€)</div>
-                <div class="hint">Alternativ zu % (hat Vorrang, wenn &gt; 0)</div>
+                <div class="hint">Fixbetrag statt Prozent. Hat Vorrang, wenn &gt; 0.</div>
                 <div class="suffix">
                   <input id="ek_eur" type="text" inputmode="numeric" value="0" autocomplete="off">
                   <span>€</span>
@@ -589,75 +610,77 @@
               </div>
             </div>
 
-            <div class="subhead">Kaufnebenkosten (automatisch)</div>
+            <div class="subhead">Kaufnebenkosten</div>
 
             <div class="row">
-              <div><div class="label">Notar &amp; Grundbuch</div><div class="hint">in % vom Kaufpreis</div></div>
+              <div><div class="label">Notar &amp; Grundbuch</div><div class="hint">in % vom Kaufpreis (wird in Kredit mitfinanziert).</div></div>
               <div class="suffix"><input id="nk_notar_pct" type="text" inputmode="decimal" value="0" autocomplete="off"><span>%</span></div>
             </div>
 
             <div class="row">
-              <div><div class="label">Grunderwerbsteuer</div><div class="hint">in % vom Kaufpreis</div></div>
+              <div><div class="label">Grunderwerbsteuer</div><div class="hint">in % vom Kaufpreis (wird in Kredit mitfinanziert).</div></div>
               <div class="suffix"><input id="nk_grest_pct" type="text" inputmode="decimal" value="0" autocomplete="off"><span>%</span></div>
             </div>
 
             <div class="row">
-              <div><div class="label">Makler</div><div class="hint">optional</div></div>
+              <div><div class="label">Makler</div><div class="hint">optional, in % vom Kaufpreis (wird in Kredit mitfinanziert).</div></div>
               <div class="suffix"><input id="nk_makler_pct" type="text" inputmode="decimal" value="0" autocomplete="off"><span>%</span></div>
             </div>
 
+            <div class="subhead">Investition in Objektqualität (Capex)</div>
+
             <div class="row">
-              <div><div class="label">Sanierungskosten</div><div class="hint">werden als Anschaffungskosten behandelt (AfA-Basis)</div></div>
+              <div>
+                <div class="label">Investitionsbudget gesamt</div>
+                <div class="hint">Sanierung/Modernisierung zusammengefasst. Wirkt je nach Finanzierung auf Liquidität (EK) oder Rate (mitfinanziert).</div>
+              </div>
               <div class="suffix">
-                <input id="sanierung" type="text" inputmode="numeric" value="0" autocomplete="off">
+                <input id="capex_total" type="text" inputmode="numeric" value="0" autocomplete="off">
                 <span>€</span>
               </div>
             </div>
 
-            <div class="subhead">Modernisierung (Jahr 1–3, je 1 Maßnahme)</div>
+            <div class="row" style="align-items:start;">
+              <div>
+                <div class="label">Finanzierung der Investition</div>
+                <div class="hint">EK = einmaliger Cash-Out im Betrachtungsjahr 1. Mitfinanziert = höhere Kreditsumme und Rate.</div>
 
-            <div class="ek-grid">
-              <div class="ekbox">
-                <div class="label">Modernisierung Jahr 1</div>
-                <div class="hint">€ (Cash-Out im Jahr 1)</div>
-                <div class="suffix">
-                  <input id="modern_y1" type="text" inputmode="numeric" value="0" autocomplete="off">
-                  <span>€</span>
+                <div class="chip-row" role="group" aria-label="Finanzierung Capex">
+                  <label class="chip">
+                    <input type="radio" name="capexMode" value="equity" checked>
+                    aus Eigenkapital <small>(Liquidität)</small>
+                  </label>
+                  <label class="chip">
+                    <input type="radio" name="capexMode" value="debt">
+                    mitfinanziert <small>(Rate)</small>
+                  </label>
                 </div>
               </div>
-
-              <div class="ekbox">
-                <div class="label">Modernisierung Jahr 2</div>
-                <div class="hint">€ (Cash-Out im Jahr 2)</div>
-                <div class="suffix">
-                  <input id="modern_y2" type="text" inputmode="numeric" value="0" autocomplete="off">
-                  <span>€</span>
-                </div>
-              </div>
+              <div></div>
             </div>
 
             <div class="row">
               <div>
-                <div class="label">Modernisierung Jahr 3</div>
-                <div class="hint">€ (Cash-Out im Jahr 3)</div>
+                <div class="label">Miet-Boost nach Maßnahmen (optional)</div>
+                <div class="hint">Zusätzliche Kaltmiete pro Monat durch Maßnahmen (wirkt direkt auf Cashflow/Miete).</div>
               </div>
               <div class="suffix">
-                <input id="modern_y3" type="text" inputmode="numeric" value="0" autocomplete="off">
+                <input id="capex_rent_uplift" type="text" inputmode="numeric" value="0" autocomplete="off">
                 <span>€</span>
               </div>
             </div>
 
-            <p class="small" id="out_15rule_note"></p>
+            <p class="small" id="out_capex_note"></p>
 
             <h2 style="margin-top:18px;">Berechnung der Rate</h2>
 
             <div class="row">
-              <div><div class="label">Zins</div></div>
+              <div><div class="label">Zins</div><div class="hint">Nominalzins p.a. (für Annuitätenrate &amp; Steuerbox-Zinsen).</div></div>
               <div class="suffix"><input id="zins_pct" type="text" inputmode="decimal" value="0" autocomplete="off"><span>%</span></div>
             </div>
 
             <div class="row">
-              <div><div class="label">Tilgung</div></div>
+              <div><div class="label">Tilgung</div><div class="hint">Anfängliche Tilgung p.a. (Rate = Kredit * (Zins+Tilgung)/12).</div></div>
               <div class="suffix"><input id="tilgung_pct" type="text" inputmode="decimal" value="0" autocomplete="off"><span>%</span></div>
             </div>
 
@@ -666,24 +689,68 @@
             <div class="subhead">Miete (Start / Soll)</div>
 
             <div class="row">
-              <div><div class="label">Wohnfläche</div><div class="hint">m²</div></div>
+              <div><div class="label">Wohnfläche</div><div class="hint">m². Relevant für Miete €/m² sowie Instandhaltungsrücklage €/m².</div></div>
               <div class="suffix"><input id="wf" type="text" inputmode="decimal" value="0" autocomplete="off"><span>m²</span></div>
             </div>
 
-            <div class="row">
-              <div><div class="label">Miete €/m²</div><div class="hint">Kaltmiete (Soll)</div></div>
+            <div class="row" style="border-bottom:none; padding-bottom:0;">
+              <div>
+                <div class="label">Miete €/m²</div>
+                <div class="hint">Bidirektional: €/m² ↔ Monat ↔ Jahr (immer synchronisiert).</div>
+              </div>
               <div class="suffix"><input id="miete_qm" type="text" inputmode="decimal" value="0" autocomplete="off"><span>€</span></div>
+            </div>
+
+            <div class="row" style="align-items:start; border-bottom:1px solid rgba(0,0,0,.10); padding-top: 10px;">
+              <div>
+                <div class="label">Alternative Mieteingabe</div>
+                <div class="hint">Wähle nur die Anzeige. Die Felder sind immer gegenseitig berechenbar.</div>
+
+                <div class="chip-row" role="group" aria-label="Mieteingabe">
+                  <label class="chip">
+                    <input type="radio" name="rentInputMode" value="perqm" checked>
+                    €/m² <small>(Standard)</small>
+                  </label>
+                  <label class="chip">
+                    <input type="radio" name="rentInputMode" value="month">
+                    Monat <small>(Netto kalt)</small>
+                  </label>
+                  <label class="chip">
+                    <input type="radio" name="rentInputMode" value="year">
+                    Jahr <small>(Netto kalt)</small>
+                  </label>
+                </div>
+
+                <div id="rent_month_box" style="display:none; margin-top:10px;">
+                  <div class="hint">Netto-Kaltmiete pro Monat (Soll). Miet-Boost wird zusätzlich addiert.</div>
+                  <div class="suffix" style="max-width:220px;">
+                    <input id="miete_monat" type="text" inputmode="numeric" value="0" autocomplete="off">
+                    <span>€</span>
+                  </div>
+                </div>
+
+                <div id="rent_year_box" style="display:none; margin-top:10px;">
+                  <div class="hint">Netto-Kaltmiete pro Jahr (Soll). Miet-Boost wird zusätzlich addiert (auf Monatsbasis).</div>
+                  <div class="suffix" style="max-width:220px;">
+                    <input id="miete_jahr" type="text" inputmode="numeric" value="0" autocomplete="off">
+                    <span>€</span>
+                  </div>
+                </div>
+
+                <p class="small" id="rent_input_note" style="margin-top:10px;"></p>
+              </div>
+              <div></div>
             </div>
 
             <div class="subhead">Nicht umlagefähige Nebenkosten (Schätzung)</div>
 
             <div class="row">
-              <div><div class="label">Instandhaltungsrücklage</div><div class="hint">€/m² pro Monat (Liquidität: ja, Steuer: nein)</div></div>
+              <div><div class="label">Instandhaltungsrücklage</div><div class="hint">€/m² pro Monat (Liquidität: ja, Steuer: nein).</div></div>
               <div class="suffix"><input id="ih_qm" type="text" inputmode="decimal" value="0" autocomplete="off"><span>€</span></div>
             </div>
 
             <div class="row">
-              <div><div class="label">Verwaltung (pro Monat)</div><div class="hint">Liquidität: ja, Steuer: ja (absetzbar)</div></div>
+              <div><div class="label">Verwaltung (pro Monat)</div><div class="hint">Nicht umlagefähige Verwaltung (Liquidität: ja, Steuer: ja).</div></div>
               <div class="suffix">
                 <input id="verw" type="text" inputmode="numeric" value="0" autocomplete="off">
                 <span>€</span>
@@ -693,7 +760,7 @@
             <div class="subhead">Szenario</div>
 
             <div class="row" style="margin-bottom:0;">
-              <div><div class="label">Betrachtungsjahr</div><div class="hint">für KPIs/Steuerbox und Miete im Jahr (1 = wie Screenshot)</div></div>
+              <div><div class="label">Betrachtungsjahr</div><div class="hint">Jahr 1–20: bestimmt Miete/Steuerbox/KPIs für dieses Jahr.</div></div>
               <div class="suffix">
                 <input id="view_year" type="text" inputmode="numeric" value="1" autocomplete="off">
                 <span>J</span>
@@ -705,7 +772,7 @@
             <div class="ek-grid">
               <div class="ekbox">
                 <div class="label">Angenommene Wertsteigerung</div>
-                <div class="hint">p.a. in % (wirkt auf Wertkurve)</div>
+                <div class="hint">p.a. in % (nur Wertkurve, nicht Cashflow).</div>
                 <div class="suffix">
                   <input id="ass_wert_pct" type="text" inputmode="decimal" value="2,0" autocomplete="off">
                   <span>%</span>
@@ -714,7 +781,7 @@
 
               <div class="ekbox">
                 <div class="label">Angenommener Mietausfall</div>
-                <div class="hint">% vom Soll (wirkt auf Cashflow/Liquidität)</div>
+                <div class="hint">% vom Soll (reduziert Miete = Ist).</div>
                 <div class="suffix">
                   <input id="ass_ausfall_pct" type="text" inputmode="decimal" value="0,0" autocomplete="off">
                   <span>%</span>
@@ -725,21 +792,21 @@
             <div class="row" style="border-bottom:none; padding-bottom:0;">
               <div>
                 <div class="label">Mietsteigerung</div>
-                <div class="hint">jährlich oder Kappung (Sprung in Jahr 1, dann Jahr 4/7/10/...)</div>
+                <div class="hint">Entweder jährlich p.a. oder in 3-Jahres-Blöcken (Kappungslogik vereinfacht als Sprung).</div>
 
-                <div class="rent-radio">
-                  <label class="rent-radio-item">
+                <div style="display:flex; gap:12px; margin:10px 0 10px; align-items:center; flex-wrap:nowrap;">
+                  <label style="display:flex; align-items:center; gap:6px; font-weight:600; white-space:nowrap;">
                     <input type="radio" name="rentMode" value="pa" checked>
                     Jährlich
                   </label>
-                  <label class="rent-radio-item">
+                  <label style="display:flex; align-items:center; gap:6px; font-weight:600; white-space:nowrap;">
                     <input type="radio" name="rentMode" value="3y">
-                    15% innerhalb 3 Jahren (Kappung)
+                    % innerhalb&nbsp;3&nbsp;Jahren&nbsp;(Kappungsgrenze)
                   </label>
                 </div>
 
                 <div id="rent_pa_box">
-                  <div class="hint">jährliche Steigerung</div>
+                  <div class="hint">jährliche Steigerung p.a.</div>
                   <div class="suffix" style="max-width:220px;">
                     <input id="ass_miete_pct" type="text" inputmode="decimal" value="2,0" autocomplete="off">
                     <span>%</span>
@@ -780,49 +847,108 @@
           <h2>Ergebnisse</h2>
 
           <div class="result">
-            <div class="kpi"><div class="name">Kaufnebenkosten (Summe)</div><div class="val" id="out_nk_sum">0,00&nbsp;€</div></div>
+            <div class="kpi">
+              <div>
+                <div class="name">Kaufnebenkosten (Summe)</div>
+                <div class="hint">Notar+Grundbuch, GrESt, Makler (aus Prozenten berechnet).</div>
+              </div>
+              <div class="val" id="out_nk_sum">0,00&nbsp;€</div>
+            </div>
 
-            <div class="kpi"><div class="name">Notar &amp; Grundbuch</div><div class="val" id="out_nk_notar_line">0,00&nbsp;€</div></div>
-            <div class="kpi"><div class="name">Grunderwerbsteuer</div><div class="val" id="out_nk_grest_line">0,00&nbsp;€</div></div>
-            <div class="kpi"><div class="name">Makler</div><div class="val" id="out_nk_makler_line">0,00&nbsp;€</div></div>
+            <div class="kpi">
+              <div><div class="name">Notar &amp; Grundbuch</div><div class="hint">abgeleitet aus Kaufpreis * %.</div></div>
+              <div class="val" id="out_nk_notar_line">0,00&nbsp;€</div>
+            </div>
+            <div class="kpi">
+              <div><div class="name">Grunderwerbsteuer</div><div class="hint">abgeleitet aus Kaufpreis * %.</div></div>
+              <div class="val" id="out_nk_grest_line">0,00&nbsp;€</div>
+            </div>
+            <div class="kpi">
+              <div><div class="name">Makler</div><div class="hint">abgeleitet aus Kaufpreis * %.</div></div>
+              <div class="val" id="out_nk_makler_line">0,00&nbsp;€</div>
+            </div>
 
             <div class="kpi-divider"></div>
 
-            <div class="kpi"><div class="name">Eigenkapital</div><div class="val" id="out_ek">0,00&nbsp;€</div></div>
+            <div class="kpi">
+              <div><div class="name">Eigenkapital (Kauf)</div><div class="hint">EK-Anteil nur auf Kaufpreis (ohne NK/Capex).</div></div>
+              <div class="val" id="out_ek">0,00&nbsp;€</div>
+            </div>
+            <div class="kpi">
+              <div><div class="name">Zus. EK für Investition (Capex)</div><div class="hint">Nur wenn Capex „aus Eigenkapital“ gewählt ist.</div></div>
+              <div class="val" id="out_capex_ek">0,00&nbsp;€</div>
+            </div>
+            <div class="kpi">
+              <div><div class="name">EK gesamt</div><div class="hint">Eigenkapital (Kauf) + ggf. Capex-EK.</div></div>
+              <div class="val" id="out_ek_total">0,00&nbsp;€</div>
+            </div>
 
             <div class="kpi-divider"></div>
 
-            <div class="kpi"><div class="name">Kredit</div><div class="val" id="out_kredit">0,00&nbsp;€</div></div>
-            <div class="kpi"><div class="name">Rate</div><div class="val" id="out_rate">0,00&nbsp;€ / Monat</div></div>
+            <div class="kpi">
+              <div><div class="name">Kredit</div><div class="hint">(Kaufpreis − EK) + NK + ggf. Capex (mitfinanziert).</div></div>
+              <div class="val" id="out_kredit">0,00&nbsp;€</div>
+            </div>
+            <div class="kpi">
+              <div><div class="name">Rate</div><div class="hint">Annuität: Kredit * (Zins+Tilgung)/12.</div></div>
+              <div class="val" id="out_rate">0,00&nbsp;€ / Monat</div>
+            </div>
 
             <div class="kpi-divider"></div>
 
-            <div class="kpi"><div class="name">Miete (Betrachtungsjahr)</div><div class="val" id="out_miete_y">0,00&nbsp;€ / Monat</div></div>
-            <div class="kpi"><div class="name">Nicht umlagefähige NK</div><div class="val" id="out_nuk">0,00&nbsp;€ / Monat</div></div>
+            <div class="kpi">
+              <div><div class="name">Miete (Betrachtungsjahr)</div><div class="hint">Soll-Miete im Betrachtungsjahr inkl. Mietsteigerung und Miet-Boost (vor Mietausfall).</div></div>
+              <div class="val" id="out_miete_y">0,00&nbsp;€ / Monat</div>
+            </div>
+            <div class="kpi">
+              <div><div class="name">Nicht umlagefähige NK</div><div class="hint">Instandhaltungsrücklage + Verwaltung (monatlich).</div></div>
+              <div class="val" id="out_nuk">0,00&nbsp;€ / Monat</div>
+            </div>
 
             <div class="kpi-divider"></div>
 
-            <div class="kpi"><div class="name">Kaufpreis je m²</div><div class="val" id="out_price_qm">—</div></div>
-            <div class="kpi"><div class="name">Kaufpreisfaktor</div><div class="val" id="out_price_factor">—</div></div>
+            <div class="kpi">
+              <div><div class="name">Kaufpreis je m²</div><div class="hint">Kaufpreis / Wohnfläche.</div></div>
+              <div class="val" id="out_price_qm">—</div>
+            </div>
+            <div class="kpi">
+              <div><div class="name">Kaufpreisfaktor</div><div class="hint">Kaufpreis / Jahreskaltmiete (Start).</div></div>
+              <div class="val" id="out_price_factor">—</div>
+            </div>
 
             <div class="kpi-divider"></div>
 
             <div class="kpi" id="kpi_cashflow_bt">
-              <div class="name">Cashflow (vor Steuer)</div>
+              <div>
+                <div class="name">Cashflow (vor Steuer)</div>
+                <div class="hint">Ist-Miete − Rate − nicht umlagefähige NK − ggf. Capex-Cash-Out (vereinfacht in Jahr 1).</div>
+              </div>
               <div class="val" id="out_cashflow_bt">0,00&nbsp;€ / Monat</div>
             </div>
 
-            <div class="kpi"><div class="name">AfA (p.a.)</div><div class="val" id="out_afa">0,00&nbsp;€</div></div>
-            <div class="kpi"><div class="name">Steuerwirkung (p.a.)</div><div class="val" id="out_tax_effect">0,00&nbsp;€</div></div>
+            <div class="kpi">
+              <div><div class="name">AfA (p.a.)</div><div class="hint">AfA-Basis (KP+NK * Gebäudeanteil + ggf. aktivierter Capex) * AfA-Satz.</div></div>
+              <div class="val" id="out_afa">0,00&nbsp;€</div>
+            </div>
+            <div class="kpi">
+              <div><div class="name">Steuerwirkung (p.a.)</div><div class="hint">Vereinfachte Steuerzahlung (-) / Rückerstattung (+) aus steuerlichem Ergebnis.</div></div>
+              <div class="val" id="out_tax_effect">0,00&nbsp;€</div>
+            </div>
 
             <div class="kpi" id="kpi_liq_at">
-              <div class="name">Liquidität (nach Steuer)</div>
+              <div>
+                <div class="name">Liquidität (nach Steuer)</div>
+                <div class="hint">Cashflow (vor Steuer) + Steuerwirkung (auf Monatsbasis).</div>
+              </div>
               <div class="val" id="out_liq_at">0,00&nbsp;€ / Monat</div>
             </div>
 
-            <div class="kpi"><div class="name">Liquidität (nach Steuer, p.a.)</div><div class="val" id="out_liq_at_y">0,00&nbsp;€</div></div>
+            <div class="kpi">
+              <div><div class="name">Liquidität (nach Steuer, p.a.)</div><div class="hint">Liquidität nach Steuer pro Jahr.</div></div>
+              <div class="val" id="out_liq_at_y">0,00&nbsp;€</div>
+            </div>
 
-            <div class="taxbox" aria-label="Steuerbox wie Screenshot">
+            <div class="taxbox" aria-label="Steuerbox">
               <h3>Steuerliche Betrachtung <span style="font-weight:600; opacity:.85;">(Betrachtungsjahr: <span id="tax_year_label">1</span>)</span></h3>
 
               <div class="taxgrid">
@@ -833,7 +959,7 @@
 
               <div class="taxgrid">
                 <div class="k">Ausgaben: Abschreibung Immobilie (AfA)</div><div class="v" id="tax_out_afa">0,00 €</div>
-                <div class="k">Ausgaben: Kosten Modernisierung (sofort)</div><div class="v" id="tax_out_mod_immediate">0,00 €</div>
+                <div class="k">Ausgaben: Capex (sofort) / AfA (wenn aktiviert)</div><div class="v" id="tax_out_capex_immediate">0,00 €</div>
                 <div class="k">Ausgaben: Hausverwaltung</div><div class="v" id="tax_out_admin">0,00 €</div>
                 <div class="k">Ausgaben: Zinsen</div><div class="v" id="tax_out_interest">0,00 €</div>
               </div>
@@ -847,14 +973,20 @@
 
               <div class="taxhint" id="tax_hint">
                 Modell: Instandhaltungsrücklage ist Liquiditätsabfluss, aber steuerlich nicht absetzbar.
-                15%-Regel: Jahr 1–3 kumuliert; wenn &gt; 15% vom Gebäudeanteil der Anschaffungskosten → Aktivierung (AfA) statt Sofortabzug.
+                Capex wird vereinfacht behandelt: entweder sofort abziehbar (Erhaltungsaufwand) oder aktiviert (AfA-Basis).
               </div>
             </div>
 
             <div class="kpi-divider"></div>
 
-            <div class="kpi"><div class="name">Cashflow-Rendite (vor Steuer, p.a.)</div><div class="val" id="out_cf_yield">—</div></div>
-            <div class="kpi"><div class="name">Eigenkapitalrendite (vor Steuer, p.a.)</div><div class="val" id="out_roe">—</div></div>
+            <div class="kpi">
+              <div><div class="name">Cashflow-Rendite (vor Steuer, p.a.)</div><div class="hint">Cashflow vor Steuer (p.a.) / EK gesamt.</div></div>
+              <div class="val" id="out_cf_yield">—</div>
+            </div>
+            <div class="kpi">
+              <div><div class="name">Eigenkapitalrendite (vor Steuer, p.a.)</div><div class="hint">(Cashflow vor Steuer p.a. + Tilgung p.a.) / EK gesamt.</div></div>
+              <div class="val" id="out_roe">—</div>
+            </div>
 
             <div class="btnrow">
               <a class="btn" href="#kontakt">Objekt prüfen lassen</a>
@@ -868,6 +1000,7 @@
     </div>
   </main>
 
+  <!-- Prognose / Preise / Kontakt / Footer bleiben unverändert -->
   <section class="frame-gap" id="prognose">
     <div class="container">
       <div class="section-title">Prognose (20 Jahre)</div>
@@ -879,8 +1012,8 @@
           <p class="chart-title">Entwicklung (jährlich)</p>
           <canvas id="chartCashflow" aria-label="Liquidität nach Steuer / Miete p.a." role="img"></canvas>
           <div class="chart-note">
-            Linie 1: Liquidität nach Steuer p.a. (wie Steuerbox-Logik).
-            Linie 2: Miete p.a. (Soll). Annahmen werden oben im Eingabebereich gesteuert.
+            Linie 1: Liquidität nach Steuer p.a. (inkl. Steuerwirkung, inkl. Mietausfall).
+            Linie 2: Miete p.a. (Soll, ohne Mietausfall).
           </div>
         </div>
 
@@ -888,36 +1021,71 @@
           <p class="chart-title">Wertentwicklung vs. Restschuld (jährlich)</p>
           <canvas id="chartValueDebt" aria-label="Wert vs Restschuld" role="img"></canvas>
           <div class="chart-note">
-            Restschuld: Annuität mit konstanter Rate. Wert: Kaufpreis (ohne NK/Sanierung) mit Wertsteigerung (p.a.).
+            Restschuld: Annuität mit konstanter Rate. Wert: Kaufpreis (ohne NK/Capex) mit Wertsteigerung (p.a.).
           </div>
         </div>
 
         <div class="chart-wrap" aria-label="Beschreibung Eingaben und Ausgaben">
-          <p class="chart-title">Feldbeschreibung (kurz)</p>
+          <p class="chart-title">Feldbeschreibung (vollständig)</p>
 
           <div class="desc-wrap">
             <div class="desc-block">
               <h3>Eingaben</h3>
               <ul>
-                <li><code>Betrachtungsjahr</code>: Jahr, für das KPIs &amp; Steuerbox gerechnet werden (Miete wird auf dieses Jahr hochgerechnet).</li>
-                <li><code>Wertsteigerung</code>: beeinflusst nur die Wertkurve (und damit z.B. Equity/Restschuld-Gefühl, nicht die Liquidität).</li>
-                <li><code>Mietsteigerung</code>: beeinflusst Miete im Betrachtungsjahr und damit Cashflow/Liquidität.</li>
-                <li><code>Mietausfall</code>: reduziert Miete (Ist) in Betrachtungsjahr und Prognose.</li>
+                <li><code>Kaufpreis</code>: Basis für Kredit, EK und Kennzahlen (ohne NK/Capex).</li>
+                <li><code>Baujahr</code>: bestimmt AfA-Satz (vereinfachtes Modell).</li>
+                <li><code>Gebäudeanteil (%)</code>: Anteil der AK, der als Gebäude (AfA) angesetzt wird.</li>
+                <li><code>Grenzsteuersatz</code>: steuert Steuerwirkung (ohne Soli/KiSt).</li>
+                <li><code>Eigenkapital (%)</code>: EK-Anteil vom Kaufpreis (ignoriert bei EK € &gt; 0).</li>
+                <li><code>Eigenkapital (€)</code>: Fixbetrag, hat Vorrang vor EK %.</li>
+                <li><code>Notar &amp; Grundbuch (%)</code>: Kaufnebenkosten, werden in Kredit mitfinanziert.</li>
+                <li><code>Grunderwerbsteuer (%)</code>: Kaufnebenkosten, werden in Kredit mitfinanziert.</li>
+                <li><code>Makler (%)</code>: optional, Kaufnebenkosten.</li>
+                <li><code>Investitionsbudget gesamt</code>: Capex – je nach Finanzierung Cash-Out oder Rate.</li>
+                <li><code>Finanzierung der Investition</code>: EK (Liquidität) vs. mitfinanziert (Kredit/Rate).</li>
+                <li><code>Miet-Boost (optional)</code>: zusätzliche monatliche Kaltmiete durch Maßnahmen.</li>
+                <li><code>Zins</code>: Nominalzins p.a. für Rate, Zinsen in Steuerbox und Restschuldkurve.</li>
+                <li><code>Tilgung</code>: anfängliche Tilgung p.a. für Annuitätenrate.</li>
+                <li><code>Wohnfläche</code>: m² für Miete €/m² und Rücklage €/m².</li>
+                <li><code>Miete €/m²</code>: Soll-Kaltmiete pro m² (wird aus Monat/Jahr berechnet, wenn dort zuletzt geändert).</li>
+                <li><code>Miete Monat</code>: alternative Soll-Netto-Kaltmiete pro Monat.</li>
+                <li><code>Miete Jahr</code>: alternative Soll-Netto-Kaltmiete pro Jahr.</li>
+                <li><code>Instandhaltungsrücklage €/m²</code>: Liquiditätsabfluss, steuerlich nicht absetzbar (vereinfachend).</li>
+                <li><code>Verwaltung (Monat)</code>: nicht umlagefähige Verwaltung, steuerlich absetzbar.</li>
+                <li><code>Betrachtungsjahr</code>: Jahr (1–20) für KPIs/Steuerbox und „Miete im Jahr“.</li>
+                <li><code>Wertsteigerung</code>: beeinflusst nur die Wertkurve (nicht Cashflow).</li>
+                <li><code>Mietausfall</code>: reduziert Soll-Miete zu Ist-Miete (wirkt direkt auf Cashflow).</li>
+                <li><code>Mietsteigerung</code>: jährlich p.a. oder 3-Jahres-Block (Sprungmodell).</li>
               </ul>
             </div>
 
             <div class="desc-block">
               <h3>Ausgaben/Ergebnisse</h3>
               <ul>
-                <li><code>Cashflow (vor Steuer)</code>: Miete (Ist) − Rate − nicht umlagefähige NK − ggf. Modernisierung im Betrachtungsjahr.</li>
-                <li><code>Steuerwirkung</code>: geschätzte Steueränderung im Betrachtungsjahr (Zahlung − / Erstattung +).</li>
-                <li><code>Liquidität (nach Steuer)</code>: Cashflow vor Steuer + Steuerwirkung.</li>
+                <li><code>Kaufnebenkosten (Summe)</code>: Notar+GrESt+Makler (aus % berechnet).</li>
+                <li><code>Eigenkapital (Kauf)</code>: EK-Anteil am Kaufpreis.</li>
+                <li><code>Zus. EK Capex</code>: Capex als EK (nur bei Capex=EK).</li>
+                <li><code>EK gesamt</code>: EK (Kauf) + Capex-EK.</li>
+                <li><code>Kredit</code>: (Kaufpreis − EK) + NK + ggf. Capex (mitfinanziert).</li>
+                <li><code>Rate</code>: Annuität pro Monat (Zins+Tilgung).</li>
+                <li><code>Miete (Betrachtungsjahr)</code>: Soll-Miete im Jahr (inkl. Mietsteigerung + Miet-Boost).</li>
+                <li><code>Nicht umlagefähige NK</code>: Rücklage + Verwaltung (monatlich).</li>
+                <li><code>Kaufpreis je m²</code>: Kaufpreis / Wohnfläche.</li>
+                <li><code>Kaufpreisfaktor</code>: Kaufpreis / Jahreskaltmiete (Start).</li>
+                <li><code>Cashflow (vor Steuer)</code>: Ist-Miete − Rate − nicht umlagefähige NK − ggf. Capex-Cash-Out (Jahr 1).</li>
+                <li><code>AfA (p.a.)</code>: Abschreibung aus AfA-Basis und AfA-Satz.</li>
+                <li><code>Steuerwirkung (p.a.)</code>: vereinfachte Steuerzahlung (-) / Rückerstattung (+).</li>
+                <li><code>Liquidität (nach Steuer)</code>: Cashflow vor Steuer + Steuerwirkung (monatlich).</li>
+                <li><code>Liquidität (nach Steuer, p.a.)</code>: Liquidität nach Steuer pro Jahr.</li>
+                <li><code>Steuerbox</code>: zeigt Einnahmen, AfA, Capex (sofort), Verwaltung, Zinsen, Ergebnis und Steuerwirkung.</li>
+                <li><code>Cashflow-Rendite</code>: Cashflow vor Steuer p.a. / EK gesamt.</li>
+                <li><code>Eigenkapitalrendite</code>: (Cashflow p.a. + Tilgung p.a.) / EK gesamt.</li>
               </ul>
             </div>
           </div>
 
           <div class="chart-note">
-            Hinweis: Das Modell ist bewusst vereinfacht (keine umlagefähigen NK, keine exakten Zahlungszeitpunkte, keine Soli/KiSt).
+            Hinweis: bewusst vereinfacht (keine umlagefähigen NK, keine Soli/KiSt, Capex steuerlich nur als Näherung, Mietsteigerung 3y als Sprung).
           </div>
         </div>
 
@@ -925,14 +1093,11 @@
     </div>
   </section>
 
-  <!-- ===== Beratungsleistungen ===== -->
   <section class="frame-gap" id="preise">
     <div class="container">
       <div class="section-title">Beratungsleistungen</div>
-
       <div class="pricing-panel">
-        <h2>Beratungsleistungen</h2>
-
+        <!-- zweite Überschrift entfernt -->
         <div class="price-table">
           <div class="price-col">
             <div class="kicker">Kostenloser Objektcheck</div>
@@ -971,7 +1136,7 @@
             <div class="col-desc">Maximierung der wirtschaftlichen Ergebnisse. Durch strukturierte Immobilienoptimierung werden Betriebskosten reduziert und Erträge langfristig gesteigert.</div>
             <ul class="checks">
               <li><span class="dot"></span><span>Analyse von Mietniveau und Erlösstruktur</span></li>
-              <li><span class="dot"></span><span>Prüfung laufender Kosten und Dienstleisterverträge</span></li>
+              <li><span class="dot"></span><span>Prüfung laufender Kosten und Dienstleistern</span></li>
               <li><span class="dot"></span><span>Bewertung von Optimierungs- und Entwicklungspotenzialen</span></li>
               <li><span class="dot"></span><span>Priorisierung wirtschaftlich sinnvoller Maßnahmen</span></li>
               <li><span class="dot"></span><span>Optional: Prüfung der aktuellen Hausverwaltung</span></li>
@@ -998,7 +1163,6 @@
     </div>
   </section>
 
-  <!-- ===== Kontakt ===== -->
   <section class="frame-gap" id="kontakt">
     <div class="container">
       <div class="section-title">Kontakt</div>
@@ -1093,18 +1257,64 @@
       return Math.max(0, parseDeNumber(input.value));
     }
 
+    function getCapexMode(){
+      return document.querySelector('input[name="capexMode"]:checked')?.value || "equity";
+    }
+
+    function getRentInputMode(){
+      return document.querySelector('input[name="rentInputMode"]:checked')?.value || "perqm";
+    }
+
+    function updateRentInputVisuals(){
+      const mode = getRentInputMode();
+      const qm = el("miete_qm");
+      if (!qm) return;
+
+      const auto = (mode !== "perqm");
+      qm.classList.toggle("auto-muted", auto);
+      qm.readOnly = auto;
+      qm.setAttribute("aria-readonly", auto ? "true" : "false");
+      qm.title = auto ? "Wird automatisch aus Monats-/Jahresmiete und Wohnfläche berechnet." : "";
+    }
+
+    function setRentInputMode(mode){
+      const perqm = document.querySelector('input[name="rentInputMode"][value="perqm"]');
+      const mon = document.querySelector('input[name="rentInputMode"][value="month"]');
+      const yr = document.querySelector('input[name="rentInputMode"][value="year"]');
+      if (!perqm || !mon || !yr) return;
+
+      if (mode === "month") mon.checked = true;
+      else if (mode === "year") yr.checked = true;
+      else perqm.checked = true;
+
+      const m = getRentInputMode();
+      const boxM = el("rent_month_box");
+      const boxY = el("rent_year_box");
+      if (boxM) boxM.style.display = (m === "month") ? "block" : "none";
+      if (boxY) boxY.style.display = (m === "year") ? "block" : "none";
+
+      const note = el("rent_input_note");
+      if (note){
+        if (m === "perqm") note.textContent = "Berechnung: Monats-/Jahresmiete werden aus €/m² und Wohnfläche berechnet.";
+        if (m === "month") note.textContent = "Berechnung: €/m² und Jahresmiete werden aus der Monatsmiete und Wohnfläche berechnet.";
+        if (m === "year") note.textContent = "Berechnung: €/m² und Monatsmiete werden aus der Jahresmiete und Wohnfläche berechnet.";
+      }
+
+      updateRentInputVisuals();
+    }
+
     const ids = [
       "kaufpreis","baujahr","geb_anteil_pct","tax_pct",
-      "ek_pct","ek_eur","nk_notar_pct","nk_grest_pct","nk_makler_pct","sanierung",
-      "modern_y1","modern_y2","modern_y3",
+      "ek_pct","ek_eur","nk_notar_pct","nk_grest_pct","nk_makler_pct",
+      "capex_total","capex_rent_uplift",
       "zins_pct","tilgung_pct",
-      "wf","miete_qm","ih_qm","verw",
+      "wf","miete_qm","miete_monat","miete_jahr","ih_qm","verw",
       "view_year",
       "ass_wert_pct","ass_miete_pct","ass_miete_3y_pct","ass_ausfall_pct"
     ];
 
     const fmtNoGroupYearIds = new Set(["baujahr","view_year"]);
-    const fmtIntIds = new Set(["kaufpreis","ek_eur","sanierung","verw","modern_y1","modern_y2","modern_y3"]);
+    const fmtIntIds = new Set(["kaufpreis","ek_eur","capex_total","capex_rent_uplift","verw","miete_monat","miete_jahr"]);
     const fmtDecIds = new Set([
       "geb_anteil_pct","tax_pct","ek_pct","nk_notar_pct","nk_grest_pct","nk_makler_pct","zins_pct","tilgung_pct",
       "wf","miete_qm","ih_qm","ass_wert_pct","ass_miete_pct","ass_miete_3y_pct","ass_ausfall_pct"
@@ -1124,10 +1334,21 @@
       node.value = formatValueForInput(id, v);
     }
 
-    function attachAutoFormat(id){
+    // =============================
+    // 🔧 Fix: Mietfelder nicht doppelt "calc()"en
+    // =============================
+    const rentSensitiveIds = new Set(["miete_qm","miete_monat","miete_jahr","wf"]);
+
+    function attachAutoFormat(id, opts = {}){
       const node = el(id);
       if (!node) return;
-      node.addEventListener("input", () => calc());
+
+      // Standard: calc bei input
+      if (!opts.skipInputCalc){
+        node.addEventListener("input", () => calc());
+      }
+
+      // immer: beim Verlassen formatieren + calc
       node.addEventListener("blur", () => {
         formatInput(id);
         calc();
@@ -1171,11 +1392,10 @@
       return (y > 0 && y < 1925) ? 0.025 : 0.02;
     }
 
-    function compute15Rule(baseBuildingAcq, m1, m2, m3){
-      const sum = Math.max(0,m1) + Math.max(0,m2) + Math.max(0,m3);
-      const threshold = Math.max(0, baseBuildingAcq) * 0.15;
-      const capitalized = (sum > threshold) && sum > 0 && threshold > 0;
-      return { sum, threshold, capitalized };
+    function capexIsCapitalized(capexTotal, buildingBase){
+      const threshold = Math.max(0, buildingBase) * 0.15;
+      if (threshold <= 0) return false;
+      return capexTotal > threshold && capexTotal > 0;
     }
 
     function rentSollMonatForYear(mieteStartMonat, y){
@@ -1184,7 +1404,7 @@
       const rentMode = document.querySelector('input[name="rentMode"]:checked')?.value || "pa";
       if (rentMode === "3y"){
         const K = Math.max(0, parseDeNumber(el("ass_miete_3y_pct").value))/100;
-        const blocks = Math.floor((y + 2) / 3); // y=1..3 => 1, y=4..6 => 2, ...
+        const blocks = Math.floor((y + 2) / 3);
         return mieteStartMonat * Math.pow(1 + K, blocks);
       }
 
@@ -1228,16 +1448,15 @@
       const afaRate = state.afaRate;
       const afaBaseBuildingAcq = state.afaBaseBuildingAcq;
 
-      const m1 = state.mod1, m2 = state.mod2, m3 = state.mod3;
-      const rule = compute15Rule(afaBaseBuildingAcq, m1, m2, m3);
+      const capexTotal = state.capexTotal;
+      const capexCap = state.capexCapitalized;
+      const adminYearStatic = state.verwMonat * 12;
 
       const labels = [];
       const liqAfterTax = [];
       const rentYearly = [];
       const values = [];
       const debt = [];
-
-      let capexCum = 0;
 
       for (let y = 0; y <= years; y++){
         labels.push(fmtYear(y));
@@ -1255,23 +1474,16 @@
         const annuityYear = rateMonat * 12;
         const interestYear = restStart * z;
 
-        let modernCash = 0;
-        if (y === 1) modernCash = m1;
-        if (y === 2) modernCash = m2;
-        if (y === 3) modernCash = m3;
+        const capexCashOut = (y === 0 && state.capexMode === "equity") ? capexTotal : 0;
 
-        let deductibleModern = 0;
-        if (modernCash > 0){
-          if (rule.capitalized) capexCum += modernCash;
-          else deductibleModern = modernCash;
-        }
+        const capexDeduct = (!capexCap && y === 0) ? capexTotal : 0;
+        const capexAfaAdd = (capexCap ? capexTotal : 0);
 
-        const afaYear = (afaBaseBuildingAcq + capexCum) * afaRate;
+        const afaYear = (afaBaseBuildingAcq + capexAfaAdd) * afaRate;
 
-        const liqBT = rentIstYear - nukMonat0*12 - annuityYear - modernCash;
+        const liqBT = rentIstYear - nukMonat0*12 - annuityYear - capexCashOut;
 
-        const adminYear = state.verwMonat * 12;
-        const taxable = rentIstYear - adminYear - interestYear - afaYear - deductibleModern;
+        const taxable = rentIstYear - adminYearStatic - interestYear - afaYear - capexDeduct;
         const taxEffect = -taxRate * taxable;
 
         liqAfterTax.push(liqBT + taxEffect);
@@ -1345,9 +1557,8 @@
       baujahr: "1900",
       geb_anteil_pct: "70,0",
       tax_pct: "42,0",
-      modern_y1: "0",
-      modern_y2: "0",
-      modern_y3: "0",
+      capex_total: "0",
+      capex_rent_uplift: "0",
       view_year: "1",
       ...forecastDefaults
     };
@@ -1362,14 +1573,14 @@
       nk_notar_pct: "2,0",
       nk_grest_pct: "5,5",
       nk_makler_pct: "0,0",
-      sanierung: "0",
-      modern_y1: "0",
-      modern_y2: "0",
-      modern_y3: "0",
+      capex_total: "0",
+      capex_rent_uplift: "0",
       zins_pct: "2,7",
       tilgung_pct: "2,0",
       wf: "70",
       miete_qm: "9,0",
+      miete_monat: "0",
+      miete_jahr: "0",
       ih_qm: "1,0",
       verw: "30",
       view_year: "1",
@@ -1386,14 +1597,14 @@
       nk_notar_pct: "2,0",
       nk_grest_pct: "5,0",
       nk_makler_pct: "0,0",
-      sanierung: "0",
-      modern_y1: "0",
-      modern_y2: "0",
-      modern_y3: "0",
+      capex_total: "0",
+      capex_rent_uplift: "0",
       zins_pct: "2,7",
       tilgung_pct: "2,0",
       wf: "70",
       miete_qm: "8,0",
+      miete_monat: "0",
+      miete_jahr: "0",
       ih_qm: "1,0",
       verw: "30",
       view_year: "1",
@@ -1410,14 +1621,14 @@
       nk_notar_pct: "2,0",
       nk_grest_pct: "5,5",
       nk_makler_pct: "0,0",
-      sanierung: "0",
-      modern_y1: "0",
-      modern_y2: "0",
-      modern_y3: "0",
+      capex_total: "0",
+      capex_rent_uplift: "0",
       zins_pct: "2,7",
       tilgung_pct: "2,0",
       wf: "70",
       miete_qm: "10,0",
+      miete_monat: "0",
+      miete_jahr: "0",
       ih_qm: "1,0",
       verw: "30",
       view_year: "1",
@@ -1427,10 +1638,84 @@
     function applyDefaults(obj){
       Object.entries(obj).forEach(([k,v]) => { if (el(k)) el(k).value = String(v); });
       ids.forEach(id => formatInput(id));
+      const m = document.querySelector('input[name="capexMode"][value="equity"]');
+      if (m) m.checked = true;
+
+      setRentInputMode("perqm");
+
+      // nach Defaults: Quelle ist €/m² (sauberer Start)
+      lastRentEdited = "perqm";
+      syncRentFields();
+
       calc();
     }
 
+    // =====================================================
+    // ✅ BIDIREKTIONAL (Quelle = zuletzt geändertes Feld)
+    // =====================================================
+    let rentSyncLock = false;
+    let lastRentEdited = "perqm"; // "perqm" | "month" | "year"
+
+    function setIfNotActive(node, valueString){
+      if (!node) return;
+      if (document.activeElement === node) return;
+      node.value = valueString;
+    }
+
+    function syncRentFields(){
+      if (rentSyncLock) return;
+      rentSyncLock = true;
+
+      try{
+        updateRentInputVisuals();
+
+        const area = Math.max(0, parseDeNumber(el("wf")?.value));
+        const qmEl = el("miete_qm");
+        const monEl = el("miete_monat");
+        const yrEl = el("miete_jahr");
+
+        if (!qmEl || !monEl || !yrEl) return;
+
+        // Werte lesen (roh)
+        const q = Math.max(0, parseDeNumber(qmEl.value));
+        const m = Math.max(0, parseDeNumber(monEl.value));
+        const y = Math.max(0, parseDeNumber(yrEl.value));
+
+        // Year/Month sind auch ohne Fläche gegenseitig berechenbar
+        if (lastRentEdited === "year"){
+          const mon = y / 12;
+          setIfNotActive(monEl, formatValueForInput("miete_monat", mon));
+          if (area > 0){
+            const rentqm = mon / area;
+            setIfNotActive(qmEl, formatValueForInput("miete_qm", rentqm));
+          }
+          return;
+        }
+
+        if (lastRentEdited === "month"){
+          setIfNotActive(yrEl, formatValueForInput("miete_jahr", m * 12));
+          if (area > 0){
+            setIfNotActive(qmEl, formatValueForInput("miete_qm", m / area));
+          }
+          return;
+        }
+
+        // perqm
+        if (area > 0){
+          const mon = q * area;
+          setIfNotActive(monEl, formatValueForInput("miete_monat", mon));
+          setIfNotActive(yrEl, formatValueForInput("miete_jahr", mon * 12));
+        }
+      } finally {
+        rentSyncLock = false;
+      }
+    }
+    // =====================================================
+
     function calc(){
+      // vor der Rechnung: Mieten konsistent halten
+      syncRentFields();
+
       const kp = numInput(el("kaufpreis"));
 
       const ekEurRaw = numInput(el("ek_eur"));
@@ -1451,16 +1736,27 @@
       const makler = kp * (maklerPct/100);
       const nkSum = notar + grest + makler;
 
-      const sani = numInput(el("sanierung"));
-      const kredit = Math.max(0, (kp - ek) + nkSum + sani);
+      const capexTotal = numInput(el("capex_total"));
+      const capexMode = getCapexMode();
+      const capexRentUplift = numInput(el("capex_rent_uplift"));
+
+      const capexEk = (capexMode === "equity") ? capexTotal : 0;
+      const capexDebt = (capexMode === "debt") ? capexTotal : 0;
+
+      const kredit = Math.max(0, (kp - ek) + nkSum + capexDebt);
 
       const z = Math.max(0, parseDeNumber(el("zins_pct").value))/100;
       const t = Math.max(0, parseDeNumber(el("tilgung_pct").value))/100;
       const rate = kredit * (z + t) / 12;
 
       const area = Math.max(0, parseDeNumber(el("wf").value));
-      const rentqm = Math.max(0, parseDeNumber(el("miete_qm").value));
-      const mieteMonat0 = area * rentqm;
+
+      // ✅ Ab hier nutzen wir IMMER die synchronisierten Felder (qm/monat/jahr)
+      const rentQmEff = Math.max(0, parseDeNumber(el("miete_qm").value));
+      const mieteMonat0_base = (area > 0) ? (area * rentQmEff) : 0;
+
+      // Boost wird immer zusätzlich addiert
+      const mieteMonat0 = mieteMonat0_base + capexRentUplift;
 
       const ihqm = Math.max(0, parseDeNumber(el("ih_qm").value));
       const ruecklageMonat = area * ihqm;
@@ -1472,27 +1768,21 @@
       const gebAnteil = Math.min(100, Math.max(0, parseDeNumber(el("geb_anteil_pct").value))) / 100;
       const afaRate = getAfaRateFromYear(baujahr);
 
-      const afaBaseBuildingAcq = (kp + nkSum + sani) * gebAnteil;
+      const afaBaseBuildingAcq = (kp + nkSum) * gebAnteil;
+      const capexCap = capexIsCapitalized(capexTotal, afaBaseBuildingAcq);
+      const capexAfaAdd = capexCap ? capexTotal : 0;
+      const capexDeductImmediate = capexCap ? 0 : capexTotal;
 
-      const mod1 = numInput(el("modern_y1"));
-      const mod2 = numInput(el("modern_y2"));
-      const mod3 = numInput(el("modern_y3"));
-      const rule = compute15Rule(afaBaseBuildingAcq, mod1, mod2, mod3);
-
-      const ruleTxt = (afaBaseBuildingAcq <= 0)
-        ? "15%-Regel: erst sinnvoll, wenn Kaufpreis/NK/Sanierung > 0."
-        : `15%-Regel (Jahr 1–3 kumuliert): Summe ${eur(rule.sum)} | Schwelle ${eur(rule.threshold)} | Behandlung: ${rule.capitalized ? "Aktivierung (AfA)" : "Sofort abziehbar"}`;
-      if (el("out_15rule_note")) el("out_15rule_note").textContent = ruleTxt;
+      const capexNote = (capexTotal <= 0)
+        ? ""
+        : `Capex: ${eur(capexTotal)} | Finanzierung: ${capexMode === "equity" ? "Eigenkapital (einmalig)" : "mitfinanziert (Rate)"} | steuerlich: ${capexCap ? "Aktivierung (AfA)" : "Sofort (vereinfachend)"}`;
+      if (el("out_capex_note")) el("out_capex_note").textContent = capexNote;
 
       const viewYearRaw = parseDeNumber(el("view_year")?.value);
       const viewYear = Math.max(1, Math.min(20, Math.round(viewYearRaw || 1)));
-
       if (el("tax_year_label")) el("tax_year_label").textContent = String(viewYear);
-
       const vyEl = el("view_year");
-      if (vyEl && document.activeElement !== vyEl) {
-        vyEl.value = String(viewYear);
-      }
+      if (vyEl && document.activeElement !== vyEl) vyEl.value = String(viewYear);
 
       const assAusfall = Math.min(100, Math.max(0, parseDeNumber(el("ass_ausfall_pct").value)))/100;
 
@@ -1504,36 +1794,28 @@
       const annuityYear = rate * 12;
       const interestYear = restStart * z;
 
-      let modernCash = 0;
-      if (viewYear === 1) modernCash = mod1;
-      if (viewYear === 2) modernCash = mod2;
-      if (viewYear === 3) modernCash = mod3;
-
-      let capexCum = 0;
-      if (rule.capitalized){
-        if (viewYear >= 1) capexCum += mod1;
-        if (viewYear >= 2) capexCum += mod2;
-        if (viewYear >= 3) capexCum += mod3;
-      }
-
-      const deductibleModern = rule.capitalized ? 0 : modernCash;
-      const afaYear = (afaBaseBuildingAcq + capexCum) * afaRate;
+      const afaYear = (afaBaseBuildingAcq + capexAfaAdd) * afaRate;
 
       const adminYear = verwMonat * 12;
       const taxRate = Math.min(100, Math.max(0, parseDeNumber(el("tax_pct").value))) / 100;
 
-      const taxable = rentIstYear - interestYear - adminYear - afaYear - deductibleModern;
+      const capexDeductInYear = (!capexCap && viewYear === 1) ? capexDeductImmediate : 0;
+
+      const taxable = rentIstYear - interestYear - adminYear - afaYear - capexDeductInYear;
       const taxEffect = -taxRate * taxable;
 
-      const liqBT = rentIstYear - annuityYear - (nukSum*12) - modernCash;
+      const capexCashOutYear = (capexMode === "equity" && viewYear === 1) ? capexTotal : 0;
+      const liqBT = rentIstYear - annuityYear - (nukSum*12) - capexCashOutYear;
       const liqAT = liqBT + taxEffect;
 
       const cashflowBT_mon = liqBT / 12;
       const liqAT_mon = liqAT / 12;
 
-      const cfYield = ek > 0 ? (cashflowBT_mon * 12 / ek) * 100 : null;
+      const ekTotal = ek + capexEk;
+
+      const cfYield = ekTotal > 0 ? (cashflowBT_mon * 12 / ekTotal) * 100 : null;
       const tilgungP_a = kredit * t;
-      const roe = ek > 0 ? ((cashflowBT_mon * 12 + tilgungP_a) / ek) * 100 : null;
+      const roe = ekTotal > 0 ? ((cashflowBT_mon * 12 + tilgungP_a) / ekTotal) * 100 : null;
 
       el("out_nk_sum").textContent = eur(nkSum);
       el("out_nk_notar_line").textContent = eur(notar);
@@ -1541,6 +1823,9 @@
       el("out_nk_makler_line").textContent = eur(makler);
 
       el("out_ek").textContent = eur(ek);
+      el("out_capex_ek").textContent = eur(capexEk);
+      el("out_ek_total").textContent = eur(ekTotal);
+
       el("out_kredit").textContent = eur(kredit);
       el("out_rate").textContent = eurPerMonth(rate);
 
@@ -1549,8 +1834,8 @@
 
       el("out_price_qm").textContent = (area > 0 && kp > 0) ? (nf2.format(kp / area) + " € / m²") : "—";
 
-      const annualRentStart = mieteMonat0 * 12;
-      el("out_price_factor").textContent = (kp > 0 && annualRentStart > 0) ? (nf2plain.format(kp / annualRentStart) + " x") : "—";
+      const annualRentStartFromQm = (area * rentQmEff) * 12;
+      el("out_price_factor").textContent = (kp > 0 && annualRentStartFromQm > 0) ? (nf2plain.format(kp / annualRentStartFromQm) + " x") : "—";
 
       el("out_cashflow_bt").textContent = eurPerMonth(cashflowBT_mon);
       el("out_afa").textContent = eur(afaYear);
@@ -1560,7 +1845,7 @@
 
       el("tax_in_rent").textContent = eur(rentIstYear);
       el("tax_out_afa").textContent = eur(afaYear);
-      el("tax_out_mod_immediate").textContent = eur(deductibleModern);
+      el("tax_out_capex_immediate").textContent = eur(capexDeductInYear);
       el("tax_out_admin").textContent = eur(adminYear);
       el("tax_out_interest").textContent = eur(interestYear);
       el("tax_profit").textContent = eur(taxable);
@@ -1578,9 +1863,9 @@
       el("out_roe").textContent = (roe === null) ? "—" : pct(roe);
 
       const note =
-        (kp===0 && area===0 && rentqm===0 && z===0 && t===0)
+        (kp===0 && area===0 && rentQmEff===0 && z===0 && t===0)
           ? "Trage Werte ein, um eine Erstabschätzung zu erhalten."
-          : `Betrachtungsjahr = ${viewYear}: Miete & Mietausfall wirken auf Cashflow/Liquidität im Jahr. Wertsteigerung wirkt auf die Wertkurve.`;
+          : `Betrachtungsjahr = ${viewYear} | Mieten sind bidirektional synchronisiert (€/m² ↔ Monat ↔ Jahr).`;
       if (el("out_note")) el("out_note").textContent = note;
 
       if (ekEurRaw > 0 && kp > 0){
@@ -1603,27 +1888,63 @@
         taxRate,
         afaRate,
         afaBaseBuildingAcq,
-        mod1, mod2, mod3
+        capexTotal,
+        capexCapitalized: capexCap,
+        capexMode
       });
     }
 
     function bind(){
-      ids.forEach(id => attachAutoFormat(id));
+      // Standard-Felder: auto-calc auf input
+      ids.forEach(id => {
+        const skipInputCalc = rentSensitiveIds.has(id); // ✅ Fix
+        attachAutoFormat(id, { skipInputCalc });
+      });
 
       const vy = el("view_year");
       if (vy){
         vy.addEventListener("input", () => {
           const y = Math.max(1, Math.min(20, Math.round(parseDeNumber(vy.value) || 1)));
           if (el("tax_year_label")) el("tax_year_label").textContent = String(y);
+          calc();
         });
       }
 
+      // ✅ EINZIGE Quelle der Synchronisierung (keine doppelten calc()-Listener mehr)
+      el("miete_qm")?.addEventListener("input", () => { lastRentEdited = "perqm"; syncRentFields(); calc(); });
+      el("miete_monat")?.addEventListener("input", () => { lastRentEdited = "month"; syncRentFields(); calc(); });
+      el("miete_jahr")?.addEventListener("input", () => { lastRentEdited = "year"; syncRentFields(); calc(); });
+
+      // Fläche ändert alle Umrechnungen
+      el("wf")?.addEventListener("input", () => { syncRentFields(); calc(); });
+
+      // Blur sauber formatieren + nach-sync
+      ["miete_qm","miete_monat","miete_jahr","wf"].forEach(id => {
+        el(id)?.addEventListener("blur", () => {
+          formatInput(id);
+          syncRentFields();
+          calc();
+        });
+      });
+
+      document.querySelectorAll('input[name="capexMode"]').forEach(r => {
+        r.addEventListener("change", () => calc());
+      });
+
+      document.querySelectorAll('input[name="rentInputMode"]').forEach(r => {
+        r.addEventListener("change", () => {
+          setRentInputMode(getRentInputMode());
+          syncRentFields();
+          calc();
+        });
+      });
+
       attachShiftArrowBoost(el("kaufpreis"), 1000);
-      attachShiftArrowBoost(el("sanierung"), 1000);
+      attachShiftArrowBoost(el("capex_total"), 1000);
+      attachShiftArrowBoost(el("capex_rent_uplift"), 10);
       attachShiftArrowBoost(el("verw"), 10);
-      attachShiftArrowBoost(el("modern_y1"), 1000);
-      attachShiftArrowBoost(el("modern_y2"), 1000);
-      attachShiftArrowBoost(el("modern_y3"), 1000);
+      attachShiftArrowBoost(el("miete_monat"), 50);
+      attachShiftArrowBoost(el("miete_jahr"), 500);
 
       document.querySelectorAll('input[name="rentMode"]').forEach(r => {
         r.addEventListener("change", () => {
@@ -1653,12 +1974,17 @@
       });
 
       el("copyBtn").addEventListener("click", async () => {
-        const lines = [];
+        const rentMode = getRentInputMode();
+        const rentModeLabel = rentMode === "month" ? "Monatsmiete" : rentMode === "year" ? "Jahresmiete" : "€/m²";
 
+        const lines = [];
         lines.push("Cashflow-Rechner (Grundmann Consulting)");
         lines.push("");
         lines.push("Eingaben");
         lines.push(`- Kaufpreis: ${el("kaufpreis").value} €`);
+        lines.push(`- Capex (Investition): ${el("capex_total").value} €`);
+        lines.push(`- Capex Finanzierung: ${getCapexMode()==="equity" ? "Eigenkapital" : "mitfinanziert"}`);
+        lines.push(`- Miet-Boost (monatl.): ${el("capex_rent_uplift").value} €`);
         lines.push(`- Baujahr: ${el("baujahr").value}`);
         lines.push(`- Gebäudeanteil: ${el("geb_anteil_pct").value} %`);
         lines.push(`- Grenzsteuersatz: ${el("tax_pct").value} %`);
@@ -1667,51 +1993,29 @@
         lines.push(`- Notar & Grundbuch (%): ${el("nk_notar_pct").value} %`);
         lines.push(`- Grunderwerbsteuer (%): ${el("nk_grest_pct").value} %`);
         lines.push(`- Makler (%): ${el("nk_makler_pct").value} %`);
-        lines.push(`- Sanierungskosten (AK): ${el("sanierung").value} €`);
-        lines.push(`- Modernisierung Jahr 1: ${el("modern_y1").value} €`);
-        lines.push(`- Modernisierung Jahr 2: ${el("modern_y2").value} €`);
-        lines.push(`- Modernisierung Jahr 3: ${el("modern_y3").value} €`);
         lines.push(`- Zins (%): ${el("zins_pct").value} %`);
         lines.push(`- Tilgung (%): ${el("tilgung_pct").value} %`);
         lines.push(`- Wohnfläche: ${el("wf").value} m²`);
+        lines.push(`- Mieteingabe (Anzeige): ${rentModeLabel}`);
         lines.push(`- Miete €/m²: ${el("miete_qm").value} €`);
+        lines.push(`- Miete Monat: ${el("miete_monat").value} €`);
+        lines.push(`- Miete Jahr: ${el("miete_jahr").value} €`);
         lines.push(`- Instandhaltungsrücklage €/m²: ${el("ih_qm").value} €`);
         lines.push(`- Verwaltung (Monat): ${el("verw").value} €`);
         lines.push(`- Betrachtungsjahr: ${el("view_year").value}`);
 
         lines.push("");
-        lines.push("Annahmen");
-        lines.push(`- Wertsteigerung p.a.: ${el("ass_wert_pct").value} %`);
-        const rentMode = document.querySelector('input[name="rentMode"]:checked')?.value || "pa";
-        if (rentMode === "3y") lines.push(`- Mietsteigerung: 3 Jahre (Kappung) ${el("ass_miete_3y_pct").value} %`);
-        else lines.push(`- Mietsteigerung: jährlich ${el("ass_miete_pct").value} %`);
-        lines.push(`- Mietausfall: ${el("ass_ausfall_pct").value} %`);
-
-        lines.push("");
         lines.push("Ergebnisse");
-        lines.push(`- Kaufpreis je m²: ${el("out_price_qm").textContent}`);
-        lines.push(`- Kaufpreisfaktor: ${el("out_price_factor").textContent}`);
         lines.push(`- Kaufnebenkosten (Summe): ${el("out_nk_sum").textContent}`);
-        lines.push(`- Eigenkapital: ${el("out_ek").textContent}`);
+        lines.push(`- Eigenkapital (Kauf): ${el("out_ek").textContent}`);
+        lines.push(`- Zus. EK Capex: ${el("out_capex_ek").textContent}`);
+        lines.push(`- EK gesamt: ${el("out_ek_total").textContent}`);
         lines.push(`- Kredit: ${el("out_kredit").textContent}`);
         lines.push(`- Rate: ${el("out_rate").textContent}`);
         lines.push(`- Miete (Betrachtungsjahr): ${el("out_miete_y").textContent}`);
         lines.push(`- Nicht umlagefähige NK: ${el("out_nuk").textContent}`);
         lines.push(`- Cashflow (vor Steuer): ${el("out_cashflow_bt").textContent}`);
-        lines.push(`- AfA (p.a.): ${el("out_afa").textContent}`);
-        lines.push(`- Steuerwirkung (p.a.): ${el("out_tax_effect").textContent}`);
         lines.push(`- Liquidität (nach Steuer): ${el("out_liq_at").textContent}`);
-        lines.push(`- Liquidität (nach Steuer, p.a.): ${el("out_liq_at_y").textContent}`);
-
-        lines.push("");
-        lines.push("Steuerbox (Betrachtungsjahr)");
-        lines.push(`- Einnahmen (Kaltmiete): ${el("tax_in_rent").textContent}`);
-        lines.push(`- Ausgaben AfA: ${el("tax_out_afa").textContent}`);
-        lines.push(`- Ausgaben Modernisierung (sofort): ${el("tax_out_mod_immediate").textContent}`);
-        lines.push(`- Ausgaben Hausverwaltung: ${el("tax_out_admin").textContent}`);
-        lines.push(`- Ausgaben Zinsen: ${el("tax_out_interest").textContent}`);
-        lines.push(`- Steuerliches Ergebnis: ${el("tax_profit").textContent}`);
-        lines.push(`- Steuerzahlung (-) / Rückerstattung (+): ${el("tax_effect").textContent}`);
 
         const text = lines.join("\n");
         try{
@@ -1724,6 +2028,7 @@
       });
 
       setRentMode("pa");
+      setRentInputMode("perqm");
       applyDefaults({ ...defaultsZero, ...defaultsCommon });
     }
 
