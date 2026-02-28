@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="de">
 <head>
@@ -103,10 +104,8 @@
 
     .grid{
       display:grid;
-      /* Ergebnisse etwas breiter (vorher: 1.05fr .95fr) */
       grid-template-columns: .95fr 1.05fr;
       gap: 26px;
-      /* gleiche Höhe wie Eingaben (stretch) */
       align-items: stretch;
     }
 
@@ -193,7 +192,6 @@
     .chip input{ width:auto; margin:0; }
     .chip small{ font-size:12px; color: rgba(0,0,0,.62); font-weight:600; }
 
-    /* Ergebnisse: gleiche Höhe wie Eingaben, Inhalt ggf. scrollbar */
     aside.panel[aria-label="Ergebnisse"]{
       display:flex;
       flex-direction:column;
@@ -263,7 +261,6 @@
       margin: 0 0 18px;
     }
 
-    /* Preise: helleren Hintergrund entfernen */
     .pricing-panel{
       background: transparent;
       border: none;
@@ -285,7 +282,7 @@
       border: 1px solid rgba(0,0,0,.12);
       border-radius: 10px;
       overflow:hidden;
-      background: transparent; /* war: rgba(255,255,255,.24) */
+      background: transparent;
     }
     .price-col{
       padding: 16px 14px 14px;
@@ -507,7 +504,6 @@
       }
       .price-col:last-child{ border-bottom:none; }
 
-      /* auf Mobile kein internes Scrollen erzwingen */
       aside.panel[aria-label="Ergebnisse"]{ height:auto; }
       .result{ overflow: visible; }
     }
@@ -613,21 +609,41 @@
             <div class="subhead">Kaufnebenkosten</div>
 
             <div class="row">
-              <div><div class="label">Notar &amp; Grundbuch</div><div class="hint">in % vom Kaufpreis (wird in Kredit mitfinanziert).</div></div>
+              <div><div class="label">Notar &amp; Grundbuch</div><div class="hint">in % vom Kaufpreis (Standardannahme: wird mitfinanziert).</div></div>
               <div class="suffix"><input id="nk_notar_pct" type="text" inputmode="decimal" value="0" autocomplete="off"><span>%</span></div>
             </div>
 
             <div class="row">
-              <div><div class="label">Grunderwerbsteuer</div><div class="hint">in % vom Kaufpreis (wird in Kredit mitfinanziert).</div></div>
+              <div><div class="label">Grunderwerbsteuer</div><div class="hint">in % vom Kaufpreis (Standardannahme: wird mitfinanziert).</div></div>
               <div class="suffix"><input id="nk_grest_pct" type="text" inputmode="decimal" value="0" autocomplete="off"><span>%</span></div>
             </div>
 
             <div class="row">
-              <div><div class="label">Makler</div><div class="hint">optional, in % vom Kaufpreis (wird in Kredit mitfinanziert).</div></div>
+              <div><div class="label">Makler</div><div class="hint">optional, in % vom Kaufpreis (Standardannahme: wird mitfinanziert).</div></div>
               <div class="suffix"><input id="nk_makler_pct" type="text" inputmode="decimal" value="0" autocomplete="off"><span>%</span></div>
             </div>
 
-            <div class="subhead">Investition in Objektqualität (Capex)</div>
+            <!-- NEU: Finanzierung Kaufnebenkosten -->
+            <div class="row" style="align-items:start;">
+              <div>
+                <div class="label">Kaufnebenkosten: Finanzierung</div>
+                <div class="hint">Aus EK: erhöht eingesetztes Eigenkapital. Mitfinanziert: erhöht Kreditsumme und Rate.</div>
+
+                <div class="chip-row" role="group" aria-label="Finanzierung Kaufnebenkosten">
+                  <label class="chip">
+                    <input type="radio" name="nkMode" value="debt" checked>
+                    mitfinanziert <small>(Standard)</small>
+                  </label>
+                  <label class="chip">
+                    <input type="radio" name="nkMode" value="equity">
+                    aus Eigenkapital
+                  </label>
+                </div>
+              </div>
+              <div></div>
+            </div>
+
+            <div class="subhead">Modernisierung/Sanierung (Capex)</div>
 
             <div class="row">
               <div>
@@ -642,8 +658,8 @@
 
             <div class="row" style="align-items:start;">
               <div>
-                <div class="label">Finanzierung der Investition</div>
-                <div class="hint">EK = einmaliger Cash-Out im Betrachtungsjahr 1. Mitfinanziert = höhere Kreditsumme und Rate.</div>
+                <div class="label">Modernisierung/Sanierung: Finanzierung</div>
+                <div class="hint">Aus EK: einmaliger Liquiditätsabfluss im Jahr 1 (vereinfachend). Über Kredit: Capex erhöht Kreditsumme und Annuität.</div>
 
                 <div class="chip-row" role="group" aria-label="Finanzierung Capex">
                   <label class="chip">
@@ -684,7 +700,7 @@
               <div class="suffix"><input id="tilgung_pct" type="text" inputmode="decimal" value="0" autocomplete="off"><span>%</span></div>
             </div>
 
-            <h2 style="margin-top:18px;">Cashflow</h2>
+            <!-- "Cashflow" Überschrift entfernt -->
 
             <div class="subhead">Miete (Start / Soll)</div>
 
@@ -874,19 +890,26 @@
               <div><div class="name">Eigenkapital (Kauf)</div><div class="hint">EK-Anteil nur auf Kaufpreis (ohne NK/Capex).</div></div>
               <div class="val" id="out_ek">0,00&nbsp;€</div>
             </div>
+
+            <!-- NEU: NK aus EK -->
+            <div class="kpi">
+              <div><div class="name">Zus. EK für Kaufnebenkosten</div><div class="hint">Nur wenn NK „aus Eigenkapital“ gewählt ist.</div></div>
+              <div class="val" id="out_nk_ek">0,00&nbsp;€</div>
+            </div>
+
             <div class="kpi">
               <div><div class="name">Zus. EK für Investition (Capex)</div><div class="hint">Nur wenn Capex „aus Eigenkapital“ gewählt ist.</div></div>
               <div class="val" id="out_capex_ek">0,00&nbsp;€</div>
             </div>
             <div class="kpi">
-              <div><div class="name">EK gesamt</div><div class="hint">Eigenkapital (Kauf) + ggf. Capex-EK.</div></div>
+              <div><div class="name">EK gesamt</div><div class="hint">Eigenkapital (Kauf) + ggf. NK-EK + ggf. Capex-EK.</div></div>
               <div class="val" id="out_ek_total">0,00&nbsp;€</div>
             </div>
 
             <div class="kpi-divider"></div>
 
             <div class="kpi">
-              <div><div class="name">Kredit</div><div class="hint">(Kaufpreis − EK) + NK + ggf. Capex (mitfinanziert).</div></div>
+              <div><div class="name">Kredit</div><div class="hint">(Kaufpreis − EK) + NK (wenn mitfinanziert) + ggf. Capex (mitfinanziert).</div></div>
               <div class="val" id="out_kredit">0,00&nbsp;€</div>
             </div>
             <div class="kpi">
@@ -1038,9 +1061,10 @@
                 <li><code>Grenzsteuersatz</code>: steuert Steuerwirkung (ohne Soli/KiSt).</li>
                 <li><code>Eigenkapital (%)</code>: EK-Anteil vom Kaufpreis (ignoriert bei EK € &gt; 0).</li>
                 <li><code>Eigenkapital (€)</code>: Fixbetrag, hat Vorrang vor EK %.</li>
-                <li><code>Notar &amp; Grundbuch (%)</code>: Kaufnebenkosten, werden in Kredit mitfinanziert.</li>
-                <li><code>Grunderwerbsteuer (%)</code>: Kaufnebenkosten, werden in Kredit mitfinanziert.</li>
+                <li><code>Notar &amp; Grundbuch (%)</code>: Kaufnebenkosten.</li>
+                <li><code>Grunderwerbsteuer (%)</code>: Kaufnebenkosten.</li>
                 <li><code>Makler (%)</code>: optional, Kaufnebenkosten.</li>
+                <li><code>Finanzierung Kaufnebenkosten</code>: aus EK vs. mitfinanziert (wirkt auf EK gesamt, Kredit, Rate).</li>
                 <li><code>Investitionsbudget gesamt</code>: Capex – je nach Finanzierung Cash-Out oder Rate.</li>
                 <li><code>Finanzierung der Investition</code>: EK (Liquidität) vs. mitfinanziert (Kredit/Rate).</li>
                 <li><code>Miet-Boost (optional)</code>: zusätzliche monatliche Kaltmiete durch Maßnahmen.</li>
@@ -1064,9 +1088,10 @@
               <ul>
                 <li><code>Kaufnebenkosten (Summe)</code>: Notar+GrESt+Makler (aus % berechnet).</li>
                 <li><code>Eigenkapital (Kauf)</code>: EK-Anteil am Kaufpreis.</li>
+                <li><code>Zus. EK NK</code>: NK aus EK (nur bei NK=EK).</li>
                 <li><code>Zus. EK Capex</code>: Capex als EK (nur bei Capex=EK).</li>
-                <li><code>EK gesamt</code>: EK (Kauf) + Capex-EK.</li>
-                <li><code>Kredit</code>: (Kaufpreis − EK) + NK + ggf. Capex (mitfinanziert).</li>
+                <li><code>EK gesamt</code>: EK (Kauf) + ggf. NK-EK + ggf. Capex-EK.</li>
+                <li><code>Kredit</code>: (Kaufpreis − EK) + NK (wenn mitfinanziert) + ggf. Capex (mitfinanziert).</li>
                 <li><code>Rate</code>: Annuität pro Monat (Zins+Tilgung).</li>
                 <li><code>Miete (Betrachtungsjahr)</code>: Soll-Miete im Jahr (inkl. Mietsteigerung + Miet-Boost).</li>
                 <li><code>Nicht umlagefähige NK</code>: Rücklage + Verwaltung (monatlich).</li>
@@ -1097,7 +1122,6 @@
     <div class="container">
       <div class="section-title">Beratungsleistungen</div>
       <div class="pricing-panel">
-        <!-- zweite Überschrift entfernt -->
         <div class="price-table">
           <div class="price-col">
             <div class="kicker">Kostenloser Objektcheck</div>
@@ -1261,6 +1285,10 @@
       return document.querySelector('input[name="capexMode"]:checked')?.value || "equity";
     }
 
+    function getNkMode(){
+      return document.querySelector('input[name="nkMode"]:checked')?.value || "debt";
+    }
+
     function getRentInputMode(){
       return document.querySelector('input[name="rentInputMode"]:checked')?.value || "perqm";
     }
@@ -1334,21 +1362,16 @@
       node.value = formatValueForInput(id, v);
     }
 
-    // =============================
-    // 🔧 Fix: Mietfelder nicht doppelt "calc()"en
-    // =============================
     const rentSensitiveIds = new Set(["miete_qm","miete_monat","miete_jahr","wf"]);
 
     function attachAutoFormat(id, opts = {}){
       const node = el(id);
       if (!node) return;
 
-      // Standard: calc bei input
       if (!opts.skipInputCalc){
         node.addEventListener("input", () => calc());
       }
 
-      // immer: beim Verlassen formatieren + calc
       node.addEventListener("blur", () => {
         formatInput(id);
         calc();
@@ -1638,12 +1661,15 @@
     function applyDefaults(obj){
       Object.entries(obj).forEach(([k,v]) => { if (el(k)) el(k).value = String(v); });
       ids.forEach(id => formatInput(id));
-      const m = document.querySelector('input[name="capexMode"][value="equity"]');
-      if (m) m.checked = true;
+
+      const cap = document.querySelector('input[name="capexMode"][value="equity"]');
+      if (cap) cap.checked = true;
+
+      const nk = document.querySelector('input[name="nkMode"][value="debt"]');
+      if (nk) nk.checked = true;
 
       setRentInputMode("perqm");
 
-      // nach Defaults: Quelle ist €/m² (sauberer Start)
       lastRentEdited = "perqm";
       syncRentFields();
 
@@ -1676,12 +1702,10 @@
 
         if (!qmEl || !monEl || !yrEl) return;
 
-        // Werte lesen (roh)
         const q = Math.max(0, parseDeNumber(qmEl.value));
         const m = Math.max(0, parseDeNumber(monEl.value));
         const y = Math.max(0, parseDeNumber(yrEl.value));
 
-        // Year/Month sind auch ohne Fläche gegenseitig berechenbar
         if (lastRentEdited === "year"){
           const mon = y / 12;
           setIfNotActive(monEl, formatValueForInput("miete_monat", mon));
@@ -1700,7 +1724,6 @@
           return;
         }
 
-        // perqm
         if (area > 0){
           const mon = q * area;
           setIfNotActive(monEl, formatValueForInput("miete_monat", mon));
@@ -1713,7 +1736,6 @@
     // =====================================================
 
     function calc(){
-      // vor der Rechnung: Mieten konsistent halten
       syncRentFields();
 
       const kp = numInput(el("kaufpreis"));
@@ -1736,6 +1758,10 @@
       const makler = kp * (maklerPct/100);
       const nkSum = notar + grest + makler;
 
+      const nkMode = getNkMode();
+      const nkEk = (nkMode === "equity") ? nkSum : 0;
+      const nkDebt = (nkMode === "debt") ? nkSum : 0;
+
       const capexTotal = numInput(el("capex_total"));
       const capexMode = getCapexMode();
       const capexRentUplift = numInput(el("capex_rent_uplift"));
@@ -1743,7 +1769,7 @@
       const capexEk = (capexMode === "equity") ? capexTotal : 0;
       const capexDebt = (capexMode === "debt") ? capexTotal : 0;
 
-      const kredit = Math.max(0, (kp - ek) + nkSum + capexDebt);
+      const kredit = Math.max(0, (kp - ek) + nkDebt + capexDebt);
 
       const z = Math.max(0, parseDeNumber(el("zins_pct").value))/100;
       const t = Math.max(0, parseDeNumber(el("tilgung_pct").value))/100;
@@ -1751,11 +1777,9 @@
 
       const area = Math.max(0, parseDeNumber(el("wf").value));
 
-      // ✅ Ab hier nutzen wir IMMER die synchronisierten Felder (qm/monat/jahr)
       const rentQmEff = Math.max(0, parseDeNumber(el("miete_qm").value));
       const mieteMonat0_base = (area > 0) ? (area * rentQmEff) : 0;
 
-      // Boost wird immer zusätzlich addiert
       const mieteMonat0 = mieteMonat0_base + capexRentUplift;
 
       const ihqm = Math.max(0, parseDeNumber(el("ih_qm").value));
@@ -1811,7 +1835,7 @@
       const cashflowBT_mon = liqBT / 12;
       const liqAT_mon = liqAT / 12;
 
-      const ekTotal = ek + capexEk;
+      const ekTotal = ek + nkEk + capexEk;
 
       const cfYield = ekTotal > 0 ? (cashflowBT_mon * 12 / ekTotal) * 100 : null;
       const tilgungP_a = kredit * t;
@@ -1823,6 +1847,7 @@
       el("out_nk_makler_line").textContent = eur(makler);
 
       el("out_ek").textContent = eur(ek);
+      el("out_nk_ek").textContent = eur(nkEk);
       el("out_capex_ek").textContent = eur(capexEk);
       el("out_ek_total").textContent = eur(ekTotal);
 
@@ -1895,9 +1920,8 @@
     }
 
     function bind(){
-      // Standard-Felder: auto-calc auf input
       ids.forEach(id => {
-        const skipInputCalc = rentSensitiveIds.has(id); // ✅ Fix
+        const skipInputCalc = rentSensitiveIds.has(id);
         attachAutoFormat(id, { skipInputCalc });
       });
 
@@ -1910,15 +1934,12 @@
         });
       }
 
-      // ✅ EINZIGE Quelle der Synchronisierung (keine doppelten calc()-Listener mehr)
       el("miete_qm")?.addEventListener("input", () => { lastRentEdited = "perqm"; syncRentFields(); calc(); });
       el("miete_monat")?.addEventListener("input", () => { lastRentEdited = "month"; syncRentFields(); calc(); });
       el("miete_jahr")?.addEventListener("input", () => { lastRentEdited = "year"; syncRentFields(); calc(); });
 
-      // Fläche ändert alle Umrechnungen
       el("wf")?.addEventListener("input", () => { syncRentFields(); calc(); });
 
-      // Blur sauber formatieren + nach-sync
       ["miete_qm","miete_monat","miete_jahr","wf"].forEach(id => {
         el(id)?.addEventListener("blur", () => {
           formatInput(id);
@@ -1928,6 +1949,10 @@
       });
 
       document.querySelectorAll('input[name="capexMode"]').forEach(r => {
+        r.addEventListener("change", () => calc());
+      });
+
+      document.querySelectorAll('input[name="nkMode"]').forEach(r => {
         r.addEventListener("change", () => calc());
       });
 
@@ -1982,6 +2007,7 @@
         lines.push("");
         lines.push("Eingaben");
         lines.push(`- Kaufpreis: ${el("kaufpreis").value} €`);
+        lines.push(`- Kaufnebenkosten Finanzierung: ${getNkMode()==="equity" ? "Eigenkapital" : "mitfinanziert"}`);
         lines.push(`- Capex (Investition): ${el("capex_total").value} €`);
         lines.push(`- Capex Finanzierung: ${getCapexMode()==="equity" ? "Eigenkapital" : "mitfinanziert"}`);
         lines.push(`- Miet-Boost (monatl.): ${el("capex_rent_uplift").value} €`);
@@ -2008,6 +2034,7 @@
         lines.push("Ergebnisse");
         lines.push(`- Kaufnebenkosten (Summe): ${el("out_nk_sum").textContent}`);
         lines.push(`- Eigenkapital (Kauf): ${el("out_ek").textContent}`);
+        lines.push(`- Zus. EK NK: ${el("out_nk_ek").textContent}`);
         lines.push(`- Zus. EK Capex: ${el("out_capex_ek").textContent}`);
         lines.push(`- EK gesamt: ${el("out_ek_total").textContent}`);
         lines.push(`- Kredit: ${el("out_kredit").textContent}`);
@@ -2065,3 +2092,4 @@
 
 </body>
 </html>
+```
